@@ -27,6 +27,7 @@ const sidebars: SidebarsConfig = {
       label: 'Architecture',
       items: [
         'architecture/base-ecosystem',
+        'architecture/mini-app',
         'architecture/smart-contracts',
         'architecture/map-layer',
         'architecture/identity',

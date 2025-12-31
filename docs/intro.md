@@ -16,7 +16,19 @@ Horizon leverages the Coinbase/Base ecosystem:
 - **Basenames** - .base.eth identity integration
 - **EAS** - On-chain reputation attestations
 - **CDP Paymaster** - Gasless operations for ratings & achievements
+- **OnchainKit + MiniKit** - Coinbase Wallet Mini App
 - **Talent Protocol** - Builder Score XP multipliers
+
+### Horizon Mini App
+
+A lightweight companion app that runs inside **Coinbase Wallet** and Farcaster clients:
+
+- 🔍 **Discover** - Browse missions without leaving the wallet
+- ⚡ **Quick Claim** - Gasless mission claims with one tap
+- 🏆 **Track Progress** - View XP, achievements, and guild memberships
+- 📱 **Full App Link** - Seamless handoff for GPS-verified missions
+
+[Learn more about the Mini App →](/docs/architecture/mini-app)
 
 ## What is Horizon?
 
