@@ -22,11 +22,13 @@ Most endpoints require authentication via JWT bearer token:
 curl -H "Authorization: Bearer <token>" https://api.horizon.xyz/v1/missions
 ```
 
-### Obtaining a Token
+### Obtaining a Token (SIWE)
 
-1. Connect wallet via Privy
-2. Sign authentication message
-3. Receive JWT token (valid 24 hours)
+1. Connect wallet (CDP Embedded Wallet, Coinbase Wallet, or WalletConnect)
+2. Request challenge: `GET /auth/challenge?address=0x...`
+3. Sign EIP-4361 SIWE message with wallet
+4. Submit signature: `POST /auth/login` with address, message, signature
+5. Receive JWT token (valid 24 hours)
 
 ## Rate Limits
 
@@ -74,6 +76,8 @@ All responses follow this structure:
 - [**Feed**](/docs/api/feed) - Personalized mission discovery
 - [**Ratings**](/docs/api/ratings) - On-chain EAS reputation attestations
 - [**Notifications**](/docs/api/notifications) - Push and in-app notifications
+- [**Disputes**](/docs/api/disputes) - DDR/LPP dispute resolution
+- [**Data Vault**](/docs/api/data-vault) - GDPR data export and privacy
 - [**WebSocket**](/docs/api/websocket) - Real-time events
 
 ## OpenAPI Specification
@@ -86,8 +90,6 @@ https://api.horizon.xyz/v1/openapi.json
 
 ## SDKs
 
-Official SDKs coming soon:
-- TypeScript/JavaScript
-- React Native hooks (included in mobile package)
-- Python
+- **TypeScript SDK**: [@horizon-protocol/sdk](https://github.com/HrznLabs/horizon-sdk) - ABIs, utilities, contract addresses
+- React Native hooks included in mobile package
 

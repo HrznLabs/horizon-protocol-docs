@@ -50,6 +50,8 @@ const sidebars: SidebarsConfig = {
         'api/feed',
         'api/ratings',
         'api/notifications',
+        'api/disputes',
+        'api/data-vault',
         'api/websocket',
       ],
     },
