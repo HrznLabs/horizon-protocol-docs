@@ -274,23 +274,28 @@ All contracts follow Checks-Effects-Interactions:
 2. **Effects**: Update storage
 3. **Interactions**: External calls (last)
 
-## Deployment
+## Deployed Addresses
 
-### Base Sepolia Addresses
+### Base Sepolia (Testnet)
 
-```
-MissionFactory:         0x...
-MissionEscrow (impl):   0x...
-PaymentRouter:          0x...
-GuildFactory:           0x...
-GuildDAO (impl):        0x...
-ReputationAttestations: 0x...
-DisputeResolver:        0x...
-HorizonAchievements:    0x...
-USDC (testnet):         0x...
-```
+| Contract | Address |
+|----------|---------|
+| MissionFactory | `0xee9234954b134c39c17a75482da78e46b16f466c` |
+| PaymentRouter | `0x94fb7908257ec36f701d2605b51eefed4326ddf5` |
+| GuildFactory | `0xfeae3538a4a1801e47b6d16104aa8586edb55f00` |
+| ReputationAttestations | `0xedae9682a0fb6fb3c18d6865461f67db7d748002` |
+| DisputeResolver | `0xb00ac4278129928aecc72541b0bcd69d94c1691e` |
+| HorizonAchievements | `0x568e0e3102bfa1f4045d3f62559c0f9823b469bc` |
+| USDC (testnet) | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
+
+**Chain ID**: 84532  
+**Block Explorer**: [sepolia.basescan.org](https://sepolia.basescan.org)
+
+### Base Mainnet
+
+Mainnet deployment pending.
 
 ### Verification
 
-All contracts are verified on BaseScan with full source code and constructor arguments.
+All contracts are verified on [BaseScan](https://sepolia.basescan.org) with full source code and constructor arguments.
 

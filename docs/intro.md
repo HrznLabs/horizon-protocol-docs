@@ -150,6 +150,7 @@ Horizon Protocol enables:
 | ReputationAttestations | `0xedae9682a0fb6fb3c18d6865461f67db7d748002` |
 | DisputeResolver | `0xb00ac4278129928aecc72541b0bcd69d94c1691e` |
 | HorizonAchievements | `0x568e0e3102bfa1f4045d3f62559c0f9823b469bc` |
+| USDC (testnet) | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
 
 ## Open Source
 
