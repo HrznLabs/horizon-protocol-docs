@@ -68,9 +68,12 @@ All responses follow this structure:
 
 - [**Missions**](/docs/api/missions) - Create, query, and manage missions
 - [**Guilds**](/docs/api/guilds) - Guild membership and boards
-- [**Users**](/docs/api/users) - User profiles and ratings
+- [**Users**](/docs/api/users) - User profiles and identity
 - [**Map**](/docs/api/map) - Geospatial queries and location
-- [**XP & NFT**](/docs/api/xp-nft) - XP ledger and achievements
+- [**XP & NFT**](/docs/api/xp-nft) - XP ledger, levels, and achievements
+- [**Feed**](/docs/api/feed) - Personalized mission discovery
+- [**Ratings**](/docs/api/ratings) - On-chain EAS reputation attestations
+- [**Notifications**](/docs/api/notifications) - Push and in-app notifications
 - [**WebSocket**](/docs/api/websocket) - Real-time events
 
 ## OpenAPI Specification

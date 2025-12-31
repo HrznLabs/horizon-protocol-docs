@@ -5,7 +5,18 @@ slug: /
 
 # Welcome to Horizon Protocol
 
-Horizon is a **decentralized, gamified coordination platform** for real-world missions. It bridges digital incentives with physical-world tasks through blockchain-backed escrow, location verification, and guild-based coordination.
+Horizon is a **decentralized, gamified coordination platform** for real-world missions built natively on **Base L2**. It bridges digital incentives with physical-world tasks through blockchain-backed escrow, location verification, and guild-based coordination.
+
+## Built on Base
+
+Horizon leverages the Coinbase/Base ecosystem:
+
+- **Base L2** - Low-cost, fast EVM transactions
+- **USDC** - Native stablecoin for mission payments
+- **Basenames** - .base.eth identity integration
+- **EAS** - On-chain reputation attestations
+- **CDP Paymaster** - Gasless operations for ratings & achievements
+- **Talent Protocol** - Builder Score XP multipliers
 
 ## What is Horizon?
 

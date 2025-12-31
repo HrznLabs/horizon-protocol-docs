@@ -188,7 +188,7 @@ Token-based governance and staking mechanisms may be introduced in future protoc
 
 ### Protocol Treasury
 
-Receives 3% of all mission completions.
+Receives 4% of all mission completions.
 
 **Allocation:**
 - 50% Development

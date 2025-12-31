@@ -21,7 +21,10 @@ Experience points, levels, and achievement NFTs.
   "level": 5,
   "levelTitle": "Voyager",
   "xpToNextLevel": 750,
-  "progress": 62.5
+  "progress": 62.5,
+  "builderScore": 75,
+  "builderLevel": "advanced",
+  "xpMultiplier": 1.20
 }
 ```
 
@@ -70,6 +73,7 @@ Experience points, levels, and achievement NFTs.
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `limit` | number | Top N users (default: 100) |
+| `type` | string | `global` or `builders` |
 
 **Response**
 
@@ -82,10 +86,19 @@ Experience points, levels, and achievement NFTs.
       "evmAddress": "0x..."
     },
     "xp": 5000,
-    "rank": 1
+    "rank": 1,
+    "builderScore": 85
   }
 ]
 ```
+
+---
+
+### Get Builder Leaderboard
+
+<span class="api-method api-method-get">GET</span> `/xp/leaderboard/builders`
+
+Leaderboard filtered to users with Talent Protocol Builder Score.
 
 ---
 
@@ -176,6 +189,43 @@ All possible achievements.
 | `mission_streak` | +15% | 5+ consecutive |
 | `guild_board` | +10% | From guild board |
 | `referral` | 20 | Per referred user |
+| `curation_success` | 20 | Mission you curated completed |
+| `dispute_won` | 100 | Won a dispute |
+| `dispute_lost` | -50 | Lost a dispute |
+
+---
+
+## Builder Score Multipliers
+
+Users with [Talent Protocol](https://talentprotocol.com) Builder Score get XP bonuses:
+
+| Builder Level | Score Range | XP Multiplier |
+|---------------|-------------|---------------|
+| Novice | 0-24 | 1.0x (no bonus) |
+| Apprentice | 25-49 | 1.05x (+5%) |
+| Practitioner | 50-74 | 1.10x (+10%) |
+| Advanced | 75-89 | 1.20x (+20%) |
+| Expert | 90-99 | 1.35x (+35%) |
+| Master | 100 | 1.50x (+50%) |
+
+**Example**: A Master-level builder completing a 50 XP mission earns 75 XP (50 × 1.5).
+
+---
+
+## Streak System
+
+Consecutive mission completions earn bonus XP:
+
+| Streak | Bonus | Total Multiplier |
+|--------|-------|------------------|
+| 1-4 missions | 0% | 1.0x |
+| 5-9 missions | +15% | 1.15x |
+| 10-19 missions | +25% | 1.25x |
+| 20+ missions | +35% | 1.35x |
+
+**Note**: Streaks reset after 7 days of inactivity.
+
+---
 
 ## Level Progression
 
@@ -191,4 +241,3 @@ All possible achievements.
 | 8 | Trailblazer | 5,500 |
 | 9 | Legend | 8,000 |
 | 10 | Master | 12,000 |
-

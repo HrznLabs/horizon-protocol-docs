@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Architecture',
       items: [
+        'architecture/base-ecosystem',
         'architecture/smart-contracts',
         'architecture/map-layer',
         'architecture/identity',
@@ -45,6 +46,9 @@ const sidebars: SidebarsConfig = {
         'api/users',
         'api/map',
         'api/xp-nft',
+        'api/feed',
+        'api/ratings',
+        'api/notifications',
         'api/websocket',
       ],
     },
