@@ -207,12 +207,89 @@ Mainnet deployment in progress. See [Protocol Overview](/docs/protocol/overview)
 
 ---
 
+## OnchainKit Integration
+
+The Horizon Mini App uses `@coinbase/onchainkit` for Base-native features:
+
+```typescript
+import { OnchainKitProvider } from '@coinbase/onchainkit';
+import {
+  ConnectWallet,
+  Wallet,
+  WalletDropdown,
+} from '@coinbase/onchainkit/wallet';
+import {
+  Transaction,
+  TransactionButton,
+} from '@coinbase/onchainkit/transaction';
+```
+
+### Components Used
+
+| Component | Purpose |
+|-----------|---------|
+| `ConnectWallet` | Wallet connection UI |
+| `WalletDropdown` | Account management |
+| `Transaction` | One-click transactions |
+| `TransactionButton` | Gasless claim buttons |
+| `Identity` | ENS/Basename display |
+| `Avatar` | Profile pictures |
+
+---
+
+## Smart Wallet Support
+
+Full support for **Coinbase Smart Wallet** (ERC-4337):
+
+- **Passkey authentication** - Biometric login without seed phrases
+- **Account abstraction** - Users don't need to manage gas
+- **Session keys** - Smooth multi-transaction UX
+- **Recovery options** - Social recovery built-in
+
+```typescript
+// Mobile app configured for Smart Wallet
+const walletConfig = {
+  options: 'smartWalletOnly',
+  // Paymaster for sponsored transactions
+  paymasterUrl: process.env.CDP_PAYMASTER_URL,
+};
+```
+
+---
+
+## Farcaster Integration
+
+Social features powered by Farcaster:
+
+### Frame Support
+
+The Mini App renders as a Farcaster Frame:
+
+```typescript
+// layout.tsx meta tags
+'fc:frame': 'vNext',
+'fc:frame:image': '/og-image.png',
+'fc:frame:button:1': 'Open Horizon',
+'fc:frame:button:1:action': 'link',
+```
+
+### Share to Warpcast
+
+One-tap sharing of missions to Farcaster:
+
+```typescript
+const farcasterUrl = `https://warpcast.com/~/compose?text=${shareText}&embeds[]=${shareUrl}`;
+```
+
+### Social Graph
+
+Friend activity feed based on Farcaster connections (in progress).
+
+---
+
 ## Future Integrations
 
-Planned Base ecosystem integrations:
+Planned additions:
 
-- **OnchainKit** - React components for wallet connection
-- **Smart Wallet** - Passkey-based account abstraction
-- **Base Bridge** - Cross-chain asset support
-- **Farcaster Frames** - Social sharing of missions
+- **Base Bridge** - Cross-chain asset support for multi-chain missions
 
