@@ -161,6 +161,8 @@ Total performer payout:  $109.00
 
 Token-based governance and staking mechanisms may be introduced in future protocol versions. Current governance is based on protocol participation and reputation.
 
+---
+
 ## XP Economy
 
 ### XP Sources
@@ -172,17 +174,92 @@ Token-based governance and staking mechanisms may be introduced in future protoc
 | Perfect rating (5/5) | +10 bonus |
 | Mission streak (5+) | +15% multiplier |
 | Guild board completion | +10% bonus |
+| Curation success | +20 XP |
+| Dispute won | +100 XP |
+| Dispute lost | -50 XP |
 
-### Level Progression
+---
+
+## Level Progression (25 Levels)
+
+Horizon uses a 25-level progression system optimized for engagement:
+
+### Onboarding (Levels 1-5)
+
+Fast progression to hook new users (~8-10 missions to Level 5).
 
 | Level | Title | XP Required | Perks |
 |-------|-------|-------------|-------|
-| 1 | Novice | 0 | Basic access |
-| 2 | Apprentice | 100 | Access priority missions |
-| 3 | Explorer | 300 | Guild creation |
-| 4 | Pathfinder | 600 | Curator eligibility |
-| 5 | Voyager | 1,000 | Premium features |
-| 6+ | Master+ | 2,000+ | Achievement NFTs |
+| 1 | Newcomer | 0 | Basic access |
+| 2 | Rookie | 75 | Mission posting |
+| 3 | Starter | 200 | - |
+| 4 | Apprentice | 375 | - |
+| 5 | Explorer | 625 | Guild joining |
+
+### Early Game (Levels 6-10)
+
+Building momentum and unlocking key features.
+
+| Level | Title | XP Required | Perks |
+|-------|-------|-------------|-------|
+| 6 | Scout | 925 | - |
+| 7 | Tracker | 1,325 | - |
+| 8 | Pathfinder | 1,825 | Premium missions |
+| 9 | Ranger | 2,475 | - |
+| 10 | Adventurer | 3,275 | Guild creation |
+
+### Mid Game (Levels 11-15)
+
+Core engagement with governance unlocks.
+
+| Level | Title | XP Required | Perks |
+|-------|-------|-------------|-------|
+| 11 | Voyager | 4,275 | - |
+| 12 | Wayfarer | 5,525 | - |
+| 13 | Navigator | 7,025 | Curator eligible |
+| 14 | Trailblazer | 8,825 | - |
+| 15 | Pioneer | 11,000 | Resolver eligible |
+
+### Late Game (Levels 16-20)
+
+Dedicated users with governance power.
+
+| Level | Title | XP Required | Perks |
+|-------|-------|-------------|-------|
+| 16 | Captain | 13,575 | - |
+| 17 | Commander | 16,650 | - |
+| 18 | Elite | 20,325 | Governance voting |
+| 19 | Master | 24,725 | - |
+| 20 | Champion | 30,000 | Protocol proposals |
+
+### Prestige (Levels 21-25)
+
+Top-tier users with full access.
+
+| Level | Title | XP Required | Perks |
+|-------|-------|-------------|-------|
+| 21 | Hero | 36,300 | - |
+| 22 | Guardian | 43,850 | - |
+| 23 | Sentinel | 52,850 | - |
+| 24 | Titan | 63,525 | - |
+| 25 | Legend | 76,200 | All perks unlocked |
+
+---
+
+## Feature Unlocks
+
+| Feature | Level Required |
+|---------|----------------|
+| Mission Posting | 2 |
+| Guild Joining | 5 |
+| Premium Missions | 8 |
+| Guild Creation | 10 |
+| Curator Eligible | 13 |
+| Resolver Eligible | 15 |
+| Governance Voting | 18 |
+| Protocol Proposals | 20 |
+
+---
 
 ## Treasury Management
 
@@ -204,4 +281,3 @@ Managed by guild governance.
 - Marketing
 - Equipment/tools
 - Events
-

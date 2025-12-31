@@ -229,15 +229,14 @@ Consecutive mission completions earn bonus XP:
 
 ## Level Progression
 
-| Level | Title | XP Required |
-|-------|-------|-------------|
-| 1 | Novice | 0 |
-| 2 | Apprentice | 100 |
-| 3 | Explorer | 300 |
-| 4 | Pathfinder | 600 |
-| 5 | Voyager | 1,000 |
-| 6 | Navigator | 2,000 |
-| 7 | Pioneer | 3,500 |
-| 8 | Trailblazer | 5,500 |
-| 9 | Legend | 8,000 |
-| 10 | Master | 12,000 |
+Horizon uses a 25-level progression system. See [Economics](/docs/protocol/economics#level-progression-25-levels) for the complete breakdown.
+
+### Quick Reference
+
+| Phase | Levels | XP Range | Key Unlocks |
+|-------|--------|----------|-------------|
+| Onboarding | 1-5 | 0 - 624 | Mission posting, Guild joining |
+| Early Game | 6-10 | 625 - 3,274 | Premium missions, Guild creation |
+| Mid Game | 11-15 | 3,275 - 10,999 | Curator, Resolver eligibility |
+| Late Game | 16-20 | 11,000 - 29,999 | Governance voting, Proposals |
+| Prestige | 21-25 | 30,000+ | All perks, Legend status |
