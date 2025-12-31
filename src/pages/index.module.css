@@ -1,18 +1,18 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Horizon Protocol - Homepage Styles
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f1f1a 100%);
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 3rem 1.5rem;
   }
 }
 
@@ -20,4 +20,103 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Quick Links Section */
+.quickLinks {
+  padding: 4rem 0;
+  background-color: var(--ifm-background-surface-color);
+}
+
+.quickLinkCard {
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--ifm-toc-border-color);
+  background-color: var(--ifm-background-color);
+  height: 100%;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.quickLinkCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--ifm-color-primary);
+}
+
+.quickLinkCard h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.quickLinkCard p {
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.quickLinkCard a {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+.quickLinkCard a:hover {
+  text-decoration: underline;
+}
+
+/* Deployments Section */
+.deployments {
+  padding: 4rem 0;
+}
+
+.contractGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.contractCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-toc-border-color);
+  background-color: var(--ifm-background-surface-color);
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.contractCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+  background-color: rgba(52, 211, 153, 0.05);
+  text-decoration: none;
+}
+
+.contractName {
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 0.5rem;
+}
+
+.contractAddress {
+  font-size: 0.85rem;
+  color: var(--ifm-color-primary);
+  background-color: rgba(52, 211, 153, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+  }
+  
+  .buttons .button {
+    width: 100%;
+    margin-left: 0 !important;
+  }
 }

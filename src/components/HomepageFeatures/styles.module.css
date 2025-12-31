@@ -1,11 +1,47 @@
+/**
+ * Horizon Protocol - Homepage Features Styles
+ */
+
 .features {
   display: flex;
-  align-items: center;
-  padding: 2rem 0;
+  align-items: flex-start;
+  padding: 4rem 0;
   width: 100%;
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+.featureEmoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Add spacing between feature rows */
+.features .row {
+  row-gap: 2.5rem;
+}
+
+/* Feature card styling */
+.features .col {
+  margin-bottom: 1rem;
+}
+
+.features h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.features p {
+  color: var(--ifm-font-color-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 2rem 0;
+  }
+  
+  .featureEmoji {
+    font-size: 2.5rem;
+  }
 }

@@ -5,50 +5,78 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  emoji: string;
   description: ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Mission Escrow',
+    emoji: '🎯',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Post missions with escrowed USDC rewards. Performers accept, complete, 
+        and get paid automatically through secure smart contracts.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Guild Coordination',
+    emoji: '⚔️',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Form guilds to curate mission boards, share reputation, and coordinate 
+        as a team. DAO governance for fee settings and treasury management.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Location Verified',
+    emoji: '📍',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Geofenced missions with privacy-preserving location proofs. Approximate 
+        locations before acceptance, precise coordinates after.
+      </>
+    ),
+  },
+  {
+    title: 'XP & Achievements',
+    emoji: '🏆',
+    description: (
+      <>
+        Level up through 25 tiers, earn soulbound NFT achievements, and unlock 
+        perks like priority missions and reduced fees.
+      </>
+    ),
+  },
+  {
+    title: 'On-chain Reputation',
+    emoji: '⭐',
+    description: (
+      <>
+        Ratings stored as EAS attestations on Base. Gasless submissions via 
+        CDP Paymaster. Verifiable, portable reputation.
+      </>
+    ),
+  },
+  {
+    title: 'Built on Base',
+    emoji: '🔵',
+    description: (
+      <>
+        Native USDC payments, Basenames integration, Coinbase Wallet support, 
+        and low-cost transactions on Base L2.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, emoji, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
       <div className="text--center padding-horiz--md">
+        <div className={styles.featureEmoji}>{emoji}</div>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>
