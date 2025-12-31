@@ -1,10 +1,10 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Identity System
 
-Horizon uses a cross-chain identity system linking EVM and Solana addresses.
+Horizon uses an EVM-first identity system with multi-wallet support and name resolution.
 
 ## Architecture
 
@@ -13,114 +13,139 @@ Horizon uses a cross-chain identity system linking EVM and Solana addresses.
 │                     User Identity                            │
 ├─────────────────────────────────────────────────────────────┤
 │  Primary: EVM Address (Base L2)                             │
-│  └── Missions, guilds, reputation                           │
+│  └── Missions, guilds, reputation, XP                       │
 ├─────────────────────────────────────────────────────────────┤
-│  Linked: Solana Address (optional)                          │
-│  └── NFT minting, liquidity onboarding                      │
+│  Linked Wallets: Additional EVM addresses                   │
+│  └── Multi-wallet support with labels                       │
+├─────────────────────────────────────────────────────────────┤
+│  Name Resolution: Basename / ENS                            │
+│  └── Human-readable names and avatars                       │
 ├─────────────────────────────────────────────────────────────┤
 │  Off-chain: Display name, avatar, bio                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
+---
+
 ## Wallet Integration
 
-### Privy (Primary)
+### CDP Embedded Wallets (Primary)
 
-Embedded wallet solution for mobile:
-- Email/social login
-- Automatic wallet creation
-- Transaction signing
-- Key recovery
+Coinbase Developer Platform embedded wallets for seamless onboarding:
+
+- **Email OTP** - Sign up with email verification
+- **Social Login** - Google, Apple authentication
+- **Non-custodial** - Users own their keys
+- **No seed phrase** - Simplified UX
 
 ### External Wallets
 
-Also supported:
-- MetaMask
-- Coinbase Wallet
-- WalletConnect
+Also supported via WalletConnect:
 
-## Address Linking
+- **Coinbase Wallet** - Native Base integration
+- **MetaMask** - Popular browser wallet
+- **Rainbow** - Mobile-first wallet
+- **Other WalletConnect-compatible wallets**
 
-### EVM → Solana
+---
 
-1. User connects EVM wallet
-2. Signs message with EVM key
-3. Connects Solana wallet
-4. Signs verification message with Solana key
-5. Backend verifies both signatures
-6. Addresses linked in database
+## Authentication (SIWE)
+
+Horizon uses **Sign-In With Ethereum (EIP-4361)** for authentication:
 
 ```typescript
-// Message format
-const message = `Link Solana address ${solanaAddress} to EVM address ${evmAddress}
-Timestamp: ${timestamp}
-Nonce: ${nonce}`;
+// SIWE message format
+const message = `
+horizon.app wants you to sign in with your Ethereum account:
+${address}
+
+Sign in to Horizon
+
+URI: https://horizon.app
+Version: 1
+Chain ID: ${chainId}
+Nonce: ${nonce}
+Issued At: ${issuedAt}
+`;
 ```
 
-### Verification
+### Flow
+
+1. User connects wallet
+2. Backend generates SIWE challenge with nonce
+3. User signs message with wallet
+4. Backend verifies signature
+5. JWT token issued for session
+
+---
+
+## Name Resolution
+
+### Basenames (.base.eth)
+
+Native Base name resolution:
 
 ```typescript
-async function verifyLink(
-  evmAddress: string,
-  solanaAddress: string,
-  evmSignature: string,
-  solanaSignature: string
-): Promise<boolean> {
-  // Verify EVM signature
-  const recoveredEvm = recoverMessageAddress({
-    message,
-    signature: evmSignature,
-  });
-  
-  // Verify Solana signature
-  const isValidSolana = nacl.sign.detached.verify(
-    new TextEncoder().encode(message),
-    bs58.decode(solanaSignature),
-    bs58.decode(solanaAddress)
-  );
-  
-  return recoveredEvm === evmAddress && isValidSolana;
-}
+// Reverse resolution: address → name
+const result = await basenameService.resolveAddress('0x...');
+// { name: 'alice.base.eth', avatar: 'https://...' }
+
+// Forward resolution: name → address  
+const address = await basenameService.resolveName('alice.base.eth');
+// '0x...'
 ```
 
-## Device Attestation
+### ENS (.eth)
 
-For security-sensitive operations:
-
-### Android (Play Integrity API)
+Fallback to Ethereum Name Service:
 
 ```typescript
-const token = await IntegrityManager.requestIntegrityToken({
-  cloudProjectNumber: PROJECT_NUMBER,
-  nonce: generateNonce(),
-});
+const result = await ensService.resolveAddress('0x...');
+// { name: 'vitalik.eth', avatar: 'https://...' }
 ```
 
-### iOS (DeviceCheck)
+### Priority
+
+1. Check Basename first (Base-native)
+2. Fall back to ENS if no Basename
+3. Display address if neither found
+
+---
+
+## Multi-Wallet Support
+
+Users can link multiple wallets to their account:
+
+### Link Wallet
 
 ```typescript
-const token = await DeviceCheck.generateToken();
+// Generate link message
+const message = generateLinkMessage(userId, address);
+// "Link wallet to Horizon\nUser: ...\nWallet: ...\nTimestamp: ..."
+
+// User signs message
+const signature = await wallet.signMessage(message);
+
+// Backend verifies and links
+await identityService.linkWallet(userId, 'evm', address, signature, message);
 ```
 
-### Web (WebAuthn)
+### Wallet Management
 
-```typescript
-const credential = await navigator.credentials.create({
-  publicKey: {
-    challenge,
-    rp: { name: 'Horizon Protocol' },
-    user: { id: userId, name: username },
-    pubKeyCredParams: [{ alg: -7, type: 'public-key' }],
-  },
-});
-```
+| Feature | Description |
+|---------|-------------|
+| **Primary wallet** | Main address for missions |
+| **Labels** | Custom names for wallets |
+| **Unlink** | Remove linked wallets (except primary) |
+
+---
 
 ## User Data
 
 ### On-chain (Immutable)
 
 - Wallet addresses
-- Reputation attestations
+- Reputation attestations (EAS)
 - Achievement NFTs
 - Guild memberships
 
@@ -132,11 +157,31 @@ const credential = await navigator.credentials.create({
 - Notification preferences
 - Location history (30-day retention)
 
+---
+
 ## Privacy Controls
 
 Users can:
-- Export all data (GDPR)
-- Delete off-chain data
-- Control location sharing
-- Manage notification preferences
 
+- **Export all data** (GDPR compliance)
+- **Delete off-chain data**
+- **Control location sharing**
+- **Manage notification preferences**
+- **Revoke linked wallets**
+
+---
+
+## Future: Device Attestation
+
+Planned for high-security operations:
+
+| Platform | Technology |
+|----------|------------|
+| Android | Play Integrity API |
+| iOS | DeviceCheck |
+| Web | WebAuthn/Passkeys |
+
+This will enable:
+- Anti-fraud protection
+- Bot prevention
+- Location verification enhancement
