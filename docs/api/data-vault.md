@@ -229,3 +229,4 @@ Delete all off-chain user data. GDPR Article 17 (right to be forgotten).
 | Notification tokens | Until revoked |
 | Export logs | 90 days |
 
+

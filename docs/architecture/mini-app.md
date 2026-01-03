@@ -194,3 +194,4 @@ Browse and claim before downloading full app.
 
 The Mini App is designed for discovery and simple claims. Complex missions requiring GPS verification or photo proof direct users to the full mobile app.
 
+
