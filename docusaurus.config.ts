@@ -20,7 +20,13 @@ const config: Config = {
   projectName: 'horizon-docs',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+
+  markdown: {
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      return result;
+    },
+  },
 
   i18n: {
     defaultLocale: 'en',
@@ -34,8 +40,9 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/HrznLabs/horizon-docs/tree/main/',
-          showLastUpdateTime: true,
-          showLastUpdateAuthor: true,
+          // Disabled for Vercel deployment (no git history available)
+          showLastUpdateTime: false,
+          showLastUpdateAuthor: false,
         },
         blog: false, // Disabled for public docs
         theme: {
