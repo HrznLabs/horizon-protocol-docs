@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 /**
  * Horizon Protocol Documentation Sidebars
@@ -64,6 +64,8 @@ const sidebars: SidebarsConfig = {
       label: 'Guides',
       items: [
         'guides/getting-started',
+        'guides/achievements',
+        'guides/becoming-resolver',
       ],
     },
   ],
