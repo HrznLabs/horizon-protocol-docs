@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
@@ -89,6 +89,12 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'sdkSidebar',
+          position: 'left',
+          label: 'SDK',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'apiSidebar',
           position: 'left',
           label: 'API',
@@ -98,6 +104,12 @@ const config: Config = {
           sidebarId: 'guidesSidebar',
           position: 'left',
           label: 'Guides',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'useCasesSidebar',
+          position: 'left',
+          label: 'Use Cases',
         },
         {
           href: 'https://github.com/HrznLabs',
