@@ -35,6 +35,19 @@ const sidebars: SidebarsConfig = {
     },
   ],
 
+  // SDK Documentation
+  sdkSidebar: [
+    {
+      type: 'category',
+      label: 'SDK',
+      items: [
+        'sdk/overview',
+        'sdk/quickstart',
+        'sdk/api-reference',
+      ],
+    },
+  ],
+
   // API Reference
   apiSidebar: [
     {
@@ -66,9 +79,25 @@ const sidebars: SidebarsConfig = {
         'guides/getting-started',
         'guides/achievements',
         'guides/becoming-resolver',
+        'guides/creating-missions',
+      ],
+    },
+  ],
+
+  // Use Cases (Verticals)
+  useCasesSidebar: [
+    {
+      type: 'category',
+      label: 'Use Cases',
+      items: [
+        'use-cases/overview',
+        'use-cases/itake',
+        'use-cases/ridesdao',
+        'use-cases/builddao',
       ],
     },
   ],
 };
 
 export default sidebars;
+
