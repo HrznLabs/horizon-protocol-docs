@@ -8,7 +8,7 @@ Official documentation for Horizon Protocol - a decentralized, gamified coordina
 
 ## 🌐 Live Documentation
 
-Visit [docs.horizonprotocol.xyz](https://docs.horizonprotocol.xyz) (coming soon)
+Visit https://horizon-docs-public.vercel.app/
 
 ## 📚 What's Included
 
