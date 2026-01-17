@@ -4,14 +4,14 @@ sidebar_position: 2
 
 # iTake - Food Delivery
 
-iTake is a decentralized food delivery platform built on Horizon Protocol, demonstrating how real-world logistics can be coordinated through blockchain-backed escrow and guild-based organization.
+iTake is a **MetaDAO** (vertical application) running on Horizon Protocol, demonstrating how real-world logistics can be coordinated through blockchain-backed escrow and guild-based organization. Users access iTake through the **iTake mini-app** within the Horizon mobile application.
 
 ## Overview
 
-iTake connects three key participants:
-- **Restaurants** - Food providers who receive orders
-- **Customers** - Users who place orders
-- **Drivers** - Delivery performers who fulfill orders
+iTake connects three key participants through the Horizon mobile app:
+- **Restaurants** - Food providers who receive orders (SubDAOs)
+- **Customers** - Users who place orders via the mini-app
+- **Drivers** - Delivery performers who fulfill orders as missions
 
 ## How It Works
 
@@ -32,7 +32,7 @@ iTake connects three key participants:
 
 ### Step-by-Step
 
-1. **Customer orders** food via the iTake app
+1. **Customer orders** food via the iTake mini-app (within Horizon app)
 2. **Restaurant confirms** and prepares the order
 3. **Delivery mission** is created with pickup/dropoff locations
 4. **Available drivers** see the mission on their map
@@ -75,14 +75,31 @@ iTake uses Horizon's MetaDAO/SubDAO hierarchy:
 
 ## Payment Distribution
 
-When a delivery is completed:
+When a delivery is completed, fees are distributed using the inclusive 10% model:
 
-| Recipient | Description |
-|-----------|-------------|
-| **Driver** | Base delivery fee + tips |
-| **Restaurant** | Keeps food revenue |
-| **iTake** | Platform fee |
-| **Protocol** | Horizon protocol fees |
+| Recipient | Percentage | Description |
+|-----------|------------|-------------|
+| **Driver** | 90% | Base delivery fee (guaranteed minimum) |
+| **Protocol** | 2.5% | Platform sustainability |
+| **Labs** | 2.5% | R&D and development |
+| **Resolver** | 2% | Dispute resolution pool |
+| **iTake (MetaDAO)** | 1% | Platform operations |
+| **Restaurant (SubDAO)** | 2% | Restaurant fee share |
+
+### Example: €10 Delivery Fee
+
+```
+Driver:       €9.00 (90%)
+Protocol:     €0.25 (2.5%)
+Labs:         €0.25 (2.5%)
+Resolver:     €0.20 (2%)
+iTake:        €0.10 (1%)
+Restaurant:   €0.20 (2%)
+─────────────────────────
+Total Fees:   €1.00 (10%)
+```
+
+> **Note**: Food revenue goes directly to the restaurant. The breakdown above applies only to delivery fees.
 
 ## Key Features
 
@@ -150,29 +167,34 @@ const deliveryMission = await horizonClient.createMission({
 
 ### As a Driver
 
-1. Download the iTake driver app
-2. Connect your wallet
-3. Join available delivery guilds
-4. Start accepting missions
+1. Open the Horizon mobile app
+2. Navigate to the iTake mini-app
+3. Switch to Driver mode
+4. Join available delivery guilds
+5. Start accepting missions
 
 ### As a Customer
 
-1. Download the iTake app
-2. Browse restaurants in your area
-3. Place an order
-4. Track your delivery in real-time
+1. Open the Horizon mobile app
+2. Navigate to the iTake mini-app
+3. Browse restaurants in your area
+4. Place an order
+5. Track your delivery in real-time
 
 ## Technical Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    iTake Frontend                        │
-│           (Customer App · Driver App · Dashboard)        │
+│                  Horizon Mobile App                      │
+│    ┌─────────────────────────────────────────────────┐  │
+│    │           iTake Mini-App (Vertical)             │  │
+│    │   (Restaurant Browse · Order · Driver Mode)     │  │
+│    └─────────────────────────────────────────────────┘  │
 └──────────────────────────┬──────────────────────────────┘
                            │
 ┌──────────────────────────▼──────────────────────────────┐
-│                     iTake API                            │
-│          (Orders · Restaurants · Matching)               │
+│                   Horizon Service API                    │
+│          (iTake Module · Orders · Matching)              │
 └──────────────────────────┬──────────────────────────────┘
                            │
 ┌──────────────────────────▼──────────────────────────────┐
@@ -185,6 +207,8 @@ const deliveryMission = await horizonClient.createMission({
 │               (Smart Contracts · USDC)                   │
 └─────────────────────────────────────────────────────────┘
 ```
+
+> **Note**: iTake is one of several verticals (mini-apps) that can run on the Horizon Protocol. Each vertical operates as a MetaDAO with its own SubDAOs (like restaurants).
 
 ## Resources
 

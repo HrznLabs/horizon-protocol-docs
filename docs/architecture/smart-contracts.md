@@ -136,22 +136,22 @@ Handles the 5-way fee split when missions complete.
 **Fixed Fees (immutable):**
 ```solidity
 // Fixed fees in basis points
-uint16 public constant PROTOCOL_FEE_BPS = 400;   // 4%
-uint16 public constant LABS_FEE_BPS = 400;       // 4%
+uint16 public constant PROTOCOL_FEE_BPS = 250;   // 2.5%
+uint16 public constant LABS_FEE_BPS = 250;       // 2.5%
 uint16 public constant RESOLVER_FEE_BPS = 200;   // 2%
 
-// Base performer percentage before guild fee
+// Hierarchy fees (for verticals like iTake)
+uint16 public constant MAX_METADAO_FEE_BPS = 100;  // 1%
+uint16 public constant MAX_SUBDAO_FEE_BPS = 200;   // 2%
+
+// Base performer percentage
 uint16 public constant BASE_PERFORMER_BPS = 9000; // 90%
 ```
 
-**Variable Guild Fee:**
-```solidity
-// Maximum guild fee (set per-guild)
-uint16 public constant MAX_GUILD_FEE_BPS = 1500; // 15%
-
-// Guild fee is determined when mission is curated to board
-// Performer receives: 90% - guildFee
-```
+**Inclusive Fee Model:**
+- Total fees never exceed 10%
+- Performer always receives ≥90%
+- MetaDAO + SubDAO fees are taken from the 3% variable portion
 
 ### Settlement Functions
 
@@ -178,16 +178,17 @@ function settlePaymentWithGuildFee(
 
 ```solidity
 // Fixed fees
-protocolAmount = (rewardAmount * 400) / 10000;  // 4%
-labsAmount = (rewardAmount * 400) / 10000;      // 4%
+protocolAmount = (rewardAmount * 250) / 10000;  // 2.5%
+labsAmount = (rewardAmount * 250) / 10000;      // 2.5%
 resolverAmount = (rewardAmount * 200) / 10000;  // 2%
 
-// Variable guild fee (0-15%)
-guildAmount = (rewardAmount * guildFeeBps) / 10000;
+// Variable hierarchy fees (0-3% total)
+metaDAOAmount = (rewardAmount * metaDAOFeeBps) / 10000; // 0-1%
+subDAOAmount = (rewardAmount * subDAOFeeBps) / 10000;   // 0-2%
 
-// Performer gets remainder
+// Performer gets remainder (≥90%)
 performerAmount = rewardAmount - protocolAmount - labsAmount 
-                  - resolverAmount - guildAmount;
+                  - resolverAmount - metaDAOAmount - subDAOAmount;
 ```
 
 ## DisputeResolver
