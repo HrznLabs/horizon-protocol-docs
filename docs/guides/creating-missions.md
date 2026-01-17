@@ -318,6 +318,6 @@ POST /missions/:id/cancel
 
 ## Next Steps
 
-- [Accepting Missions](/docs/guides/accepting-missions) - Learn to accept and complete
-- [Dispute Resolution](/docs/guides/disputes) - Handle disagreements
+- [Getting Started](/docs/guides/getting-started) - Setup and first steps
+- [Becoming a Resolver](/docs/guides/becoming-resolver) - Handle disputes
 - [API Reference](/docs/api/missions) - Full mission API docs
