@@ -4,212 +4,363 @@ sidebar_position: 2
 
 # Missions API
 
-Create, query, and manage missions.
+The Missions API allows you to create, manage, and discover missions on Horizon Protocol.
 
 ## Endpoints
 
-### List Missions
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/missions` | List missions |
+| GET | `/missions/:id` | Get mission details |
+| POST | `/missions` | Create mission |
+| PATCH | `/missions/:id` | Update mission |
+| POST | `/missions/:id/accept` | Accept mission |
+| POST | `/missions/:id/submit` | Submit proof |
+| POST | `/missions/:id/approve` | Approve completion |
+| POST | `/missions/:id/cancel` | Cancel mission |
+| POST | `/missions/:id/dispute` | Raise dispute |
 
-<span class="api-method api-method-get">GET</span> `/missions`
+## List Missions
 
-Query missions with filters and pagination.
+```http
+GET /missions
+```
 
-**Query Parameters**
+### Query Parameters
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `skip` | number | Offset for pagination |
-| `take` | number | Number of results (max 100) |
 | `state` | string | Filter by state: `Open`, `Accepted`, `Submitted`, `Completed`, `Cancelled`, `Disputed` |
 | `category` | string | Filter by category |
 | `guildId` | string | Filter by guild |
+| `posterId` | string | Filter by poster |
+| `performerId` | string | Filter by performer |
+| `minReward` | string | Minimum reward amount |
+| `maxReward` | string | Maximum reward amount |
+| `skip` | number | Pagination offset |
+| `take` | number | Results per page (max 100) |
+| `sortBy` | string | Sort field: `createdAt`, `rewardAmount`, `expiresAt` |
+| `sortOrder` | string | `asc` or `desc` |
 
-**Response**
+### Response
 
 ```json
 {
-  "missions": [
+  "data": [
     {
-      "id": "clx123...",
-      "onChainId": "1",
-      "escrowAddress": "0x...",
+      "id": "mission-uuid",
+      "onChainId": "123",
+      "title": "Deliver package",
+      "description": "Pick up from store...",
       "state": "Open",
-      "title": "Package Delivery",
-      "description": "Deliver package from A to B",
-      "category": "Delivery",
-      "rewardAmount": "15000000",
+      "category": "delivery",
+      "rewardAmount": "10.000000",
       "poster": {
-        "id": "user123",
+        "id": "user-uuid",
         "evmAddress": "0x...",
-        "displayName": "TechStore"
+        "resolvedName": "alice.eth"
       },
-      "expiresAt": "2025-12-31T23:59:59Z",
-      "createdAt": "2025-12-01T10:00:00Z"
-    }
-  ],
-  "total": 150,
-  "hasMore": true
-}
-```
-
----
-
-### Get Mission
-
-<span class="api-method api-method-get">GET</span> `/missions/:id`
-
-Get a single mission by ID.
-
-**Response**
-
-```json
-{
-  "id": "clx123...",
-  "onChainId": "1",
-  "escrowAddress": "0x...",
-  "state": "Accepted",
-  "title": "Package Delivery",
-  "description": "Deliver package from A to B",
-  "category": "Delivery",
-  "rewardAmount": "15000000",
-  "poster": { ... },
-  "performer": { ... },
-  "guild": { ... },
-  "location": {
-    "latitude": 38.7223,
-    "longitude": -9.1393,
-    "geohash": "eyckp",
-    "precision": 2
-  },
-  "geofenceRadius": 100,
-  "requirePresence": true,
-  "expiresAt": "2025-12-31T23:59:59Z",
-  "acceptedAt": "2025-12-10T15:00:00Z",
-  "createdAt": "2025-12-01T10:00:00Z"
-}
-```
-
----
-
-### Get Nearby Missions
-
-<span class="api-method api-method-get">GET</span> `/missions/nearby`
-
-Find missions near a location (for map).
-
-**Query Parameters**
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `latitude` | number | Required. Center latitude |
-| `longitude` | number | Required. Center longitude |
-| `radius` | number | Search radius in meters (default: 5000) |
-| `limit` | number | Max results (default: 50) |
-| `category` | string | Filter by category |
-| `guildId` | string | Filter by guild |
-
-**Response**
-
-```json
-{
-  "missions": [
-    {
-      "id": "clx123...",
-      "title": "Package Delivery",
-      "category": "Delivery",
-      "rewardAmount": "15000000",
-      "distance": 850,
+      "performer": null,
+      "guild": {
+        "id": "guild-uuid",
+        "name": "Delivery Guild"
+      },
       "location": {
-        "latitude": 38.7230,
-        "longitude": -9.1400,
-        "geohash": "eyckp",
-        "precision": 2
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "radius": 100
       },
-      "isEligible": true,
-      "guildId": "guild123",
-      "guildName": "Lisbon Couriers",
-      "expiresAt": "2025-12-31T23:59:59Z"
+      "expiresAt": "2026-01-18T12:00:00Z",
+      "createdAt": "2026-01-17T12:00:00Z"
     }
   ],
-  "clusters": [
-    {
-      "latitude": 38.7200,
-      "longitude": -9.1350,
-      "count": 5,
-      "bounds": { ... },
-      "expansionZoom": 15
-    }
-  ],
-  "totalCount": 42,
-  "bounds": {
-    "north": 38.77,
-    "south": 38.67,
-    "east": -9.08,
-    "west": -9.20
+  "meta": {
+    "skip": 0,
+    "take": 20,
+    "total": 150
   }
 }
 ```
 
----
+## Get Mission
 
-### Verify Presence
+```http
+GET /missions/:id
+```
 
-<span class="api-method api-method-post">POST</span> `/missions/:id/verify-presence`
-
-Verify performer is within mission geofence.
-
-**Request Body**
+### Response
 
 ```json
 {
-  "latitude": 38.7225,
-  "longitude": -9.1395,
-  "accuracy": 10
+  "data": {
+    "id": "mission-uuid",
+    "onChainId": "123",
+    "escrowAddress": "0x...",
+    "title": "Deliver package",
+    "description": "Full description...",
+    "state": "Open",
+    "category": "delivery",
+    "rewardAmount": "10.000000",
+    "ddrAmount": "0.500000",
+    "poster": { ... },
+    "performer": null,
+    "guild": { ... },
+    "location": { ... },
+    "proofHash": null,
+    "metadata": { ... },
+    "expiresAt": "2026-01-18T12:00:00Z",
+    "createdAt": "2026-01-17T12:00:00Z",
+    "acceptedAt": null,
+    "completedAt": null
+  }
 }
 ```
 
-**Response**
+## Create Mission
+
+```http
+POST /missions
+```
+
+### Request Body
 
 ```json
 {
-  "verified": true,
-  "distanceFromMission": 25,
-  "withinGeofence": true,
-  "geofenceRadius": 100,
-  "graceApplied": false
+  "title": "Deliver package",
+  "description": "Pick up from Joe's Coffee (123 Main St) and deliver to Central Park entrance",
+  "rewardAmount": "10.00",
+  "category": "delivery",
+  "expiresIn": 86400,
+  "location": {
+    "latitude": 40.7128,
+    "longitude": -74.0060,
+    "radius": 100
+  },
+  "guildId": "guild-uuid",
+  "metadata": {
+    "pickupAddress": "123 Main St",
+    "dropoffAddress": "Central Park South"
+  }
 }
 ```
 
----
+### Parameters
 
-### Get Mission Counts
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Mission title (max 100 chars) |
+| `description` | string | Yes | Detailed description |
+| `rewardAmount` | string | Yes | USDC amount (e.g., "10.00") |
+| `category` | string | Yes | Mission category |
+| `expiresIn` | number | Yes | Seconds until expiration |
+| `location` | object | No | Location requirements |
+| `guildId` | string | No | Associated guild |
+| `metadata` | object | No | Additional data |
 
-<span class="api-method api-method-get">GET</span> `/missions/counts`
-
-Get mission counts by state.
-
-**Response**
+### Response
 
 ```json
 {
-  "Open": 42,
-  "Accepted": 15,
-  "Submitted": 3,
-  "Completed": 1250,
-  "Cancelled": 23,
-  "Disputed": 2
+  "data": {
+    "id": "mission-uuid",
+    "onChainId": "123",
+    "escrowAddress": "0x...",
+    "transactionHash": "0x...",
+    ...
+  }
 }
 ```
 
----
+## Accept Mission
 
-## Error Codes
+```http
+POST /missions/:id/accept
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "success": true,
+    "transactionHash": "0x...",
+    "mission": { ... }
+  }
+}
+```
+
+## Submit Proof
+
+```http
+POST /missions/:id/submit
+```
+
+### Request Body
+
+```json
+{
+  "proofType": "photo",
+  "proofData": "ipfs://...",
+  "notes": "Delivered to front desk"
+}
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "success": true,
+    "transactionHash": "0x...",
+    "proofHash": "ipfs://..."
+  }
+}
+```
+
+## Approve Completion
+
+```http
+POST /missions/:id/approve
+```
+
+Poster approves that the mission was completed successfully.
+
+### Request Body
+
+```json
+{
+  "rating": 5,
+  "feedback": "Great job!"
+}
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "success": true,
+    "transactionHash": "0x...",
+    "settlement": {
+      "performerAmount": "9.000000",
+      "protocolAmount": "0.250000",
+      "guildAmount": "0.300000",
+      "labsAmount": "0.250000",
+      "resolverAmount": "0.200000"
+    }
+  }
+}
+```
+
+## Cancel Mission
+
+```http
+POST /missions/:id/cancel
+```
+
+Only the poster can cancel, and only before acceptance.
+
+### Response
+
+```json
+{
+  "data": {
+    "success": true,
+    "transactionHash": "0x...",
+    "refundAmount": "10.000000"
+  }
+}
+```
+
+## Raise Dispute
+
+```http
+POST /missions/:id/dispute
+```
+
+Either party can raise a dispute after submission.
+
+### Request Body
+
+```json
+{
+  "reason": "Work not completed as specified",
+  "evidence": "ipfs://..."
+}
+```
+
+### Response
+
+```json
+{
+  "data": {
+    "success": true,
+    "disputeId": "dispute-uuid",
+    "onChainDisputeId": "456"
+  }
+}
+```
+
+## Mission States
+
+| State | Description |
+|-------|-------------|
+| `Open` | Available for acceptance |
+| `Accepted` | Claimed by performer |
+| `Submitted` | Proof submitted, awaiting approval |
+| `Completed` | Approved and settled |
+| `Cancelled` | Cancelled by poster |
+| `Expired` | Expired without acceptance |
+| `Disputed` | In dispute resolution |
+
+## Error Responses
 
 | Code | Description |
 |------|-------------|
-| 400 | Invalid parameters |
-| 401 | Not authenticated |
-| 403 | Not authorized (not poster/performer) |
-| 404 | Mission not found |
-| 409 | Invalid state transition |
+| `MISSION_NOT_FOUND` | Mission doesn't exist |
+| `MISSION_NOT_OPEN` | Cannot accept - wrong state |
+| `ALREADY_ACCEPTED` | Mission already has performer |
+| `NOT_POSTER` | Only poster can perform action |
+| `NOT_PERFORMER` | Only performer can perform action |
+| `INSUFFICIENT_BALANCE` | Not enough USDC |
+| `INELIGIBLE` | User doesn't meet requirements |
 
+## Webhooks (Coming Soon)
+
+Subscribe to mission events:
+
+```json
+{
+  "event": "mission.accepted",
+  "data": {
+    "missionId": "mission-uuid",
+    "performerId": "user-uuid",
+    "timestamp": "2026-01-17T12:00:00Z"
+  }
+}
+```
+
+## SDK Example
+
+```typescript
+import { parseUSDC } from '@horizon-protocol/sdk';
+
+// Create mission via API
+const response = await fetch('https://api.horizon.dev/missions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    title: 'Deliver package',
+    description: 'Pick up and deliver',
+    rewardAmount: '10.00',
+    category: 'delivery',
+    expiresIn: 86400,
+  }),
+});
+
+const { data } = await response.json();
+console.log('Mission created:', data.id);
+```

@@ -4,194 +4,214 @@ sidebar_position: 3
 
 # ridesDAO - Ride Sharing
 
-A decentralized ride-sharing network built on Horizon Protocol.
+ridesDAO is a conceptual decentralized ride-sharing platform built on Horizon Protocol, where drivers collectively own and govern the platform through guild-based coordination.
 
 ## Overview
 
-ridesDAO reimagines ride-sharing with:
-- **Driver-owned guilds** instead of corporate control
-- **Transparent pricing** visible to both parties
-- **Direct payments** via on-chain escrow
-- **Portable reputation** across the network
+ridesDAO reimagines ride-sharing as a driver-owned cooperative:
 
-## Concept Design
-
-> **Note**: ridesDAO is currently in the design phase. This document outlines the planned architecture.
-
-### Vision
-
-Replace centralized ride-sharing with a network of driver cooperatives that:
-- Set their own pricing
-- Keep 90%+ of fares
-- Build long-term customer relationships
-- Share governance of the platform
+- **No middleman extraction** - Drivers keep more of each fare
+- **Community governance** - Drivers vote on platform rules
+- **Portable reputation** - Ratings follow drivers across the ecosystem
+- **Fair matching** - Transparent ride assignment
 
 ## How It Works
 
+### Ride Request Flow
+
 ```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Rider     │────▶│  ridesDAO   │────▶│   Driver    │
-│  (Poster)   │     │    App      │     │   Guild     │
-└─────────────┘     └──────┬──────┘     └─────────────┘
-                           │
-                    ┌──────▼──────┐
-                    │   Horizon   │
-                    │  Protocol   │
-                    └──────┬──────┘
-                           │
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-        ┌──────────┐ ┌──────────┐ ┌──────────┐
-        │  Escrow  │ │   Map    │ │ Ratings  │
-        └──────────┘ └──────────┘ └──────────┘
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│    Rider     │────▶│   Mission    │────▶│   Driver     │
+│ Requests Ride│     │   Created    │     │   Matched    │
+└──────────────┘     └──────────────┘     └──────────────┘
+                                                  │
+                                                  ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   Payment    │◀────│    Trip      │◀────│   Pickup     │
+│  Settled     │     │  Completed   │     │   & Start    │
+└──────────────┘     └──────────────┘     └──────────────┘
 ```
 
-### Ride Flow
+### Step-by-Step
 
-1. **Rider requests ride** → Mission created with estimated fare in escrow
-2. **Guild receives request** → Dispatched to available drivers
-3. **Driver claims ride** → Mission accepted
-4. **Pickup confirmed** → Location proof at pickup point
-5. **Ride completed** → Metered fare calculated, escrow adjusted
-6. **Payment settled** → Funds distributed, ratings exchanged
+1. **Rider requests** a ride with pickup and destination
+2. **Mission created** with fare held in escrow
+3. **Nearby drivers** receive the request
+4. **Driver accepts** and heads to pickup
+5. **Driver arrives** and rider confirms
+6. **Trip begins** with live tracking
+7. **Trip ends** at destination
+8. **Payment settles** to driver automatically
 
-## Mission Structure
+## Guild Structure
 
-### Ride Request
+ridesDAO organizes drivers into regional collectives:
 
-```json
-{
-  "type": "RIDE",
-  "pickup": {
-    "location": { "lat": 40.7128, "lng": -74.0060 },
-    "address": "123 Main St"
-  },
-  "destination": {
-    "location": { "lat": 40.7580, "lng": -73.9855 },
-    "address": "789 Broadway"
-  },
-  "passengers": 2,
-  "rideType": "STANDARD",
-  "estimatedFare": "15.00",
-  "maxFare": "20.00"
-}
+```
+┌─────────────────────────────────────────────────────────┐
+│                  ridesDAO Protocol                       │
+│               (Global Governance)                        │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
+│  │  NYC Guild  │  │   LA Guild  │  │ Miami Guild │     │
+│  │  (Drivers)  │  │  (Drivers)  │  │  (Drivers)  │     │
+│  └─────────────┘  └─────────────┘  └─────────────┘     │
+└─────────────────────────────────────────────────────────┘
 ```
 
-### Ride Types
+### Regional Guilds
 
-| Type | Description |
-|------|-------------|
-| **Standard** | Regular sedan, 1-4 passengers |
-| **XL** | Larger vehicle, 5-7 passengers |
-| **Comfort** | Premium vehicles |
-| **Pool** | Shared rides, lower cost |
+- **Local governance** - Drivers set regional policies
+- **Fair distribution** - Rides distributed among guild members
+- **Collective bargaining** - Unified voice for regional issues
+- **Shared resources** - Equipment, training, support
 
-## Guild-Based Dispatch
+## Key Features
 
-### Driver Guilds
+### For Drivers
 
-Drivers organize into location-based guilds:
-- **City guilds**: Cover metropolitan areas
-- **Airport guilds**: Specialize in airport transfers
-- **Specialty guilds**: Luxury, accessibility, etc.
+- **Higher earnings** - Minimal platform fees
+- **Ownership stake** - Vote on platform decisions
+- **Flexible work** - Accept rides on your schedule
+- **Reputation portability** - Ratings count everywhere
 
-### Dispatch Priority
+### For Riders
 
-1. Guild members in proximity
-2. Highest-rated available driver
-3. Optimal route considerations
+- **Competitive fares** - Lower overhead = better prices
+- **Quality service** - Driver-owners care about experience
+- **Transparent pricing** - No surge surprises
+- **Secure payments** - Escrow-protected transactions
 
-## Dynamic Pricing
+## Matching System
 
-Fares calculated using on-chain logic:
+ridesDAO uses Horizon's mission feed for ride matching:
 
-```typescript
-function calculateFare(ride: RideDetails): bigint {
-  const baseFare = parseUSDC(2.50);
-  const perMile = parseUSDC(1.50);
-  const perMinute = parseUSDC(0.25);
-  
-  const distanceFare = ride.miles * perMile;
-  const timeFare = ride.minutes * perMinute;
-  
-  let fare = baseFare + distanceFare + timeFare;
-  
-  // Surge pricing during high demand
-  if (ride.demandMultiplier > 1) {
-    fare = fare * BigInt(ride.demandMultiplier);
-  }
-  
-  return fare;
-}
-```
+### Matching Factors
 
-### Surge Transparency
+| Factor | Description |
+|--------|-------------|
+| **Distance** | Driver proximity to pickup |
+| **Rating** | Driver reputation score |
+| **Guild Status** | Guild membership benefits |
+| **Availability** | Driver acceptance rate |
 
-Unlike traditional apps, surge pricing is:
-- **Visible on-chain**: Anyone can verify the multiplier
-- **Guild-controlled**: Each guild sets their surge caps
-- **Time-limited**: Automatic decay after demand normalizes
+### Fair Distribution
 
-## Fee Structure
+The system ensures rides are distributed fairly:
+- Prevents cherry-picking
+- Rewards reliable drivers
+- Considers driver earnings balance
 
-| Recipient | Percentage |
+## Economic Model
+
+### Fare Distribution
+
+When a ride completes:
+
+| Recipient | Allocation |
 |-----------|------------|
-| Driver | 87-90% |
-| Protocol | 4% |
-| Labs | 4% |
-| Resolver | 2% |
-| Guild | 0-3% |
+| **Driver** | Majority of fare |
+| **Guild** | Small contribution to local treasury |
+| **Protocol** | Minimal platform fee |
 
-**Result**: Drivers keep significantly more than with centralized platforms.
+### Driver Incentives
 
-## Safety Features
+- **Streak bonuses** - Consecutive ride completions
+- **XP progression** - Level up for better opportunities
+- **Achievement NFTs** - Recognition for milestones
+- **Guild rewards** - Active participation benefits
 
-### Rider Safety
-- Driver identity verified on-chain
-- Reputation history visible
-- Real-time location sharing
-- Emergency dispute button
+## Governance
 
-### Driver Safety
-- Rider identity verified
-- Payment guaranteed in escrow
-- Route tracking for disputes
-- Guild support network
+### Driver Voting
 
-## Technical Integration
+Drivers can vote on:
+- Fare structures
+- Guild policies
+- Platform features
+- Dispute resolution
+
+### Proposal Process
+
+1. **Proposal submitted** by guild member
+2. **Discussion period** for community feedback
+3. **Voting opens** for eligible drivers
+4. **Implementation** if passed
+
+## Location & Safety
+
+### Verification Features
+
+- **Pickup confirmation** - Rider verifies driver arrived
+- **Trip tracking** - Real-time route monitoring
+- **Destination verification** - Confirms arrival
+
+### Privacy Protections
+
+- Location data auto-purged
+- Opt-in for enhanced tracking
+- Driver/rider data encrypted
+
+## Technical Concepts
+
+### Ride as Mission
+
+Each ride request becomes a Horizon mission:
 
 ```typescript
-// Request a ride
-const ride = await ridesDAO.requestRide({
-  pickup: pickupLocation,
-  destination: destinationLocation,
-  rideType: 'STANDARD',
-  maxFare: parseUSDC(25),
-});
-
-// Driver accepts
-await ridesDAO.acceptRide(ride.missionId);
-
-// Complete ride
-await ridesDAO.completeRide(ride.missionId, {
-  actualRoute: gpsTrack,
-  finalFare: calculateFare(gpsTrack),
-});
+interface RideMission {
+  pickup: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  };
+  dropoff: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  };
+  fare: bigint;        // USDC amount
+  guild: string;       // Regional guild
+  expiresIn: number;   // Match timeout
+}
 ```
 
-## Roadmap
+### Driver as Performer
 
-| Phase | Status | Description |
-|-------|--------|-------------|
-| Design | ✅ Complete | Architecture and protocol design |
-| Contracts | 🔄 In Progress | Ride-specific smart contracts |
-| App MVP | Planned | Basic rider/driver apps |
-| Guild Launch | Planned | First driver cooperatives |
-| Public Launch | Planned | Wide availability |
+Drivers accept ride missions:
 
-## Get Involved
+```typescript
+// Driver sees nearby rides
+const nearbyRides = await horizonClient.getFeed({
+  userId: driverId,
+  location: { lat: driver.lat, lng: driver.lng },
+  category: 'ride',
+});
 
-Interested in contributing to ridesDAO?
+// Driver accepts ride
+await horizonClient.acceptMission(rideId);
+```
 
-- [GitHub Issues](https://github.com/HrznLabs/ridesDAO/issues)
-- [Discord Community](https://discord.gg/horizon)
+## Roadmap Concepts
+
+### Phase 1: Core Rides
+- Basic ride request/accept
+- Payment settlement
+- Driver ratings
+
+### Phase 2: Guild Features
+- Regional guilds
+- Local governance
+- Collective benefits
+
+### Phase 3: Advanced Features
+- Scheduled rides
+- Shared rides
+- Vehicle requirements
+
+## Resources
+
+- [Protocol Overview](/docs/protocol/overview)
+- [Guild System](/docs/protocol/guilds)
+- [Economics](/docs/protocol/economics)
+- [SDK Documentation](/docs/sdk/overview)

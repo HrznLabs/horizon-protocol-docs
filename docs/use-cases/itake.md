@@ -4,158 +4,191 @@ sidebar_position: 2
 
 # iTake - Food Delivery
 
-A decentralized food delivery platform built on Horizon Protocol.
+iTake is a decentralized food delivery platform built on Horizon Protocol, demonstrating how real-world logistics can be coordinated through blockchain-backed escrow and guild-based organization.
 
 ## Overview
 
-iTake connects local restaurants with delivery performers through guild-based coordination. Unlike traditional platforms, iTake:
-- **No central intermediary** taking 30%+ fees
-- **Performer-owned guilds** coordinate deliveries
-- **Transparent pricing** with on-chain escrow
-- **Reputation portability** across the Horizon ecosystem
+iTake connects three key participants:
+- **Restaurants** - Food providers who receive orders
+- **Customers** - Users who place orders
+- **Drivers** - Delivery performers who fulfill orders
 
 ## How It Works
 
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│  Customer   │────▶│   iTake     │────▶│  Restaurant │
-│  (Poster)   │     │   App       │     │             │
-└─────────────┘     └──────┬──────┘     └──────┬──────┘
-                           │                   │
-                    ┌──────▼──────┐            │
-                    │   Horizon   │◀───────────┘
-                    │  Protocol   │
-                    └──────┬──────┘
-                           │
-                    ┌──────▼──────┐
-                    │  Delivery   │
-                    │   Guild     │
-                    └─────────────┘
-```
-
 ### Order Flow
 
-1. **Customer places order** → Mission created with USDC in escrow
-2. **Guild receives notification** → Available to guild members first
-3. **Performer claims delivery** → Mission accepted, timer starts
-4. **Food picked up** → Location proof submitted
-5. **Delivery completed** → Customer confirms, funds released
-6. **Ratings exchanged** → Both parties rate each other
-
-## Mission Types
-
-### Delivery Mission
-
-```json
-{
-  "type": "DELIVERY",
-  "restaurant": {
-    "name": "Pizza Palace",
-    "location": { "lat": 40.7128, "lng": -74.0060 }
-  },
-  "customer": {
-    "location": { "lat": 40.7580, "lng": -73.9855 }
-  },
-  "items": ["1x Large Pizza", "1x Garlic Bread"],
-  "reward": {
-    "base": "5.00",
-    "tip": "3.00",
-    "total": "8.00"
-  },
-  "pickupBy": "2026-01-04T12:30:00Z",
-  "deliverBy": "2026-01-04T13:00:00Z"
-}
+```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   Customer   │────▶│  Restaurant  │────▶│   Mission    │
+│  Places Order │     │ Prepares Food│     │   Created    │
+└──────────────┘     └──────────────┘     └──────────────┘
+                                                  │
+                                                  ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  Settlement  │◀────│   Delivery   │◀────│Driver Claims │
+│   Complete   │     │   Verified   │     │   Mission    │
+└──────────────┘     └──────────────┘     └──────────────┘
 ```
 
-### Batch Delivery
+### Step-by-Step
 
-Multiple orders from same restaurant area:
-
-```json
-{
-  "type": "BATCH_DELIVERY",
-  "stops": [
-    { "restaurant": "...", "customer": "...", "items": [...] },
-    { "restaurant": "...", "customer": "...", "items": [...] }
-  ],
-  "reward": "15.00"
-}
-```
+1. **Customer orders** food via the iTake app
+2. **Restaurant confirms** and prepares the order
+3. **Delivery mission** is created with pickup/dropoff locations
+4. **Available drivers** see the mission on their map
+5. **Driver accepts** and navigates to restaurant
+6. **Driver picks up** food and marks ready for delivery
+7. **Driver delivers** to customer location
+8. **Customer confirms** receipt
+9. **Payment settles** automatically to all parties
 
 ## Guild Structure
 
-iTake uses delivery guilds organized by region:
+iTake uses Horizon's MetaDAO/SubDAO hierarchy:
 
-| Role | Permissions |
-|------|-------------|
-| **Admin** | Manage guild, set fees, remove members |
-| **Dispatcher** | Assign missions, prioritize orders |
-| **Performer** | Claim and complete deliveries |
+```
+┌─────────────────────────────────────────────────────────┐
+│                 iTake MetaDAO                            │
+│              (Platform Governance)                       │
+├─────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
+│  │ Restaurant  │  │ Restaurant  │  │ Restaurant  │     │
+│  │   SubDAO    │  │   SubDAO    │  │   SubDAO    │     │
+│  │  (Joe's)    │  │  (Tacos)    │  │  (Pizza)    │     │
+│  └─────────────┘  └─────────────┘  └─────────────┘     │
+└─────────────────────────────────────────────────────────┘
+```
 
-### Guild Benefits
+### MetaDAO (iTake)
 
-- **Priority access** to new orders
-- **Shared resources** (vehicles, equipment)
-- **Collective bargaining** for better rates
-- **Training and onboarding** for new performers
+- Sets platform-wide policies
+- Manages dispute resolution
+- Collects platform fee
+- Coordinates cross-restaurant features
 
-## Fee Structure
+### SubDAOs (Restaurants)
 
-| Recipient | Percentage |
-|-----------|------------|
-| Performer | 87-90% |
-| Protocol | 4% |
-| Labs | 4% |
-| Resolver | 2% |
-| Guild | 0-3% (configurable) |
+- Each restaurant is a SubDAO
+- Manages their own menu and availability
+- Sets delivery zones
+- Earns fee share on their orders
 
-**Example**: $10 delivery
+## Payment Distribution
 
-| Recipient | Amount |
-|-----------|--------|
-| Performer | $8.70 |
-| Protocol | $0.40 |
-| Labs | $0.40 |
-| Resolver | $0.20 |
-| Guild | $0.30 |
+When a delivery is completed:
+
+| Recipient | Description |
+|-----------|-------------|
+| **Driver** | Base delivery fee + tips |
+| **Restaurant** | Keeps food revenue |
+| **iTake** | Platform fee |
+| **Protocol** | Horizon protocol fees |
+
+## Key Features
+
+### For Restaurants
+
+- **Easy onboarding** - Register as a SubDAO
+- **Menu management** - Update items and prices
+- **Order dashboard** - Track incoming orders
+- **Analytics** - View sales and performance
+
+### For Drivers
+
+- **Mission discovery** - See nearby deliveries on map
+- **Earnings tracking** - View completed missions and earnings
+- **Reputation building** - Earn XP and ratings
+- **Flexible schedule** - Accept missions when available
+
+### For Customers
+
+- **Restaurant discovery** - Browse nearby restaurants
+- **Real-time tracking** - Follow delivery progress
+- **Secure payments** - Funds held in escrow
+- **Rating system** - Rate restaurants and drivers
 
 ## Location Verification
 
-Deliveries use Horizon's map layer for:
-- **Pickup proof**: GPS + timestamp at restaurant
-- **Delivery proof**: GPS + timestamp at customer
-- **Route optimization**: Suggested efficient paths
+iTake uses Horizon's geofencing features:
 
-## Integration Points
+- **Pickup verification** - Driver confirmed at restaurant
+- **Delivery verification** - Driver confirmed at customer location
+- **Live tracking** - Real-time driver location (opt-in)
+- **Privacy preserved** - Location data auto-purged
 
-iTake integrates with Horizon via:
+## Integration Example
 
 ```typescript
-// Create delivery mission
-await horizonClient.missions.create({
-  type: 'DELIVERY',
-  metadata: deliveryMetadata,
-  reward: parseUSDC(8),
-  guildId: 'downtown-couriers',
-  expiresAt: calculateExpiresAt(3600),
-});
-
-// Claim delivery
-await horizonClient.missions.claim(missionId);
-
-// Submit delivery proof
-await horizonClient.missions.submitProof(missionId, {
-  photos: [deliveryPhoto],
-  location: currentLocation,
-  signature: customerSignature,
+// Create delivery mission from order
+const deliveryMission = await horizonClient.createMission({
+  title: `Delivery from ${restaurant.name}`,
+  description: order.items.map(i => i.name).join(', '),
+  reward: order.deliveryFee,
+  pickup: {
+    latitude: restaurant.lat,
+    longitude: restaurant.lng,
+    address: restaurant.address,
+  },
+  dropoff: {
+    latitude: customer.lat,
+    longitude: customer.lng,
+    address: customer.address,
+  },
+  guild: restaurant.subDAOAddress,
+  expiresIn: 3600, // 1 hour
 });
 ```
 
 ## Getting Started
 
-Want to build on iTake or create a similar delivery platform?
+### As a Restaurant
 
-1. [Set up development environment](/docs/guides/getting-started)
-2. [Review the SDK](/docs/sdk/overview)
-3. [Explore the Map API](/docs/api/map)
-4. [Understand Guilds](/docs/protocol/guilds)
+1. Contact iTake to register as a SubDAO
+2. Set up your menu in the restaurant dashboard
+3. Configure delivery zones and hours
+4. Start receiving orders
+
+### As a Driver
+
+1. Download the iTake driver app
+2. Connect your wallet
+3. Join available delivery guilds
+4. Start accepting missions
+
+### As a Customer
+
+1. Download the iTake app
+2. Browse restaurants in your area
+3. Place an order
+4. Track your delivery in real-time
+
+## Technical Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    iTake Frontend                        │
+│           (Customer App · Driver App · Dashboard)        │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────┐
+│                     iTake API                            │
+│          (Orders · Restaurants · Matching)               │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────┐
+│                   Horizon Protocol                       │
+│    (Missions · Escrow · Guilds · Reputation · Map)      │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────┐
+│                      Base L2                             │
+│               (Smart Contracts · USDC)                   │
+└─────────────────────────────────────────────────────────┘
+```
+
+## Resources
+
+- [Protocol Overview](/docs/protocol/overview)
+- [Guild System](/docs/protocol/guilds)
+- [SDK Documentation](/docs/sdk/overview)
+- [API Reference](/docs/api/overview)

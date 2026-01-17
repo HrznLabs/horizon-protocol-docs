@@ -4,232 +4,253 @@ sidebar_position: 1
 
 # Getting Started
 
-This guide will help you integrate with Horizon Protocol using our TypeScript SDK.
+This guide will help you start building on Horizon Protocol. You'll learn how to set up your development environment, connect to the testnet, and create your first mission.
 
 ## Prerequisites
 
-- Node.js 18+
-- A Base Sepolia RPC URL (e.g., from [Alchemy](https://www.alchemy.com/) or [QuickNode](https://www.quicknode.com/))
-- Test USDC from the [Circle faucet](https://faucet.circle.com/)
+Before you begin, make sure you have:
+
+- **Node.js** (v18 or higher)
+- **Package manager** (npm, yarn, or pnpm)
+- **Code editor** (VS Code recommended)
+- **Base Sepolia ETH** (for gas fees)
+- **Test USDC** (for mission rewards)
 
 ## Installation
 
-### Using the SDK
-
-Install the Horizon SDK in your project:
+### 1. Install the SDK
 
 ```bash
-# npm
-npm install @horizon-protocol/sdk viem
-
-# yarn
+# Using yarn (recommended)
 yarn add @horizon-protocol/sdk viem
 
-# pnpm
+# Using npm
+npm install @horizon-protocol/sdk viem
+
+# Using pnpm
 pnpm add @horizon-protocol/sdk viem
 ```
 
-### Contract Addresses
+### 2. Set Up Your Project
 
-The SDK includes all deployed contract addresses:
+Create a new project and configure it:
 
 ```typescript
-import { BASE_SEPOLIA_CONTRACTS, BASE_SEPOLIA } from '@horizon-protocol/sdk';
+// horizon-config.ts
+import { createPublicClient, createWalletClient, http } from 'viem';
+import { baseSepolia } from 'viem/chains';
+import { privateKeyToAccount } from 'viem/accounts';
+import { BASE_SEPOLIA } from '@horizon-protocol/sdk';
 
-console.log(BASE_SEPOLIA_CONTRACTS.missionFactory);
-// 0xee9234954b134c39c17a75482da78e46b16f466c
+// Public client for reading
+export const publicClient = createPublicClient({
+  chain: baseSepolia,
+  transport: http(BASE_SEPOLIA.rpcUrl),
+});
 
-console.log(BASE_SEPOLIA.rpcUrl);
-// https://sepolia.base.org
+// Wallet client for writing (use your test private key)
+const account = privateKeyToAccount('0x...');
+export const walletClient = createWalletClient({
+  account,
+  chain: baseSepolia,
+  transport: http(BASE_SEPOLIA.rpcUrl),
+});
+
+// Contract addresses
+export const contracts = BASE_SEPOLIA.contracts;
 ```
 
-## Quick Start
+## Get Testnet Assets
 
-### 1. Read Mission Data
+### 1. Base Sepolia ETH
+
+Get testnet ETH for gas:
+- [Coinbase Faucet](https://www.coinbase.com/faucets/base-ethereum-sepolia-faucet)
+- [Alchemy Faucet](https://www.alchemy.com/faucets/base-sepolia)
+
+### 2. Testnet USDC
+
+Mint test USDC from the testnet faucet:
 
 ```typescript
-import { createPublicClient, http } from 'viem';
-import { baseSepolia } from 'viem/chains';
-import { 
-  MissionFactoryABI, 
-  BASE_SEPOLIA_CONTRACTS 
-} from '@horizon-protocol/sdk';
+import { ERC20ABI, BASE_SEPOLIA } from '@horizon-protocol/sdk';
 
-const client = createPublicClient({
-  chain: baseSepolia,
-  transport: http(),
+// Check USDC balance
+const balance = await publicClient.readContract({
+  address: BASE_SEPOLIA.contracts.usdc,
+  abi: ERC20ABI,
+  functionName: 'balanceOf',
+  args: [walletClient.account.address],
 });
 
-// Get total mission count
-const missionCount = await client.readContract({
-  address: BASE_SEPOLIA_CONTRACTS.missionFactory as `0x${string}`,
-  abi: MissionFactoryABI,
-  functionName: 'missionCount',
+console.log(`USDC Balance: ${balance / 10n ** 6n}`);
+```
+
+## Your First Mission
+
+### 1. Approve USDC Spending
+
+Before creating a mission, approve the MissionFactory to spend your USDC:
+
+```typescript
+import { ERC20ABI, parseUSDC } from '@horizon-protocol/sdk';
+
+const amount = parseUSDC('10'); // 10 USDC
+
+const hash = await walletClient.writeContract({
+  address: contracts.usdc,
+  abi: ERC20ABI,
+  functionName: 'approve',
+  args: [contracts.missionFactory, amount],
 });
 
-console.log(`Total missions: ${missionCount}`);
+await publicClient.waitForTransactionReceipt({ hash });
+console.log('USDC approved!');
 ```
 
 ### 2. Create a Mission
 
 ```typescript
-import { createWalletClient, http, parseUnits } from 'viem';
-import { baseSepolia } from 'viem/chains';
-import { privateKeyToAccount } from 'viem/accounts';
-import { 
-  MissionFactoryABI, 
-  ERC20ABI,
-  BASE_SEPOLIA_CONTRACTS,
-  parseUSDC 
-} from '@horizon-protocol/sdk';
+import { MissionFactoryABI, parseUSDC, toBytes32 } from '@horizon-protocol/sdk';
 
-// Set up wallet
-const account = privateKeyToAccount('0x...');
-const walletClient = createWalletClient({
-  account,
-  chain: baseSepolia,
-  transport: http(),
-});
+const mission = {
+  title: 'My First Mission',
+  description: 'Pick up coffee from the corner shop',
+  reward: parseUSDC('5'), // 5 USDC
+  category: toBytes32('delivery'),
+  expiresIn: 3600 * 24, // 24 hours
+  location: {
+    latitude: 40.7128,
+    longitude: -74.0060,
+  },
+};
 
-// First approve USDC spend
-const rewardAmount = parseUSDC('50'); // 50 USDC
-
-await walletClient.writeContract({
-  address: BASE_SEPOLIA_CONTRACTS.usdc as `0x${string}`,
-  abi: ERC20ABI,
-  functionName: 'approve',
-  args: [BASE_SEPOLIA_CONTRACTS.missionFactory, rewardAmount],
-});
-
-// Create mission
-const expiresAt = BigInt(Math.floor(Date.now() / 1000) + 86400); // 24 hours
-const metadataHash = '0x...'; // IPFS hash of mission details
-const locationHash = '0x...'; // IPFS hash of encrypted location
-
-const tx = await walletClient.writeContract({
-  address: BASE_SEPOLIA_CONTRACTS.missionFactory as `0x${string}`,
+const hash = await walletClient.writeContract({
+  address: contracts.missionFactory,
   abi: MissionFactoryABI,
   functionName: 'createMission',
   args: [
-    rewardAmount,
-    expiresAt,
-    '0x0000000000000000000000000000000000000000', // No guild
-    metadataHash,
-    locationHash,
+    mission.title,
+    mission.description,
+    mission.reward,
+    mission.category,
+    BigInt(Math.floor(Date.now() / 1000) + mission.expiresIn),
+    // Additional parameters based on contract interface
   ],
 });
+
+const receipt = await publicClient.waitForTransactionReceipt({ hash });
+console.log('Mission created!', receipt.transactionHash);
 ```
 
-### 3. Accept and Complete Mission
+### 3. Read Mission Data
 
 ```typescript
-import { MissionEscrowABI } from '@horizon-protocol/sdk';
+import { MissionFactoryABI } from '@horizon-protocol/sdk';
 
-// Accept mission (as performer)
-await walletClient.writeContract({
-  address: escrowAddress as `0x${string}`,
-  abi: MissionEscrowABI,
-  functionName: 'acceptMission',
+// Get total missions
+const missionCount = await publicClient.readContract({
+  address: contracts.missionFactory,
+  abi: MissionFactoryABI,
+  functionName: 'missionCount',
 });
 
-// Submit proof
-const proofHash = '0x...'; // IPFS hash of completion proof
+console.log(`Total missions: ${missionCount}`);
 
-await walletClient.writeContract({
-  address: escrowAddress as `0x${string}`,
-  abi: MissionEscrowABI,
-  functionName: 'submitProof',
-  args: [proofHash],
+// Get mission details
+const missionId = 1n; // Replace with your mission ID
+const missionData = await publicClient.readContract({
+  address: contracts.missionFactory,
+  abi: MissionFactoryABI,
+  functionName: 'getMission',
+  args: [missionId],
 });
 
-// Approve completion (as poster)
-await walletClient.writeContract({
-  address: escrowAddress as `0x${string}`,
-  abi: MissionEscrowABI,
-  functionName: 'approveCompletion',
+console.log('Mission data:', missionData);
+```
+
+## Using the API
+
+For most applications, you'll also want to use the Horizon REST API:
+
+### API Base URLs
+
+| Environment | URL |
+|-------------|-----|
+| **Testnet** | `https://api.horizon.dev` |
+| **Mainnet** | Coming soon |
+
+### Fetch Missions
+
+```typescript
+const response = await fetch('https://api.horizon.dev/missions?state=Open');
+const missions = await response.json();
+
+console.log('Available missions:', missions);
+```
+
+### Authentication
+
+Most API endpoints require authentication:
+
+```typescript
+const response = await fetch('https://api.horizon.dev/missions', {
+  headers: {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  },
 });
 ```
 
-## SDK Features
+## Project Structure
 
-### ABIs Included
+Here's a recommended structure for Horizon-based projects:
 
-All contract ABIs are exported for direct use with viem:
-
-```typescript
-import {
-  MissionFactoryABI,
-  MissionEscrowABI,
-  PaymentRouterABI,
-  GuildFactoryABI,
-  GuildDAOABI,
-  ReputationAttestationsABI,
-  HorizonAchievementsABI,
-  ERC20ABI,
-} from '@horizon-protocol/sdk';
 ```
-
-### Utility Functions
-
-```typescript
-import { parseUSDC, formatUSDC } from '@horizon-protocol/sdk';
-
-// Parse human-readable to BigInt
-const amount = parseUSDC('100.50'); // => 100500000n
-
-// Format BigInt to human-readable
-const display = formatUSDC(100500000n); // => '100.500000'
+my-horizon-app/
+├── src/
+│   ├── config/
+│   │   └── horizon.ts        # SDK configuration
+│   ├── api/
+│   │   ├── missions.ts       # Mission API calls
+│   │   └── guilds.ts         # Guild API calls
+│   ├── contracts/
+│   │   └── index.ts          # Contract interactions
+│   └── hooks/                 # React hooks (if using React)
+├── package.json
+└── tsconfig.json
 ```
-
-### Constants
-
-```typescript
-import { 
-  FEES, 
-  USDC_DECIMALS,
-  MIN_REWARD,
-  MAX_REWARD 
-} from '@horizon-protocol/sdk';
-
-console.log(FEES.PROTOCOL_BPS); // 400 (4%)
-console.log(FEES.MAX_GUILD_BPS); // 1500 (15%)
-```
-
-## Smart Contract Interaction
-
-For direct smart contract integration without the SDK, see our [contracts repository](https://github.com/HrznLabs/horizon-contracts).
-
-### Key Contracts
-
-| Contract | Purpose |
-|----------|---------|
-| **MissionFactory** | Creates mission escrow contracts |
-| **MissionEscrow** | Individual mission state machine |
-| **PaymentRouter** | 5-way fee distribution |
-| **GuildFactory** | Creates guild DAOs |
-| **GuildDAO** | Guild membership & governance |
-| **DisputeResolver** | DDR/LPP dispute handling |
-| **HorizonAchievements** | NFT achievements |
-
-## API Integration
-
-The Horizon REST API provides:
-
-- Mission CRUD operations
-- Guild management
-- User profiles and XP
-- Geospatial queries
-- WebSocket real-time updates
-
-See the [API Reference](/docs/api/overview) for full documentation.
 
 ## Next Steps
 
-- Read the [Protocol Overview](/docs/protocol/overview) to understand mission mechanics
-- Explore the [Smart Contracts](/docs/architecture/smart-contracts) architecture
-- Browse the [API Reference](/docs/api/overview) for backend integration
-- Check out the [SDK repository](https://github.com/HrznLabs/horizon-sdk) for examples
+Now that you have the basics:
 
-## Need Help?
+1. **Explore the SDK** - [SDK Reference](/docs/sdk/api-reference)
+2. **Learn the API** - [API Documentation](/docs/api/overview)
+3. **Understand missions** - [Mission Engine](/docs/protocol/mission-engine)
+4. **Join guilds** - [Guild System](/docs/protocol/guilds)
+5. **Build a vertical** - [Use Cases](/docs/use-cases/overview)
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/HrznLabs/horizon-contracts/issues)
+## Common Issues
+
+### "Insufficient USDC allowance"
+
+Make sure you've approved the MissionFactory to spend your USDC before creating missions.
+
+### "User not found"
+
+The API creates users automatically on first interaction. Make sure you're authenticated properly.
+
+### "Transaction reverted"
+
+Check that:
+- You have enough ETH for gas
+- You have enough USDC for the mission reward
+- The mission parameters are valid
+
+## Resources
+
+- [TypeScript SDK](https://github.com/HrznLabs/horizon-sdk)
+- [Smart Contracts](https://github.com/HrznLabs/horizon-contracts)
+- [API Documentation](/docs/api/overview)
+- [Base Sepolia Explorer](https://sepolia.basescan.org)

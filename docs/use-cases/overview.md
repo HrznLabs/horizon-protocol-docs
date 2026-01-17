@@ -2,75 +2,139 @@
 sidebar_position: 1
 ---
 
-# Use Cases
+# Use Cases (Verticals)
 
-Horizon Protocol is designed to power real-world coordination across diverse industries. These vertical applications demonstrate what can be built on Horizon.
+Horizon Protocol provides the infrastructure for building decentralized coordination platforms. This section showcases real-world applications built on Horizon, demonstrating how the protocol adapts to different industries.
 
-## What Are Verticals?
+## Why Build on Horizon?
 
-Verticals are industry-specific applications built on Horizon Protocol. They share:
-- **Common Infrastructure**: Smart contracts, escrow, dispute resolution
-- **Customized UX**: Tailored interfaces for specific use cases
-- **Guild Networks**: Community-driven coordination
+### For Builders
 
-## Current Verticals
+| Benefit | Description |
+|---------|-------------|
+| **Trustless Escrow** | Built-in USDC escrow eliminates payment disputes |
+| **Location Verification** | Geofencing for location-based task verification |
+| **Reputation System** | On-chain reputation and achievement NFTs |
+| **Guild Coordination** | DAO-based organization and governance |
+| **SDK & API** | Ready-to-use SDK and comprehensive API |
 
-### 🍔 [iTake](/docs/use-cases/itake)
-**Food Delivery Platform**
+### For Users
 
-Decentralized food delivery connecting local restaurants with delivery performers through guild-based coordination.
+| Benefit | Description |
+|---------|-------------|
+| **Fair Payments** | Guaranteed payment release on completion |
+| **Portable Reputation** | Reputation travels across all Horizon apps |
+| **Own Your Data** | Full control over personal data via Data Vault |
+| **Community Ownership** | Participate in guild governance |
 
-### 🚗 [ridesDAO](/docs/use-cases/ridesdao)
-**Ride-Sharing Network**
+## Active Verticals
 
-Peer-to-peer ride-sharing with driver guilds, dynamic pricing, and transparent escrow.
+### iTake - Food Delivery
 
-### 🏗️ [BuildDao](/docs/use-cases/builddao)
-**Construction & Contracting**
+A decentralized food delivery platform connecting restaurants with delivery drivers.
 
-Multi-party project coordination with milestone-based payments and contractor reputation.
+**Key Features:**
+- Restaurant onboarding and menu management
+- Order-to-mission conversion
+- Real-time delivery tracking
+- Automatic payment splitting
+
+[Learn more about iTake →](/docs/use-cases/itake)
+
+---
+
+### ridesDAO - Ride Sharing
+
+Decentralized ride-sharing where drivers own the platform.
+
+**Key Features:**
+- Driver-rider matching
+- Fair fare distribution
+- Driver collectives (guilds)
+- Community governance
+
+[Learn more about ridesDAO →](/docs/use-cases/ridesdao)
+
+---
+
+### BuildDAO - Construction
+
+Connecting skilled tradespeople with construction projects.
+
+**Key Features:**
+- Project-based missions
+- Milestone payments
+- Trade-specific guilds
+- Skill attestations
+
+[Learn more about BuildDAO →](/docs/use-cases/builddao)
 
 ## Building Your Own Vertical
 
-Horizon Protocol provides the building blocks:
+Want to build on Horizon? Here's how:
 
-| Component | Purpose |
-|-----------|---------|
-| **Mission Factory** | Create and manage tasks |
-| **Escrow System** | Hold and release payments |
-| **Guild Infrastructure** | Organize communities |
-| **Reputation System** | Track performer quality |
-| **Dispute Resolution** | Handle conflicts |
+### 1. Define Your Domain
 
-### Integration Options
+Map your use case to Horizon concepts:
 
-1. **SDK Integration** - Use the TypeScript SDK directly
-2. **API Integration** - Connect via REST/WebSocket APIs
-3. **Smart Contract Extension** - Build custom contracts on top
+| Your Domain | Horizon Concept |
+|-------------|-----------------|
+| Tasks/Jobs | Missions |
+| Organizations | Guilds |
+| Workers | Performers |
+| Customers | Posters |
 
-## Architecture Pattern
+### 2. Integrate the SDK
 
-All verticals follow a similar architecture:
+```typescript
+import { HorizonClient, MissionFactoryABI } from '@horizon-protocol/sdk';
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Vertical Application                      │
-│              (iTake, ridesDAO, BuildDao, etc.)              │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                    Horizon Backend                           │
-│           Missions · Guilds · XP · Escrow · Maps            │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                    Base L2 Blockchain                        │
-│         Smart Contracts · USDC · Attestations               │
-└─────────────────────────────────────────────────────────────┘
+// Create missions programmatically
+const mission = await client.writeContract({
+  address: contracts.missionFactory,
+  abi: MissionFactoryABI,
+  functionName: 'createMission',
+  args: [/* your mission params */],
+});
 ```
 
-## Want to Build on Horizon?
+### 3. Customize the Experience
 
-- [Getting Started](/docs/guides/getting-started) - Set up your environment
-- [SDK Documentation](/docs/sdk/overview) - TypeScript integration
-- [API Reference](/docs/api/overview) - Backend endpoints
+- Build your own UI
+- Add domain-specific features
+- Integrate with existing systems
+- Create custom guild types
+
+## Integration Patterns
+
+### Order-to-Mission Pattern (iTake)
+
+```
+Customer Order → Create Horizon Mission → Driver Accepts → Delivery → Settlement
+```
+
+### Project-to-Milestone Pattern (BuildDAO)
+
+```
+Project Created → Multiple Milestone Missions → Worker Claims → Verification → Payment
+```
+
+### Request-to-Match Pattern (ridesDAO)
+
+```
+Ride Request → Mission Created → Driver Matched → Trip Completed → Auto-Settlement
+```
+
+## Getting Started
+
+1. **Read the SDK docs**: [SDK Overview](/docs/sdk/overview)
+2. **Explore the API**: [API Reference](/docs/api/overview)
+3. **Study existing verticals**: Review iTake, ridesDAO, BuildDAO
+4. **Join the community**: Connect with other builders
+
+## Resources
+
+- [TypeScript SDK](https://github.com/HrznLabs/horizon-sdk)
+- [Smart Contracts](https://github.com/HrznLabs/horizon-contracts)
+- [API Documentation](/docs/api/overview)
+- [Getting Started Guide](/docs/guides/getting-started)
