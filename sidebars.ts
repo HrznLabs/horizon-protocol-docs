@@ -23,6 +23,10 @@ const sidebars: SidebarsConfig = {
         'protocol/governance',
       ],
     },
+  ],
+
+  // Architecture Documentation
+  architectureSidebar: [
     {
       type: 'category',
       label: 'Architecture',
