@@ -75,14 +75,31 @@ iTake uses Horizon's MetaDAO/SubDAO hierarchy:
 
 ## Payment Distribution
 
-When a delivery is completed:
+When a delivery is completed, fees are distributed using the inclusive 10% model:
 
-| Recipient | Description |
-|-----------|-------------|
-| **Driver** | Base delivery fee + tips |
-| **Restaurant** | Keeps food revenue |
-| **iTake** | Platform fee |
-| **Protocol** | Horizon protocol fees |
+| Recipient | Percentage | Description |
+|-----------|------------|-------------|
+| **Driver** | 90% | Base delivery fee (guaranteed minimum) |
+| **Protocol** | 2.5% | Platform sustainability |
+| **Labs** | 2.5% | R&D and development |
+| **Resolver** | 2% | Dispute resolution pool |
+| **iTake (MetaDAO)** | 1% | Platform operations |
+| **Restaurant (SubDAO)** | 2% | Restaurant fee share |
+
+### Example: €10 Delivery Fee
+
+```
+Driver:       €9.00 (90%)
+Protocol:     €0.25 (2.5%)
+Labs:         €0.25 (2.5%)
+Resolver:     €0.20 (2%)
+iTake:        €0.10 (1%)
+Restaurant:   €0.20 (2%)
+─────────────────────────
+Total Fees:   €1.00 (10%)
+```
+
+> **Note**: Food revenue goes directly to the restaurant. The breakdown above applies only to delivery fees.
 
 ## Key Features
 
