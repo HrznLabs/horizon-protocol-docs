@@ -1,23 +1,36 @@
 /**
- * Horizon Protocol - Homepage Features Styles
+ * Horizon Protocol - Homepage Features Styles (Cyberpunk Theme)
  */
 
 .features {
   display: flex;
   align-items: flex-start;
-  padding: 4rem 0;
+  padding: 5rem 0;
   width: 100%;
+  background: #0A0A0B;
+  position: relative;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
 }
 
 .featureEmoji {
   font-size: 3rem;
   margin-bottom: 1rem;
   display: block;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.3));
 }
 
 /* Add spacing between feature rows */
 .features .row {
-  row-gap: 2.5rem;
+  row-gap: 3rem;
 }
 
 /* Feature card styling */
@@ -28,17 +41,25 @@
 .features h3 {
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
+  color: #ffffff;
 }
 
 .features p {
-  color: var(--ifm-font-color-secondary);
+  color: #8B8D98;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
+}
+
+/* Feature item hover effect */
+.features .col:hover .featureEmoji {
+  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.5));
+  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 996px) {
   .features {
-    padding: 2rem 0;
+    padding: 3rem 0;
   }
   
   .featureEmoji {
