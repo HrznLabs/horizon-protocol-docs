@@ -179,9 +179,7 @@ Planned for high-security operations:
 |----------|------------|
 | Android | Play Integrity API |
 | iOS | DeviceCheck |
-| Web | WebAuthn/Passkeys |
-
-This will enable:
+| Web | WebAuthn/Passkeys |This will enable:
 - Anti-fraud protection
 - Bot prevention
 - Location verification enhancement

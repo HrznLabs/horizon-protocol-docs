@@ -230,3 +230,4 @@ Delete all off-chain user data. GDPR Article 17 (right to be forgotten).
 | Export logs | 90 days |
 
 
+

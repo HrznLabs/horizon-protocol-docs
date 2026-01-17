@@ -63,16 +63,17 @@ const config: Config = {
       id: 'v2_1_launch',
       content:
         '🚀 Horizon Protocol v2.1 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started">Get started →</a>',
-      backgroundColor: '#10B981',
-      textColor: '#fff',
+      backgroundColor: '#00FF88',
+      textColor: '#0A0A0B',
       isCloseable: true,
     },
     navbar: {
       title: 'Horizon',
       logo: {
         alt: 'Horizon Protocol Logo',
-        src: 'img/logo.svg',
-        srcDark: 'img/logo-dark.svg',
+        src: 'img/logo.jpg',
+        srcDark: 'img/logo.jpg',
+        style: { borderRadius: '50%' },
       },
       items: [
         {
