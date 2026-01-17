@@ -1,15 +1,20 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 /**
- * Horizon Protocol Documentation Sidebars
+ * Horizon Protocol Public Documentation Sidebars
+ * 
+ * This is the PUBLIC documentation for external developers.
+ * Contains integration guides, API references, and use cases.
+ * NO internal algorithms or proprietary implementation details.
  */
 const sidebars: SidebarsConfig = {
-  // Protocol Documentation
+  // Main Documentation Sidebar
   protocolSidebar: [
     'intro',
     {
       type: 'category',
       label: 'Protocol',
+      collapsed: false,
       items: [
         'protocol/overview',
         'protocol/mission-engine',
@@ -18,13 +23,10 @@ const sidebars: SidebarsConfig = {
         'protocol/governance',
       ],
     },
-  ],
-
-  // Architecture Documentation
-  architectureSidebar: [
     {
       type: 'category',
       label: 'Architecture',
+      collapsed: false,
       items: [
         'architecture/base-ecosystem',
         'architecture/mini-app',
@@ -40,6 +42,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'SDK',
+      collapsed: false,
       items: [
         'sdk/overview',
         'sdk/quickstart',
@@ -53,6 +56,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'API Reference',
+      collapsed: false,
       items: [
         'api/overview',
         'api/missions',
@@ -75,11 +79,12 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Guides',
+      collapsed: false,
       items: [
         'guides/getting-started',
+        'guides/creating-missions',
         'guides/achievements',
         'guides/becoming-resolver',
-        'guides/creating-missions',
       ],
     },
   ],
@@ -89,6 +94,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Use Cases',
+      collapsed: false,
       items: [
         'use-cases/overview',
         'use-cases/itake',
@@ -100,4 +106,3 @@ const sidebars: SidebarsConfig = {
 };
 
 export default sidebars;
-

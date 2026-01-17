@@ -4,18 +4,20 @@ sidebar_position: 1
 
 # Protocol Overview
 
-Horizon Protocol is a decentralized coordination system that connects task posters with performers through blockchain-backed escrow, location verification, and guild-based coordination.
+Horizon Protocol is a decentralized coordination system that connects task posters with performers through blockchain-backed escrow, location verification, and guild-based coordination. Built natively on Base L2, it provides trustless, gasless coordination for real-world tasks.
 
 ## Core Actors
 
 ### Posters
+
 Users who create missions by:
-- Defining task requirements
+- Defining task requirements and deadlines
 - Depositing USDC rewards in escrow
 - Optionally associating missions with guilds
 - Approving completion and releasing funds
 
 ### Performers
+
 Users who execute missions by:
 - Browsing available missions on the map
 - Accepting missions within their capability
@@ -23,22 +25,22 @@ Users who execute missions by:
 - Earning rewards, XP, and reputation
 
 ### Guilds
+
 Coordination groups that:
 - Curate mission boards for members
 - Maintain reputation standards
 - Earn fee share on member completions
-- Provide dispute resolution support
+- Provide community and support
 
 ### Resolvers
+
 Trusted arbitrators who:
 - Handle mission disputes
 - Review evidence from both parties
 - Make binding decisions on fund distribution
-- Earn fees from DDR pool
+- Earn fees from the dispute resolution pool
 
-## Mission Engine
-
-The Mission Engine is the core coordination mechanism:
+## Mission Lifecycle
 
 ```
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
@@ -68,79 +70,80 @@ The Mission Engine is the core coordination mechanism:
 | Submitted | Disputed | `raiseDispute()` | Either |
 | Disputed | Resolved | `resolveDispute()` | Resolver |
 
-## Economic Model
+## Fee Structure
 
-### Fee Distribution (Fixed + Variable)
+When a mission completes successfully, fees are distributed to support the protocol ecosystem:
 
-When a mission completes successfully:
+### Platform Fees
 
-**Fixed Fees (10% total):**
+| Recipient | Description |
+|-----------|-------------|
+| **Protocol Treasury** | Platform sustainability |
+| **Labs Treasury** | R&D and development |
+| **Resolver Pool** | Dispute resolution fund |
 
-| Recipient | Percentage | Description |
-|-----------|------------|-------------|
-| **Protocol** | 4% | Platform sustainability |
-| **Labs** | 4% | R&D and development |
-| **Resolver** | 2% | Dispute resolution pool |
+### Guild Fees (Variable)
 
-**Variable Fee:**
+Guilds can earn a fee share on missions curated to their board. The fee is set by guild governance.
 
-| Recipient | Percentage | Description |
-|-----------|------------|-------------|
-| **Guild** | 0-15% | Set by guild when curating mission |
-| **Performer** | 90% - guild fee | Base reward minus guild cut |
+### Performer Earnings
 
-Protocol and Labs fees are equal and higher than the Resolver fee. Guild fees are set by each guild's governance and can vary by mission difficulty/effort.
+Performers receive the majority of the mission reward (minimum 90%), minus any applicable guild fees.
+
+## Dispute Resolution
 
 ### DDR (Dynamic Dispute Reserve)
 
-The DDR is a 5% deposit required from both parties when a dispute is raised:
-
-- **Purpose**: Skin in the game for dispute parties
-- **Rate**: 5% of mission reward
-- **Return**: Returned to winner (minus fees)
-- **Distribution**: Resolver (20%), Protocol (10%), Winner (70%)
+A deposit required from both parties when a dispute is raised:
+- Ensures commitment from both disputing parties
+- Returned to the winning party
+- Partial distribution to resolver
 
 ### LPP (Loser-Pays Penalty)
 
-Additional 2% penalty on the losing party:
+Additional penalty on the losing party to discourage frivolous disputes.
 
-- **Purpose**: Discourage frivolous disputes
-- **Rate**: 2% of mission reward
-- **Distribution**: Added to winner's payout
+## Security & Privacy
 
-## Security Invariants
+### On-Chain Guarantees
 
-The following must **never** be violated:
+- **Reward Immutability**: Mission rewards cannot change after creation
+- **Performer Lock**: Performer address cannot change after acceptance
+- **Non-Custodial**: Protocol cannot unilaterally modify escrow state
 
-1. **Reward Immutability**: `rewardAmount` cannot change after creation
-2. **DDR Immutability**: `ddrAmount` cannot change after creation
-3. **Performer Lock**: `performer` cannot change after acceptance
-4. **Non-Custodial**: Horizon Service cannot modify on-chain state
-5. **Location Privacy**: Location data purged after 30 days
-6. **Consent Required**: Live tracking requires explicit opt-in
+### Privacy Features
 
-## Deployment
+- Location data purged after 30 days
+- Live tracking requires explicit opt-in
+- Encrypted data vault for user data
 
-Horizon Protocol is deployed on **Base L2** (EVM-compatible).
+## Technical Stack
 
-### What's On-Chain
-- Mission escrow and settlement
-- Guild DAOs and membership
-- Reputation attestations (EAS)
-- Dispute resolution
-- Payment routing
-- Achievement NFTs
+| Component | Technology |
+|-----------|------------|
+| **Blockchain** | Base L2 (EVM-compatible) |
+| **Smart Contracts** | Solidity + Foundry |
+| **Stablecoin** | USDC |
+| **Identity** | ENS, Basenames |
+| **Reputation** | EAS Attestations |
 
-### What's Off-Chain
-- User interface and mobile app
-- Real-time notifications
-- Location processing
-- Mission metadata (IPFS)
+## Deployments
 
-## Version History
+### Testnet (Base Sepolia)
 
-| Version | Date | Highlights |
-|---------|------|------------|
-| v2.1 | Dec 2025 | Map Layer, DDR/LPP, Geofencing |
-| v2.0 | Nov 2025 | Guild DAOs, PaymentRouter |
-| v1.0 | Oct 2025 | Initial escrow, basic missions |
+| Contract | Address |
+|----------|---------|
+| MissionFactory | `0xee9234954b134c39c17a75482da78e46b16f466c` |
+| PaymentRouter | `0x94fb7908257ec36f701d2605b51eefed4326ddf5` |
+| GuildFactory | `0xfeae3538a4a1801e47b6d16104aa8586edb55f00` |
+| ReputationAttestations | `0xedae9682a0fb6fb3c18d6865461f67db7d748002` |
+| DisputeResolver | `0xb00ac4278129928aecc72541b0bcd69d94c1691e` |
+| HorizonAchievements | `0x568e0e3102bfa1f4045d3f62559c0f9823b469bc` |
+| USDC (testnet) | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
+
+## Next Steps
+
+- [Mission Engine](/docs/protocol/mission-engine) - Deep dive into mission mechanics
+- [Guild System](/docs/protocol/guilds) - Learn about guild coordination
+- [Economics](/docs/protocol/economics) - Understand tokenomics
+- [Getting Started](/docs/guides/getting-started) - Build your first integration

@@ -4,92 +4,213 @@ sidebar_position: 1
 
 # API Overview
 
-The Horizon Service provides a RESTful API for interacting with the protocol.
+The Horizon REST API provides programmatic access to all protocol features. This documentation covers endpoints, authentication, and common patterns.
 
-## Base URL
+## Base URLs
 
-```
-Production:  https://api.horizon.xyz/v1
-Testnet:     https://api-testnet.horizon.xyz/v1
-Local:       http://localhost:3001/v1
-```
+| Environment | Base URL |
+|-------------|----------|
+| **Testnet** | `https://api.horizon.dev` |
+| **Mainnet** | Coming soon |
 
 ## Authentication
 
-Most endpoints require authentication via JWT bearer token:
+Most endpoints require authentication via JWT token:
 
-```bash
-curl -H "Authorization: Bearer <token>" https://api.horizon.xyz/v1/missions
+```http
+Authorization: Bearer <your-jwt-token>
 ```
 
-### Obtaining a Token (SIWE)
+### Getting a Token
 
-1. Connect wallet (CDP Embedded Wallet, Coinbase Wallet, or WalletConnect)
-2. Request challenge: `GET /auth/challenge?address=0x...`
-3. Sign EIP-4361 SIWE message with wallet
-4. Submit signature: `POST /auth/login` with address, message, signature
-5. Receive JWT token (valid 24 hours)
+```typescript
+// 1. Get message to sign
+const messageRes = await fetch('https://api.horizon.dev/auth/message', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ address: walletAddress }),
+});
+const { message } = await messageRes.json();
 
-## Rate Limits
+// 2. Sign with wallet
+const signature = await wallet.signMessage(message);
 
-| Tier | Requests/min | Burst |
-|------|-------------|-------|
-| Anonymous | 30 | 50 |
-| Authenticated | 100 | 200 |
-| Guild Curator | 200 | 400 |
+// 3. Get JWT
+const authRes = await fetch('https://api.horizon.dev/auth/verify', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ address: walletAddress, signature }),
+});
+const { token } = await authRes.json();
+```
 
 ## Response Format
 
-All responses follow this structure:
+All responses follow a consistent format:
+
+### Success
 
 ```json
 {
   "data": { ... },
   "meta": {
-    "total": 100,
     "page": 1,
-    "limit": 20
+    "limit": 20,
+    "total": 100
   }
 }
 ```
 
-### Error Response
+### Error
 
 ```json
 {
-  "statusCode": 400,
-  "message": "Validation failed",
-  "error": "Bad Request",
-  "details": [
-    { "field": "latitude", "message": "must be between -90 and 90" }
-  ]
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Mission not found"
+  }
 }
 ```
 
-## API Sections
+## Common Query Parameters
 
-- [**Missions**](/docs/api/missions) - Create, query, and manage missions
-- [**Guilds**](/docs/api/guilds) - Guild membership and boards
-- [**Users**](/docs/api/users) - User profiles and identity
-- [**Map**](/docs/api/map) - Geospatial queries and location
-- [**XP & NFT**](/docs/api/xp-nft) - XP ledger, levels, and achievements
-- [**Feed**](/docs/api/feed) - Personalized mission discovery
-- [**Ratings**](/docs/api/ratings) - On-chain EAS reputation attestations
-- [**Notifications**](/docs/api/notifications) - Push and in-app notifications
-- [**Disputes**](/docs/api/disputes) - DDR/LPP dispute resolution
-- [**Data Vault**](/docs/api/data-vault) - GDPR data export and privacy
-- [**WebSocket**](/docs/api/websocket) - Real-time events
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `skip` | number | Pagination offset |
+| `take` | number | Results per page (default: 20, max: 100) |
+| `sortBy` | string | Sort field |
+| `sortOrder` | string | `asc` or `desc` |
 
-## OpenAPI Specification
+## Rate Limiting
 
-Full OpenAPI 3.0 spec available at:
+| Tier | Requests/minute |
+|------|-----------------|
+| **Unauthenticated** | 30 |
+| **Authenticated** | 300 |
+| **Premium** | 1000 |
 
+Rate limit headers:
+```http
+X-RateLimit-Limit: 300
+X-RateLimit-Remaining: 299
+X-RateLimit-Reset: 1640000000
 ```
-https://api.horizon.xyz/v1/openapi.json
+
+## API Endpoints
+
+### Core Resources
+
+| Resource | Endpoint | Description |
+|----------|----------|-------------|
+| [Missions](/docs/api/missions) | `/missions` | Create and manage missions |
+| [Guilds](/docs/api/guilds) | `/guilds` | Guild management |
+| [Users](/docs/api/users) | `/users` | User profiles |
+| [Feed](/docs/api/feed) | `/feed` | Mission discovery |
+| [Map](/docs/api/map) | `/map` | Location-based queries |
+
+### Supporting Resources
+
+| Resource | Endpoint | Description |
+|----------|----------|-------------|
+| [XP & NFT](/docs/api/xp-nft) | `/xp`, `/nft` | Progression system |
+| [Ratings](/docs/api/ratings) | `/ratings` | Reputation |
+| [Disputes](/docs/api/disputes) | `/resolver` | Dispute resolution |
+| [Notifications](/docs/api/notifications) | `/notifications` | User notifications |
+| [Data Vault](/docs/api/data-vault) | `/data-vault` | User data export |
+
+### Real-time
+
+| Resource | Endpoint | Description |
+|----------|----------|-------------|
+| [WebSocket](/docs/api/websocket) | `/ws` | Real-time updates |
+
+## Quick Examples
+
+### List Open Missions
+
+```bash
+curl -X GET "https://api.horizon.dev/missions?state=Open&take=10" \
+  -H "Authorization: Bearer $TOKEN"
 ```
 
-## SDKs
+### Create Mission
 
-- **TypeScript SDK**: [@horizon-protocol/sdk](https://github.com/HrznLabs/horizon-sdk) - ABIs, utilities, contract addresses
-- React Native hooks included in mobile package
+```bash
+curl -X POST "https://api.horizon.dev/missions" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Deliver package",
+    "description": "Pick up and deliver",
+    "rewardAmount": "10.00",
+    "category": "delivery",
+    "expiresIn": 86400
+  }'
+```
 
+### Get User Profile
+
+```bash
+curl -X GET "https://api.horizon.dev/users/me" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+## SDK Integration
+
+For TypeScript projects, use the SDK with API endpoints:
+
+```typescript
+import { BASE_SEPOLIA } from '@horizon-protocol/sdk';
+
+const apiClient = {
+  baseUrl: 'https://api.horizon.dev',
+  token: null,
+
+  async fetch(path: string, options: RequestInit = {}) {
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(this.token && { Authorization: `Bearer ${this.token}` }),
+        ...options.headers,
+      },
+    });
+    return response.json();
+  },
+
+  async getMissions(params?: { state?: string; take?: number }) {
+    const query = new URLSearchParams(params as any).toString();
+    return this.fetch(`/missions?${query}`);
+  },
+
+  async createMission(data: CreateMissionDto) {
+    return this.fetch('/missions', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+};
+```
+
+## Error Codes
+
+| Code | HTTP Status | Description |
+|------|-------------|-------------|
+| `UNAUTHORIZED` | 401 | Invalid or missing token |
+| `FORBIDDEN` | 403 | Insufficient permissions |
+| `NOT_FOUND` | 404 | Resource not found |
+| `VALIDATION_ERROR` | 400 | Invalid request data |
+| `RATE_LIMITED` | 429 | Too many requests |
+| `INTERNAL_ERROR` | 500 | Server error |
+
+## Versioning
+
+The API uses URL versioning (coming soon):
+- Current: `/missions`
+- Future: `/v2/missions`
+
+## Resources
+
+- [SDK Documentation](/docs/sdk/overview)
+- [Smart Contracts](/docs/architecture/smart-contracts)
+- [Getting Started](/docs/guides/getting-started)

@@ -1,267 +1,323 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # Creating Missions
 
-A complete guide to creating missions on Horizon Protocol using the SDK.
+This guide covers everything you need to know about creating missions on Horizon Protocol. Missions are the core unit of work coordination in the ecosystem.
 
-## Overview
+## Mission Anatomy
 
-Missions are the core unit of work on Horizon. Creating a mission involves:
-1. Preparing mission metadata
-2. Approving USDC spending
-3. Calling the MissionFactory contract
-4. Monitoring mission status
+Every mission has these core components:
 
-## Prerequisites
+| Component | Description | Required |
+|-----------|-------------|----------|
+| **Title** | Brief description (max 100 chars) | Yes |
+| **Description** | Detailed requirements | Yes |
+| **Reward** | USDC amount held in escrow | Yes |
+| **Category** | Mission type (delivery, task, etc.) | Yes |
+| **Expiration** | When the mission expires | Yes |
+| **Location** | Where the mission takes place | Optional |
+| **Guild** | Associated guild (if any) | Optional |
 
-- Node.js 18+
-- Horizon SDK installed
-- Base Sepolia ETH (for gas)
-- Base Sepolia USDC (for rewards)
+## Creating a Basic Mission
 
-## Step-by-Step Guide
-
-### 1. Initialize Your Client
-
-```typescript
-import { createPublicClient, createWalletClient, http } from 'viem';
-import { baseSepolia } from 'viem/chains';
-import { privateKeyToAccount } from 'viem/accounts';
-import { BASE_SEPOLIA } from '@horizon-protocol/sdk';
-
-const account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
-
-const publicClient = createPublicClient({
-  chain: baseSepolia,
-  transport: http(BASE_SEPOLIA.rpcUrl),
-});
-
-const walletClient = createWalletClient({
-  account,
-  chain: baseSepolia,
-  transport: http(),
-});
-```
-
-### 2. Prepare Mission Metadata
-
-Missions store metadata on IPFS. Structure your metadata:
+### Using the SDK
 
 ```typescript
-interface MissionMetadata {
-  title: string;
-  description: string;
-  category: string;
-  requirements: string[];
-  images?: string[];
-}
+import { MissionFactoryABI, parseUSDC, toBytes32 } from '@horizon-protocol/sdk';
 
-const metadata: MissionMetadata = {
-  title: 'Deliver Package Downtown',
-  description: 'Pick up a package from 123 Main St and deliver to 456 Broadway',
-  category: 'DELIVERY',
-  requirements: [
-    'Must have vehicle',
-    'Complete within 2 hours',
-    'Photo confirmation required'
+// 1. Approve USDC spending
+await walletClient.writeContract({
+  address: contracts.usdc,
+  abi: ERC20ABI,
+  functionName: 'approve',
+  args: [contracts.missionFactory, parseUSDC('10')],
+});
+
+// 2. Create mission
+const hash = await walletClient.writeContract({
+  address: contracts.missionFactory,
+  abi: MissionFactoryABI,
+  functionName: 'createMission',
+  args: [
+    'Deliver package',                    // title
+    'Pick up from store, deliver to park', // description
+    parseUSDC('10'),                       // reward (10 USDC)
+    toBytes32('delivery'),                 // category
+    BigInt(Math.floor(Date.now() / 1000) + 86400), // expires in 24h
   ],
-};
+});
 
-// Upload to IPFS (use your preferred IPFS service)
-const metadataHash = await uploadToIPFS(metadata);
+await publicClient.waitForTransactionReceipt({ hash });
 ```
 
-### 3. Prepare Location Data
+### Using the API
+
+```typescript
+const mission = await fetch('https://api.horizon.dev/missions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    title: 'Deliver package',
+    description: 'Pick up from store, deliver to park',
+    rewardAmount: '10.00',
+    category: 'delivery',
+    expiresIn: 86400, // seconds
+  }),
+});
+```
+
+## Mission Categories
+
+Use standardized categories for better discovery:
+
+| Category | Use Case |
+|----------|----------|
+| `delivery` | Physical item delivery |
+| `errand` | General errands and tasks |
+| `survey` | Data collection |
+| `review` | Reviews and feedback |
+| `photo` | Photography tasks |
+| `social` | Social media tasks |
+| `custom` | Other tasks |
+
+## Adding Location
 
 For location-based missions:
 
 ```typescript
-interface LocationData {
-  type: 'POINT' | 'AREA';
-  pickup?: { lat: number; lng: number };
-  destination?: { lat: number; lng: number };
-  radius?: number; // meters
-  precision: 'EXACT' | 'CITY' | 'REGION';
-}
-
-const location: LocationData = {
-  type: 'POINT',
-  pickup: { lat: 40.7128, lng: -74.0060 },
-  destination: { lat: 40.7580, lng: -73.9855 },
-  precision: 'EXACT',
-};
-
-const locationHash = await uploadToIPFS(location);
-```
-
-### 4. Approve USDC Spending
-
-Before creating a mission, approve the MissionFactory to spend your USDC:
-
-```typescript
-import { ERC20ABI, parseUSDC } from '@horizon-protocol/sdk';
-
-const rewardAmount = parseUSDC(25); // 25 USDC
-
-const approvalHash = await walletClient.writeContract({
-  address: BASE_SEPOLIA.contracts.usdc,
-  abi: ERC20ABI,
-  functionName: 'approve',
-  args: [BASE_SEPOLIA.contracts.missionFactory, rewardAmount],
-});
-
-// Wait for confirmation
-await publicClient.waitForTransactionReceipt({ hash: approvalHash });
-console.log('USDC approved:', approvalHash);
-```
-
-### 5. Create the Mission
-
-```typescript
-import { 
-  MissionFactoryABI, 
-  calculateExpiresAt,
-  toBytes32,
-  ZERO_ADDRESS 
-} from '@horizon-protocol/sdk';
-
-const createMissionHash = await walletClient.writeContract({
-  address: BASE_SEPOLIA.contracts.missionFactory,
+const hash = await walletClient.writeContract({
+  address: contracts.missionFactory,
   abi: MissionFactoryABI,
-  functionName: 'createMission',
+  functionName: 'createMissionWithLocation',
   args: [
-    rewardAmount,                        // USDC amount (6 decimals)
-    calculateExpiresAt(24 * 60 * 60),    // 24 hours from now
-    ZERO_ADDRESS,                         // Guild address (or ZERO_ADDRESS for public)
-    toBytes32(metadataHash),              // IPFS metadata hash
-    toBytes32(locationHash),              // IPFS location hash
+    'Deliver package',
+    'Pick up from Central Park',
+    parseUSDC('10'),
+    toBytes32('delivery'),
+    BigInt(Math.floor(Date.now() / 1000) + 86400),
+    {
+      latitude: 40.7829,  // Central Park
+      longitude: -73.9654,
+      radius: 100,        // meters
+    },
   ],
 });
-
-const receipt = await publicClient.waitForTransactionReceipt({ 
-  hash: createMissionHash 
-});
-
-console.log('Mission created:', createMissionHash);
-```
-
-### 6. Get Mission ID from Event
-
-Parse the `MissionCreated` event to get the mission ID:
-
-```typescript
-import { parseEventLogs } from 'viem';
-
-const logs = parseEventLogs({
-  abi: MissionFactoryABI,
-  logs: receipt.logs,
-  eventName: 'MissionCreated',
-});
-
-const missionId = logs[0].args.missionId;
-const escrowAddress = logs[0].args.escrow;
-
-console.log('Mission ID:', missionId);
-console.log('Escrow Address:', escrowAddress);
 ```
 
 ## Guild Missions
 
-To create a mission for a specific guild:
+Create missions associated with a guild:
 
 ```typescript
-const guildAddress = '0x...'; // Your guild's address
-
-await walletClient.writeContract({
-  address: BASE_SEPOLIA.contracts.missionFactory,
+const hash = await walletClient.writeContract({
+  address: contracts.missionFactory,
   abi: MissionFactoryABI,
-  functionName: 'createMission',
+  functionName: 'createGuildMission',
   args: [
-    rewardAmount,
-    calculateExpiresAt(24 * 60 * 60),
-    guildAddress,                      // Guild-exclusive mission
-    toBytes32(metadataHash),
-    toBytes32(locationHash),
+    'Guild task',
+    'Complete this task for the guild',
+    parseUSDC('15'),
+    toBytes32('task'),
+    BigInt(Math.floor(Date.now() / 1000) + 86400),
+    guildAddress, // Guild contract address
   ],
 });
 ```
 
-Guild missions are only visible/claimable by guild members.
+## Mission Requirements
 
-## Mission Parameters
+Add eligibility requirements:
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `rewardAmount` | bigint | USDC reward (6 decimals) |
-| `expiresAt` | bigint | Unix timestamp for expiration |
-| `guild` | address | Guild address or ZERO_ADDRESS for public |
-| `metadataHash` | bytes32 | IPFS hash of mission metadata |
-| `locationHash` | bytes32 | IPFS hash of location data |
+```typescript
+// Via API - missions can have requirements
+const mission = await fetch('https://api.horizon.dev/missions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    title: 'Premium delivery',
+    description: 'High-value item delivery',
+    rewardAmount: '50.00',
+    category: 'delivery',
+    expiresIn: 86400,
+    requirements: {
+      minXP: 500,           // Minimum global XP
+      minReputation: 80,    // Minimum reputation score
+      guildId: 'guild-123', // Must be guild member
+    },
+  }),
+});
+```
 
 ## Best Practices
 
-### 1. Set Appropriate Expiration
+### Write Clear Descriptions
 
-```typescript
-// Short tasks: 1-4 hours
-calculateExpiresAt(4 * 60 * 60);
-
-// Day tasks: 24 hours
-calculateExpiresAt(24 * 60 * 60);
-
-// Longer projects: 7 days
-calculateExpiresAt(7 * 24 * 60 * 60);
+**Good:**
+```
+Pick up a medium-sized package from Joe's Coffee (123 Main St) 
+and deliver to the park entrance at Central Park South.
+The package is fragile - handle with care.
+Estimated time: 30 minutes.
 ```
 
-### 2. Be Clear in Metadata
+**Bad:**
+```
+deliver something
+```
 
-Include:
-- Specific deliverables
-- Time expectations
-- Required equipment
-- Proof requirements
-
-### 3. Set Fair Rewards
+### Set Appropriate Rewards
 
 Consider:
-- Time required
-- Skill level needed
-- Travel distance
-- Market rates
+- Task complexity and time required
+- Distance (for location-based missions)
+- Skill requirements
+- Market rates for similar work
 
-## Monitoring Mission Status
+### Use Realistic Expirations
 
-Check mission state:
+| Task Type | Recommended Expiration |
+|-----------|----------------------|
+| Quick errands | 2-4 hours |
+| Same-day delivery | 8-12 hours |
+| Flexible tasks | 24-48 hours |
+| Long-term projects | 1-7 days |
+
+## Mission Lifecycle
+
+After creation, your mission follows this lifecycle:
+
+```
+Created → Open → Accepted → Submitted → Completed
+                    ↓
+                 Disputed (if needed)
+```
+
+### Managing Your Mission
 
 ```typescript
-import { MissionEscrowABI, MissionState } from '@horizon-protocol/sdk';
+// Cancel a mission (before acceptance)
+await walletClient.writeContract({
+  address: missionEscrowAddress,
+  abi: MissionEscrowABI,
+  functionName: 'cancelMission',
+  args: [],
+});
 
-const state = await publicClient.readContract({
-  address: escrowAddress,
+// Approve completion
+await walletClient.writeContract({
+  address: missionEscrowAddress,
+  abi: MissionEscrowABI,
+  functionName: 'approveCompletion',
+  args: [],
+});
+
+// Raise dispute (if unsatisfied)
+await walletClient.writeContract({
+  address: missionEscrowAddress,
+  abi: MissionEscrowABI,
+  functionName: 'raiseDispute',
+  args: [],
+});
+```
+
+## Monitoring Missions
+
+### Get Mission Status
+
+```typescript
+const status = await publicClient.readContract({
+  address: missionEscrowAddress,
   abi: MissionEscrowABI,
   functionName: 'state',
 });
 
-switch (state) {
-  case MissionState.Open:
-    console.log('Waiting for performer');
-    break;
-  case MissionState.Accepted:
-    console.log('Performer working on it');
-    break;
-  case MissionState.Submitted:
-    console.log('Ready for your approval');
-    break;
-  case MissionState.Completed:
-    console.log('Mission complete!');
-    break;
+console.log('Mission state:', status); // Open, Accepted, Submitted, etc.
+```
+
+### Listen for Events
+
+```typescript
+import { MissionEscrowABI } from '@horizon-protocol/sdk';
+
+// Watch for mission acceptance
+const unwatch = publicClient.watchContractEvent({
+  address: missionEscrowAddress,
+  abi: MissionEscrowABI,
+  eventName: 'MissionAccepted',
+  onLogs: (logs) => {
+    console.log('Mission accepted by:', logs[0].args.performer);
+  },
+});
+```
+
+## Error Handling
+
+Common errors and solutions:
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `InsufficientAllowance` | USDC not approved | Approve USDC first |
+| `InsufficientBalance` | Not enough USDC | Add USDC to wallet |
+| `InvalidExpiration` | Expiration in past | Use future timestamp |
+| `MissionAlreadyExists` | Duplicate creation | Check for existing mission |
+
+## API Reference
+
+### Create Mission
+
+```http
+POST /missions
+```
+
+**Request Body:**
+```json
+{
+  "title": "string",
+  "description": "string",
+  "rewardAmount": "string",
+  "category": "string",
+  "expiresIn": "number",
+  "location": {
+    "latitude": "number",
+    "longitude": "number",
+    "radius": "number"
+  },
+  "guildId": "string",
+  "requirements": {
+    "minXP": "number",
+    "minReputation": "number"
+  }
 }
+```
+
+### Get Mission
+
+```http
+GET /missions/:id
+```
+
+### Update Mission
+
+```http
+PATCH /missions/:id
+```
+
+### Cancel Mission
+
+```http
+POST /missions/:id/cancel
 ```
 
 ## Next Steps
 
-- [SDK API Reference](/docs/sdk/api-reference) - Full function documentation
-- [Achievements Guide](/docs/guides/achievements) - Earn XP for posting missions
-- [Dispute Resolution](/docs/api/disputes) - Handle contested missions
+- [Accepting Missions](/docs/guides/accepting-missions) - Learn to accept and complete
+- [Dispute Resolution](/docs/guides/disputes) - Handle disagreements
+- [API Reference](/docs/api/missions) - Full mission API docs
