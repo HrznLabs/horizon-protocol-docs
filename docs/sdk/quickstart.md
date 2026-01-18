@@ -183,9 +183,9 @@ console.log(`  Guild:     ${formatUSDC(fees.guildAmount)} USDC`);
 **Output:**
 ```
 Fee breakdown:
-  Performer: 87.000000 USDC
-  Protocol:  4.000000 USDC
-  Labs:      4.000000 USDC
+  Performer: 90.000000 USDC
+  Protocol:  2.500000 USDC
+  Labs:      2.500000 USDC
   Resolver:  2.000000 USDC
   Guild:     3.000000 USDC
 ```
