@@ -14,34 +14,38 @@ When a mission completes successfully:
 
 | Recipient | Percentage | Type | Purpose |
 |-----------|------------|------|---------|
-| **Performer** | 90% - Guild Fee | Base | Reward for completion |
-| **Protocol** | 4% | Fixed | Platform sustainability |
-| **Labs** | 4% | Fixed | R&D and development |
+| **Performer** | ≥90% | Guaranteed | Reward for completion |
+| **Protocol** | 2.5% | Fixed | Platform sustainability |
+| **Labs** | 2.5% | Fixed | R&D and development |
 | **Resolver** | 2% | Fixed | Dispute resolution pool |
-| **Guild** | 0-10%+ | Variable | Guild treasury (if curated) |
+| **MetaDAO** | 0-1% | Variable | Platform fee (e.g., iTake) |
+| **SubDAO** | 0-2% | Variable | Business fee (e.g., Restaurant) |
 
-### Fixed vs Variable Fees
+### Inclusive 10% Fee Model
 
-**Fixed Fees (10% total):**
-- Protocol (4%) and Labs (4%) are equal - ensures sustainable development
-- Resolver (2%) is lower - funds dispute resolution pool
+**Fixed Fees (7% base):**
+- Protocol (2.5%) and Labs (2.5%) fund platform operations and development
+- Resolver (2%) funds the dispute resolution pool
 
-**Variable Guild Fee:**
-- Set by each guild when they curate/accept a mission
-- Guilds can define fee tiers based on mission difficulty/effort
-- No guild = no guild fee (performer keeps full 90%)
-- High-value guilds may charge 5-10% for premium curation
+**Variable Hierarchy Fees (up to 3%):**
+- MetaDAO fee (0-1%): For vertical platforms like iTake
+- SubDAO fee (0-2%): For individual businesses like restaurants
+- **Total fees never exceed 10%** - performer always receives ≥90%
 
-### Example: No Guild
+**No Guild = No Hierarchy Fee:**
+- For missions without a guild, performer receives full 90%
+
+### Example: No Guild/Hierarchy
 
 For a $100 USDC mission without guild:
 
 ```
-Performer:    $90.00 (90%)
-Protocol:     $4.00  (4%)
-Labs:         $4.00  (4%)
+Performer:    $93.00 (93%)
+Protocol:     $2.50  (2.5%)
+Labs:         $2.50  (2.5%)
 Resolver:     $2.00  (2%)
-Guild:        $0.00  (0%)
+MetaDAO:      $0.00  (0%)
+SubDAO:       $0.00  (0%)
 ```
 
 ### Example: With Guild (3% fee)
@@ -49,23 +53,26 @@ Guild:        $0.00  (0%)
 For a $100 USDC mission curated by a guild with 3% fee:
 
 ```
-Performer:    $87.00 (90% - 3% guild)
-Protocol:     $4.00  (4%)
-Labs:         $4.00  (4%)
+Performer:    $90.00 (90%)
+Protocol:     $2.50  (2.5%)
+Labs:         $2.50  (2.5%)
 Resolver:     $2.00  (2%)
 Guild:        $3.00  (3%)
 ```
 
-### Example: Premium Guild (7% fee)
+### Example: iTake Delivery (MetaDAO + SubDAO)
 
-For a $100 USDC mission curated by a premium guild with 7% fee:
+For a $100 USDC delivery mission with full hierarchy:
 
 ```
-Performer:    $83.00 (90% - 7% guild)
-Protocol:     $4.00  (4%)
-Labs:         $4.00  (4%)
+Performer:    $90.00 (90%)
+Protocol:     $2.50  (2.5%)
+Labs:         $2.50  (2.5%)
 Resolver:     $2.00  (2%)
-Guild:        $7.00  (7%)
+iTake (Meta): $1.00  (1%)
+Restaurant:   $2.00  (2%)
+
+Total Fees:   $10.00 (10%)
 ```
 
 ### Guild Fee Tiers
@@ -265,7 +272,7 @@ Top-tier users with full access.
 
 ### Protocol Treasury
 
-Receives 4% of all mission completions.
+Receives 2.5% of all mission completions.
 
 **Allocation:**
 - 50% Development
