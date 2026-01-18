@@ -80,13 +80,20 @@ POST /guilds/:id/board/publish
 
 When a guild member completes a mission, fees are split between fixed platform fees and variable guild fees:
 
-**Fixed Fees (10% total):**
+**Fixed Fees (7% total):**
 
 | Recipient | Percentage | Purpose |
 |-----------|------------|---------|
-| Protocol | 4% | Platform sustainability |
-| Labs | 4% | R&D and development |
+| Protocol | 2.5% | Platform sustainability |
+| Labs | 2.5% | R&D and development |
 | Resolver | 2% | Dispute resolution pool |
+
+**Variable Fees (up to 3%):**
+
+| Recipient | Percentage | Purpose |
+|-----------|------------|---------|
+| MetaDAO | 0-1% | Platform fee (e.g., iTake) |
+| SubDAO | 0-2% | Business fee (e.g., Restaurant) |
 
 **Variable Guild Fee:**
 
@@ -98,13 +105,13 @@ When a guild member completes a mission, fees are split between fixed platform f
 | Premium | 5-8% | 82-85% |
 | Elite | 8-10%+ | 80-82% |
 
-Example: $100 mission with 5% guild fee:
+Example: $100 mission with 2% SubDAO fee:
 ```
-Performer:    $85.00 (90% - 5% guild)
-Protocol:     $4.00  (4%)
-Labs:         $4.00  (4%)
+Performer:    $91.00 (100% - 7% fixed fees - 2% SubDAO)
+Protocol:     $2.50  (2.5%)
+Labs:         $2.50  (2.5%)
 Resolver:     $2.00  (2%)
-Guild:        $5.00  (5%)
+SubDAO:       $2.00  (2%)
 ```
 
 ## Guild Fee Configuration

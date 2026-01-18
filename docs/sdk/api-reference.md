@@ -105,13 +105,13 @@ Calculate payment distribution for a mission.
 ```typescript
 import { calculateFeeSplit, parseUSDC } from '@horizon-protocol/sdk';
 
-const fees = calculateFeeSplit(parseUSDC(100), 300);
+const fees = calculateFeeSplit(parseUSDC(100), 100); // 1% MetaDAO/SubDAO fee
 // {
-//   performerAmount: 87000000n,  // 87%
-//   protocolAmount: 4000000n,    // 4%
-//   labsAmount: 4000000n,        // 4%
+//   performerAmount: 92000000n,  // 92%
+//   protocolAmount: 2500000n,    // 2.5%
+//   labsAmount: 2500000n,        // 2.5%
 //   resolverAmount: 2000000n,    // 2%
-//   guildAmount: 3000000n,       // 3%
+//   guildAmount: 1000000n,       // 1%
 // }
 ```
 
@@ -252,7 +252,7 @@ import {
   MAX_REWARD,         // 100000000000n (100,000 USDC)
   MIN_DURATION,       // 3600 (1 hour)
   MAX_DURATION,       // 2592000 (30 days)
-  FEES,               // { PROTOCOL_BPS: 400, LABS_BPS: 400, RESOLVER_BPS: 200 }
+  FEES,               // { PROTOCOL_BPS: 250, LABS_BPS: 250, RESOLVER_BPS: 200 }
   APPEAL_PERIOD,      // 172800 (48 hours)
   ZERO_ADDRESS,       // 0x0000000000000000000000000000000000000000
 } from '@horizon-protocol/sdk';
