@@ -223,6 +223,40 @@ uint256 public constant PROTOCOL_FEE_BPS = 1000;  // 10% of DDR
 | `Split` | Proportional | Proportional | Shared fault |
 | `Cancelled` | DDR (minus fees) | DDR (minus fees) | Void |
 
+## Delivery Vertical (v2)
+
+Specialized contracts for physical delivery missions with insurance and geofence verification.
+
+### DeliveryMissionFactory
+
+Deploys `DeliveryEscrow` proxies with vertical-specific parameters.
+
+```solidity
+function createDeliveryMission(
+    uint256 rewardAmount,
+    uint256 expiresAt,
+    address deliveriesDao,
+    bytes32 metadataHash,
+    uint256 insuranceCoverage
+) external returns (address escrowAddress);
+```
+
+### DeliveryEscrow
+
+Enhanced escrow that integrates with the physical world verification.
+
+- **Geofence Check**: State transitions (Arrived at Pickup, Mark Picked Up, Complete) require presence hashes.
+- **Insurance Policy**: Interacts with `DeliveriesDAO` to lock mission insurance during the delivery window.
+- **Proof of Transit**: Stores encrypted location breadcrumbs from the driver mini-app.
+
+### DeliveriesDAO
+
+The management hub for the delivery vertical.
+
+- **Performers**: Manage verified driver onboarding.
+- **Insurance Pool**: Vault holding funds for coverage payouts.
+- **Claims**: Automated (geofence-based) or manual (resolver-based) insurance settlement.
+
 ## HorizonAchievements
 
 ERC-721 NFT contract for achievements and collectibles.

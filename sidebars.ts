@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
         'protocol/guilds',
         'protocol/economics',
         'protocol/governance',
+        'protocol/geofencing',
       ],
     },
   ],
