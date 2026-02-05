@@ -248,9 +248,7 @@ Check that:
 - You have enough USDC for the mission reward
 - The mission parameters are valid
 
-## Resources
-
-- [TypeScript SDK](https://github.com/HrznLabs/horizon-sdk)
+## Resources- [TypeScript SDK](https://github.com/HrznLabs/horizon-sdk)
 - [Smart Contracts](https://github.com/HrznLabs/horizon-contracts)
 - [API Documentation](/docs/api/overview)
 - [Base Sepolia Explorer](https://sepolia.basescan.org)
