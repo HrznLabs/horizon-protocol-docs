@@ -167,15 +167,7 @@ Users can:
 - **Delete off-chain data**
 - **Control location sharing**
 - **Manage notification preferences**
-- **Revoke linked wallets**
-
----
-
-## Future: Device Attestation
-
-Planned for high-security operations:
-
-| Platform | Technology |
+- **Revoke linked wallets**---## Future: Device AttestationPlanned for high-security operations:| Platform | Technology |
 |----------|------------|
 | Android | Play Integrity API |
 | iOS | DeviceCheck |

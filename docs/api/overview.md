@@ -209,8 +209,6 @@ The API uses URL versioning (coming soon):
 - Current: `/missions`
 - Future: `/v2/missions`
 
-## Resources
-
-- [SDK Documentation](/docs/sdk/overview)
+## Resources- [SDK Documentation](/docs/sdk/overview)
 - [Smart Contracts](/docs/architecture/smart-contracts)
 - [Getting Started](/docs/guides/getting-started)
