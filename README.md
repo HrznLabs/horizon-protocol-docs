@@ -1,6 +1,16 @@
 # Horizon Docs (Public)
 
-Public documentation site for Horizon Protocol. This repo mirrors the core docs with public-facing content and a trimmed navigation.
+**Public developer documentation** for Horizon Protocol. This site provides guides, API references, and integration tutorials for developers building on Horizon.
+
+## What Is This?
+
+The public docs serve developers and integrators wanting to:
+- Understand the Horizon Protocol
+- Integrate Horizon into their applications
+- Learn about available APIs and contracts
+- Deploy to different chains
+
+**Use this if:** You're updating developer-facing documentation or guides.
 
 ## Tech
 
