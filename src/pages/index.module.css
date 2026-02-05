@@ -152,22 +152,41 @@
   border-radius: 12px;
   border: 1px solid rgba(0, 255, 136, 0.2);
   background: #111113;
-  text-decoration: none;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .contractCard:hover {
   transform: translateY(-2px);
   border-color: #00FF88;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
-  text-decoration: none;
 }
 
 .contractName {
   font-weight: 600;
   color: #E9EEF5;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contractName::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.contractName:hover {
+  color: #00FF88;
+  text-decoration: underline;
+}
+
+.addressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .contractAddress {
@@ -178,6 +197,31 @@
   padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.copyButton {
+  background: transparent;
+  border: none;
+  color: #8B8D98;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.copyButton:hover {
+  color: #00FF88;
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.copyButton:focus-visible {
+  outline: 2px solid #00FF88;
+  outline-offset: 2px;
 }
 
 @media screen and (max-width: 768px) {

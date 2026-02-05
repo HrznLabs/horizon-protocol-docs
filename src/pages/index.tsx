@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import {useState, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -67,6 +67,41 @@ function QuickLinks(): ReactNode {
   );
 }
 
+function CopyButton({text}: {text: string}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      className={styles.copyButton}
+      aria-label={copied ? "Copied!" : "Copy address"}
+      title={copied ? "Copied!" : "Copy address"}
+    >
+      {copied ? (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      )}
+    </button>
+  );
+}
+
 function Deployments(): ReactNode {
   const contracts = [
     { name: 'MissionFactory', address: '0xee9234954b134c39c17a75482da78e46b16f466c' },
@@ -84,18 +119,25 @@ function Deployments(): ReactNode {
         </Heading>
         <div className={styles.contractGrid}>
           {contracts.map((contract) => (
-            <a
+            <div
               key={contract.name}
-              href={`https://sepolia.basescan.org/address/${contract.address}`}
-              target="_blank"
-              rel="noopener noreferrer"
               className={styles.contractCard}
             >
-              <span className={styles.contractName}>{contract.name}</span>
-              <code className={styles.contractAddress}>
-                {contract.address.slice(0, 6)}...{contract.address.slice(-4)}
-              </code>
-            </a>
+              <a
+                href={`https://sepolia.basescan.org/address/${contract.address}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contractName}
+              >
+                {contract.name}
+              </a>
+              <div className={styles.addressWrapper}>
+                <code className={styles.contractAddress}>
+                  {contract.address.slice(0, 6)}...{contract.address.slice(-4)}
+                </code>
+                <CopyButton text={contract.address} />
+              </div>
+            </div>
           ))}
         </div>
       </div>
