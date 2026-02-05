@@ -102,15 +102,16 @@ function CopyButton({text}: {text: string}) {
   );
 }
 
-function Deployments(): ReactNode {
-  const contracts = [
-    { name: 'MissionFactory', address: '0xee9234954b134c39c17a75482da78e46b16f466c' },
-    { name: 'PaymentRouter', address: '0x94fb7908257ec36f701d2605b51eefed4326ddf5' },
-    { name: 'GuildFactory', address: '0xfeae3538a4a1801e47b6d16104aa8586edb55f00' },
-    { name: 'DisputeResolver', address: '0xb00ac4278129928aecc72541b0bcd69d94c1691e' },
-    { name: 'HorizonAchievements', address: '0x568e0e3102bfa1f4045d3f62559c0f9823b469bc' },
-  ];
+// Hoisted static data to prevent recreation on every render
+const contracts = [
+  { name: 'MissionFactory', address: '0xee9234954b134c39c17a75482da78e46b16f466c' },
+  { name: 'PaymentRouter', address: '0x94fb7908257ec36f701d2605b51eefed4326ddf5' },
+  { name: 'GuildFactory', address: '0xfeae3538a4a1801e47b6d16104aa8586edb55f00' },
+  { name: 'DisputeResolver', address: '0xb00ac4278129928aecc72541b0bcd69d94c1691e' },
+  { name: 'HorizonAchievements', address: '0x568e0e3102bfa1f4045d3f62559c0f9823b469bc' },
+];
 
+function Deployments(): ReactNode {
   return (
     <section className={styles.deployments}>
       <div className="container">
