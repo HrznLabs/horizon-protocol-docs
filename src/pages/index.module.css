@@ -104,8 +104,14 @@
 .quickLinkCard a {
   font-weight: 600;
   color: #00FF88;
-  position: relative;
   transition: all 0.2s ease;
+}
+
+.quickLinkCard a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .quickLinkCard a:hover {
