@@ -1,4 +1,4 @@
-import {useState, type ReactNode} from 'react';
+import {useState, memo, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -8,7 +8,8 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
-function HomepageHeader() {
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const HomepageHeader = memo(function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -33,9 +34,10 @@ function HomepageHeader() {
       </div>
     </header>
   );
-}
+});
 
-function QuickLinks(): ReactNode {
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const QuickLinks = memo(function QuickLinks(): ReactNode {
   return (
     <section className={styles.quickLinks}>
       <div className="container">
@@ -65,9 +67,10 @@ function QuickLinks(): ReactNode {
       </div>
     </section>
   );
-}
+});
 
-function CopyButton({text}: {text: string}) {
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const CopyButton = memo(function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -100,7 +103,7 @@ function CopyButton({text}: {text: string}) {
       )}
     </button>
   );
-}
+});
 
 // Hoisted static data to prevent recreation on every render
 const contracts = [
@@ -111,7 +114,8 @@ const contracts = [
   { name: 'HorizonAchievements', address: '0x568e0e3102bfa1f4045d3f62559c0f9823b469bc' },
 ];
 
-function Deployments(): ReactNode {
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const Deployments = memo(function Deployments(): ReactNode {
   return (
     <section className={styles.deployments}>
       <div className="container">
@@ -144,7 +148,7 @@ function Deployments(): ReactNode {
       </div>
     </section>
   );
-}
+});
 
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
