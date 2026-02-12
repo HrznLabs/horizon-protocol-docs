@@ -72,7 +72,7 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders of static feature items
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
 const Feature = memo(function Feature({title, emoji, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
@@ -85,7 +85,7 @@ const Feature = memo(function Feature({title, emoji, description}: FeatureItem) 
   );
 });
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders when parent (Home) updates
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
 const HomepageFeatures = memo(function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
