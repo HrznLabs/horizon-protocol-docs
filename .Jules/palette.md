@@ -5,7 +5,3 @@
 ## 2024-10-18 - Selectable Text on Stretched Links
 **Learning:** Stretched link overlays capture all clicks, making text selection impossible. To keep text selectable (e.g. addresses, code), the text element MUST have `position: relative` and `z-index: 2` (or higher) to sit above the overlay.
 **Action:** Always verify text selectability when implementing clickable cards, especially for copyable data.
-
-## 2026-02-08 - Keyboard Focus for Clickable Cards
-**Learning:** Stretched link cards often lack visual focus feedback when tabbing to the inner link.
-**Action:** Use `.card:focus-within` to apply the same hover styles (border, shadow) when the card contains the focused element.
