@@ -76,13 +76,15 @@
   transition: opacity 0.3s ease;
 }
 
-.quickLinkCard:hover {
+.quickLinkCard:hover,
+.quickLinkCard:focus-within {
   transform: translateY(-4px);
   border-color: #00FF88;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), 0 0 60px rgba(0, 255, 136, 0.1);
 }
 
-.quickLinkCard:hover::before {
+.quickLinkCard:hover::before,
+.quickLinkCard:focus-within::before {
   opacity: 1;
 }
 
@@ -163,7 +165,8 @@
   position: relative;
 }
 
-.contractCard:hover {
+.contractCard:hover,
+.contractCard:focus-within {
   transform: translateY(-2px);
   border-color: #00FF88;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
