@@ -86,7 +86,7 @@ const Feature = memo(function Feature({title, emoji, description}: FeatureItem) 
 });
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const HomepageFeatures = memo(function HomepageFeatures(): ReactNode {
+export default memo(function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
@@ -99,5 +99,3 @@ const HomepageFeatures = memo(function HomepageFeatures(): ReactNode {
     </section>
   );
 });
-
-export default HomepageFeatures;
