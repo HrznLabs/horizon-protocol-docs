@@ -57,8 +57,6 @@
 }
 
 .quickLinkCard {
-  display: block;
-  text-decoration: none;
   padding: 2rem;
   border-radius: 16px;
   border: 1px solid rgba(0, 255, 136, 0.2);
@@ -78,16 +76,13 @@
   transition: opacity 0.3s ease;
 }
 
-.quickLinkCard:hover,
-.quickLinkCard:focus-visible {
+.quickLinkCard:hover {
   transform: translateY(-4px);
   border-color: #00FF88;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), 0 0 60px rgba(0, 255, 136, 0.1);
-  outline: none;
 }
 
-.quickLinkCard:hover::before,
-.quickLinkCard:focus-visible::before {
+.quickLinkCard:hover::before {
   opacity: 1;
 }
 
@@ -106,15 +101,21 @@
   position: relative;
 }
 
-.quickLinkCard .cardCta {
+.quickLinkCard a {
   font-weight: 600;
   color: #00FF88;
   position: static;
   transition: all 0.2s ease;
 }
 
-.quickLinkCard:hover .cardCta,
-.quickLinkCard:focus-visible .cardCta {
+.quickLinkCard a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.quickLinkCard a:hover {
   color: #4ADE80;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
@@ -162,8 +163,7 @@
   position: relative;
 }
 
-.contractCard:hover,
-.contractCard:focus-within {
+.contractCard:hover {
   transform: translateY(-2px);
   border-color: #00FF88;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
