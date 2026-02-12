@@ -6,6 +6,10 @@
 **Learning:** Stretched link overlays capture all clicks, making text selection impossible. To keep text selectable (e.g. addresses, code), the text element MUST have `position: relative` and `z-index: 2` (or higher) to sit above the overlay.
 **Action:** Always verify text selectability when implementing clickable cards, especially for copyable data.
 
-## 2024-10-24 - Accessible Focus States for Cards
-**Learning:** For interactive cards using the "Stretched Link" pattern, keyboard users need visual feedback when focusing the inner link. The standard focus ring on the link is often insufficient or hidden.
-**Action:** Always add `:focus-within` styles to the card container that mirror the `:hover` state (e.g., border color, lift effect) to indicate the entire card is active.
+## 2025-02-07 - [Wrapping Cards vs Stretched Link]
+**Learning:** For cards without nested interactive elements (like buttons), wrapping the entire card in a `<Link>` preserves native text selection and keyboard navigation without requiring z-index hacks.
+**Action:** Prefer wrapping cards in `<Link>` when no nested actions exist; use Stretched Link only when necessary (e.g. Copy button inside card).
+
+## 2025-02-07 - [Focus Styles for Card Interactions]
+**Learning:** Clickable cards using Stretched Link or Wrapper Link patterns must replicate `:hover` styles on `:focus-visible` (for wrapper) or `:focus-within` (for stretched link) to ensure keyboard accessibility.
+**Action:** Always add focus styles matching hover effects for interactive cards.

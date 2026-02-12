@@ -57,6 +57,8 @@
 }
 
 .quickLinkCard {
+  display: block;
+  text-decoration: none;
   padding: 2rem;
   border-radius: 16px;
   border: 1px solid rgba(0, 255, 136, 0.2);
@@ -77,14 +79,15 @@
 }
 
 .quickLinkCard:hover,
-.quickLinkCard:focus-within {
+.quickLinkCard:focus-visible {
   transform: translateY(-4px);
   border-color: #00FF88;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), 0 0 60px rgba(0, 255, 136, 0.1);
+  outline: none;
 }
 
 .quickLinkCard:hover::before,
-.quickLinkCard:focus-within::before {
+.quickLinkCard:focus-visible::before {
   opacity: 1;
 }
 
@@ -103,21 +106,15 @@
   position: relative;
 }
 
-.quickLinkCard a {
+.quickLinkCard .cardCta {
   font-weight: 600;
   color: #00FF88;
   position: static;
   transition: all 0.2s ease;
 }
 
-.quickLinkCard a::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.quickLinkCard a:hover {
+.quickLinkCard:hover .cardCta,
+.quickLinkCard:focus-visible .cardCta {
   color: #4ADE80;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }

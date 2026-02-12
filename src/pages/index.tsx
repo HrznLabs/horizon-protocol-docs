@@ -43,25 +43,25 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
       <div className="container">
         <div className="row">
           <div className="col col--4">
-            <div className={styles.quickLinkCard}>
+            <Link to="/docs/architecture/smart-contracts" className={styles.quickLinkCard}>
               <h3>📜 Smart Contracts</h3>
               <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
-              <Link to="/docs/architecture/smart-contracts">View Contracts →</Link>
-            </div>
+              <span className={styles.cardCta}>View Contracts →</span>
+            </Link>
           </div>
           <div className="col col--4">
-            <div className={styles.quickLinkCard}>
+            <Link to="/docs/api/overview" className={styles.quickLinkCard}>
               <h3>🔌 API Reference</h3>
               <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
-              <Link to="/docs/api/overview">Browse API →</Link>
-            </div>
+              <span className={styles.cardCta}>Browse API →</span>
+            </Link>
           </div>
           <div className="col col--4">
-            <div className={styles.quickLinkCard}>
+            <Link to="https://github.com/HrznLabs/horizon-sdk" className={styles.quickLinkCard}>
               <h3>🔧 TypeScript SDK</h3>
               <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
-              <Link to="https://github.com/HrznLabs/horizon-sdk">View SDK →</Link>
-            </div>
+              <span className={styles.cardCta}>View SDK →</span>
+            </Link>
           </div>
         </div>
       </div>
