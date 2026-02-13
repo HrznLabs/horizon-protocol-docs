@@ -21,6 +21,16 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://sepolia.basescan.org',
+      },
+    },
+  ],
+
   markdown: {
     parseFrontMatter: async (params) => {
       const result = await params.defaultParseFrontMatter(params);

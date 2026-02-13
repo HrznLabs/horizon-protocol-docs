@@ -106,6 +106,8 @@
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
   transition: box-shadow 0.3s ease;
+  width: 32px;
+  height: 32px;
 }
 
 .navbar__logo:hover {
