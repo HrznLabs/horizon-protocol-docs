@@ -5,3 +5,7 @@
 ## 2024-10-18 - Selectable Text on Stretched Links
 **Learning:** Stretched link overlays capture all clicks, making text selection impossible. To keep text selectable (e.g. addresses, code), the text element MUST have `position: relative` and `z-index: 2` (or higher) to sit above the overlay.
 **Action:** Always verify text selectability when implementing clickable cards, especially for copyable data.
+
+## 2024-10-24 - Neon Focus States
+**Learning:** For dark/cyberpunk themes, standard browser focus outlines (often blue) clash visually and may have poor contrast. Using `:focus-visible` with a custom neon border/outline (`#00FF88`) maintains the aesthetic while significantly improving keyboard navigation visibility.
+**Action:** Apply `outline: 2px solid #00FF88` (or border/box-shadow) on `:focus-visible` for all interactive elements to ensure accessibility without compromising style.
