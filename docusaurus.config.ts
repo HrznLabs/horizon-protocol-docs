@@ -52,6 +52,37 @@ const config: Config = {
     ],
   ],
 
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://github.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://sepolia.basescan.org',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'dns-prefetch',
+        href: 'https://github.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'dns-prefetch',
+        href: 'https://sepolia.basescan.org',
+      },
+    },
+  ],
+
   themeConfig: {
     image: 'img/horizon-social-card.png',
     colorMode: {
