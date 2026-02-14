@@ -43,25 +43,25 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
       <div className="container">
         <div className="row">
           <div className="col col--4">
-            <Link to="/docs/architecture/smart-contracts" className={styles.quickLinkCard}>
+            <div className={styles.quickLinkCard}>
               <h3>📜 Smart Contracts</h3>
               <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
-              <span className={styles.cardCta}>View Contracts →</span>
-            </Link>
+              <Link to="/docs/architecture/smart-contracts" className={styles.cardCta}>View Contracts →</Link>
+            </div>
           </div>
           <div className="col col--4">
-            <Link to="/docs/api/overview" className={styles.quickLinkCard}>
+            <div className={styles.quickLinkCard}>
               <h3>🔌 API Reference</h3>
               <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
-              <span className={styles.cardCta}>Browse API →</span>
-            </Link>
+              <Link to="/docs/api/overview" className={styles.cardCta}>Browse API →</Link>
+            </div>
           </div>
           <div className="col col--4">
-            <Link to="https://github.com/HrznLabs/horizon-sdk" className={styles.quickLinkCard}>
+            <div className={styles.quickLinkCard}>
               <h3>🔧 TypeScript SDK</h3>
               <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
-              <span className={styles.cardCta}>View SDK →</span>
-            </Link>
+              <Link to="https://github.com/HrznLabs/horizon-sdk" className={styles.cardCta}>View SDK →</Link>
+            </div>
           </div>
         </div>
       </div>
