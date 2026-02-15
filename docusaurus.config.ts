@@ -102,8 +102,8 @@ const config: Config = {
       title: 'Horizon',
       logo: {
         alt: 'Horizon Protocol Logo',
-        src: 'img/logo.jpg',
-        srcDark: 'img/logo.jpg',
+        src: 'img/logo.webp',
+        srcDark: 'img/logo.webp',
         style: { borderRadius: '50%' },
       },
       items: [
