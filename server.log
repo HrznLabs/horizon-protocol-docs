@@ -1,0 +1,13 @@
+yarn run v1.22.22
+$ docusaurus start --port 3000
+[INFO] Starting the development server...
+[SUCCESS] Docusaurus website is running at: http://localhost:3000/
+[webpackbar] ℹ Compiling Client
+[webpackbar] ✔ Client: Compiled successfully in 17.75s
+client (webpack 5.104.1) compiled successfully
+[webpackbar] ℹ Compiling Client
+[webpackbar] ✔ Client: Compiled successfully in 1.94s
+client (webpack 5.104.1) compiled successfully
+[webpackbar] ℹ Compiling Client
+[webpackbar] ✔ Client: Compiled successfully in 959.54ms
+client (webpack 5.104.1) compiled successfully
