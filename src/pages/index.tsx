@@ -105,6 +105,17 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
   );
 });
 
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const ExternalLinkIcon = memo(function ExternalLinkIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+  );
+});
+
 // Hoisted static data to prevent recreation on every render
 const contracts = [
   { name: 'MissionFactory', address: '0xee9234954b134c39c17a75482da78e46b16f466c' },
@@ -133,8 +144,10 @@ const Deployments = memo(function Deployments(): ReactNode {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.contractName}
+                aria-label={`${contract.name} (opens in a new tab)`}
               >
                 {contract.name}
+                <ExternalLinkIcon />
               </a>
               <div className={styles.addressWrapper}>
                 <code className={styles.contractAddress}>
