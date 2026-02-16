@@ -25,7 +25,12 @@
   font-size: 3rem;
   margin-bottom: 1rem;
   display: block;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.3));
+  /* Optimized: Use text-shadow instead of filter for better performance */
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  /* Optimized: Move transition here to prevent snap-back */
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  /* Optimized: Hint browser for composition */
+  will-change: transform;
 }
 
 /* Add spacing between feature rows */
@@ -52,9 +57,8 @@
 
 /* Feature item hover effect */
 .features .col:hover .featureEmoji {
-  filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.5));
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
   transform: scale(1.1);
-  transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 996px) {
