@@ -119,6 +119,9 @@
   color: #00FF88;
   position: static;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .quickLinkCard a::before {

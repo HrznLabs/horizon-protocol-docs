@@ -77,7 +77,7 @@ const Feature = memo(function Feature({title, emoji, description}: FeatureItem) 
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">
-        <div className={styles.featureEmoji}>{emoji}</div>
+        <div className={styles.featureEmoji} aria-hidden="true">{emoji}</div>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>
