@@ -30,7 +30,11 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=()"
+          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=()"
+        },
+        {
+          "key": "X-Permitted-Cross-Domain-Policies",
+          "value": "none"
         },
         {
           "key": "Content-Security-Policy",
