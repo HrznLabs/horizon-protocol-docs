@@ -46,21 +46,27 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
             <div className={styles.quickLinkCard}>
               <h3>📜 Smart Contracts</h3>
               <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
-              <Link to="/docs/architecture/smart-contracts" className={styles.cardCta}>View Contracts →</Link>
+              <Link to="/docs/architecture/smart-contracts" className={styles.cardCta}>
+                View Contracts <ArrowRightIcon />
+              </Link>
             </div>
           </div>
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <h3>🔌 API Reference</h3>
               <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
-              <Link to="/docs/api/overview" className={styles.cardCta}>Browse API →</Link>
+              <Link to="/docs/api/overview" className={styles.cardCta}>
+                Browse API <ArrowRightIcon />
+              </Link>
             </div>
           </div>
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <h3>🔧 TypeScript SDK</h3>
               <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
-              <Link to="https://github.com/HrznLabs/horizon-sdk" className={styles.cardCta}>View SDK →</Link>
+              <Link to="https://github.com/HrznLabs/horizon-sdk" className={styles.cardCta}>
+                View SDK <ArrowRightIcon />
+              </Link>
             </div>
           </div>
         </div>
@@ -112,6 +118,16 @@ const ExternalLinkIcon = memo(function ExternalLinkIcon() {
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
       <polyline points="15 3 21 3 21 9"></polyline>
       <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+  );
+});
+
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const ArrowRightIcon = memo(function ArrowRightIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   );
 });
