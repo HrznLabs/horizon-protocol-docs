@@ -13,3 +13,7 @@
 ## 2025-02-15 - [Image Format Optimization]
 **Learning:** High-resolution JPG logos (e.g., 1024x1024, 350KB) can be mistakenly used for small UI elements like navbars. Resizing to 256x256 and converting to WebP can yield massive savings (>98%) with no perceptible quality loss.
 **Action:** Audit asset sizes regularly and resize/convert images appropriate for their display size.
+
+## 2025-02-15 - [CSS Painting Performance]
+**Learning:** `filter: drop-shadow` is significantly more expensive to render than `text-shadow` or `box-shadow`, especially during animations/transitions. For text/emoji content, `text-shadow` provides a nearly identical visual result with much better performance.
+**Action:** Prefer `text-shadow` over `filter` for text elements, and use `will-change: transform` to hint the browser for smooth animations.
