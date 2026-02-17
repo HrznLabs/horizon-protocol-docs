@@ -30,7 +30,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=()"
+          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(self), interest-cohort=()"
         },
         {
           "key": "X-Permitted-Cross-Domain-Policies",

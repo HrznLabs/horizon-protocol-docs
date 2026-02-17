@@ -7,3 +7,8 @@
 **Vulnerability:** The `Permissions-Policy` header was present but only disabled `geolocation`, `microphone`, and `camera`, leaving other sensitive features like `payment` and `usb` enabled by default.
 **Learning:** Partially configuring security headers can create a false sense of security. It's important to comprehensively list all features that should be disabled, not just the most common ones.
 **Prevention:** Regularly audit `Permissions-Policy` against the full list of available directives and disable everything not explicitly needed.
+
+## 2024-05-23 - Clipboard Access Controls Missing
+**Vulnerability:** The `Permissions-Policy` header did not restrict `clipboard-read` or `clipboard-write`, potentially allowing cross-origin iframes (if embedded) to hijack the user's clipboard.
+**Learning:** Modern `Permissions-Policy` directives like `clipboard-read` and `clipboard-write` offer granular control over hardware/privacy APIs and should be explicitly configured, especially for static sites where third-party content might be embedded.
+**Prevention:** Explicitly set `clipboard-read=()` (disable) and `clipboard-write=(self)` (same-origin only) in deployment headers to enforce least privilege.
