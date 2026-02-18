@@ -724,3 +724,19 @@ table {
 [data-theme='dark'] .hash-link:hover {
   color: #4ADE80;
 }
+
+/* =============================================================================
+   ACCESSIBILITY - FOCUS VISIBLE
+   ============================================================================= */
+:focus-visible {
+  outline: 2px solid var(--horizon-green-bright);
+  outline-offset: 2px;
+}
+
+/* Ensure focus doesn't break layout or look weird on specific elements */
+.navbar__link:focus-visible,
+.menu__link:focus-visible,
+.table-of-contents__link:focus-visible,
+.breadcrumbs__link:focus-visible {
+  outline-offset: -2px;
+}
