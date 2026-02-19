@@ -18,6 +18,6 @@
 **Learning:** `filter: drop-shadow` is significantly more expensive to render than `text-shadow` or `box-shadow`, especially during animations/transitions. For text/emoji content, `text-shadow` provides a nearly identical visual result with much better performance.
 **Action:** Prefer `text-shadow` over `filter` for text elements, and use `will-change: transform` to hint the browser for smooth animations.
 
-## 2025-02-18 - [CSS Transitions & Compositor]
-**Learning:** `transition: all` is a common anti-pattern that can inadvertently animate layout properties (like `width`, `margin`) during state changes, causing layout thrashing. Explicitly listing animated properties (e.g., `transform`, `opacity`) and using `will-change: transform` on heavy elements ensures the browser promotes them to compositor layers, avoiding main-thread paint operations.
-**Action:** Replace `transition: all` with specific property lists in CSS, and apply `will-change: transform` to interactive elements with transform-based hover effects.
+## 2025-02-15 - [CSS Transition Specificity]
+**Learning:** Using `transition: all` is convenient but causes the browser to check all properties for changes, leading to potential layout thrashing and painting overhead, especially on complex elements. Replacing it with specific properties (e.g., `transform`, `opacity`) significantly improves rendering performance without visual regression.
+**Action:** Audit CSS files for `transition: all` and replace with specific properties, prioritizing `transform` and `opacity` for animations.
