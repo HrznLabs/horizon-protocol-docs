@@ -116,7 +116,7 @@
 
 [data-theme='dark'] .navbar__link {
   color: #8B8D98;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
@@ -162,7 +162,7 @@
    ============================================================================= */
 [data-theme='dark'] a {
   color: var(--horizon-green-bright);
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
@@ -247,9 +247,8 @@ table {
 .card {
   border: 1px solid rgba(0, 255, 136, 0.2);
   border-radius: 16px;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' and promote to layer */
+  /* Optimized: Explicit properties */
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  will-change: transform;
   overflow: hidden;
 }
 
@@ -293,9 +292,8 @@ table {
   color: #0A0A0B;
   font-weight: 600;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), 0 0 40px rgba(0, 255, 136, 0.2);
-  /* ⚡ Bolt: Use specific transitions instead of 'all' and promote to layer */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
-  will-change: transform;
+  /* Optimized: Explicit properties */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .button--primary:hover {
@@ -319,7 +317,7 @@ table {
   border: 2px solid rgba(0, 255, 136, 0.3);
   background: transparent;
   color: var(--horizon-green-bright);
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
@@ -341,7 +339,7 @@ table {
    ============================================================================= */
 [data-theme='dark'] .menu__link {
   color: #8B8D98;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -370,7 +368,7 @@ table {
    ============================================================================= */
 [data-theme='dark'] .table-of-contents__link {
   color: #5C5E69;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease;
 }
 
@@ -402,7 +400,7 @@ table {
 
 [data-theme='dark'] .footer__link-item {
   color: #8B8D98;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
@@ -569,7 +567,7 @@ table {
 .DocSearch-Button {
   border-radius: 12px !important;
   border: 1px solid rgba(0, 255, 136, 0.2) !important;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
@@ -598,7 +596,7 @@ table {
 
 [data-theme='dark'] .dropdown__link {
   color: #E9EEF5;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -614,7 +612,7 @@ table {
   border: 1px solid rgba(0, 255, 136, 0.2);
   background-color: #111113;
   border-radius: 12px;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -658,7 +656,7 @@ table {
 [data-theme='dark'] .tabs__item {
   color: #8B8D98;
   border-bottom-color: transparent;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
 
@@ -676,7 +674,7 @@ table {
    ============================================================================= */
 [data-theme='dark'] .breadcrumbs__link {
   color: #5C5E69;
-  /* ⚡ Bolt: Use specific transitions instead of 'all' */
+  /* Optimized: Explicit properties */
   transition: color 0.2s ease;
 }
 
@@ -738,20 +736,4 @@ table {
 
 [data-theme='dark'] .hash-link:hover {
   color: #4ADE80;
-}
-
-/* =============================================================================
-   ACCESSIBILITY - FOCUS VISIBLE
-   ============================================================================= */
-:focus-visible {
-  outline: 2px solid var(--horizon-green-bright);
-  outline-offset: 2px;
-}
-
-/* Ensure focus doesn't break layout or look weird on specific elements */
-.navbar__link:focus-visible,
-.menu__link:focus-visible,
-.table-of-contents__link:focus-visible,
-.breadcrumbs__link:focus-visible {
-  outline-offset: -2px;
 }

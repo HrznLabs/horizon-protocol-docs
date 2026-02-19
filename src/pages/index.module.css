@@ -62,9 +62,8 @@
   border: 1px solid rgba(0, 255, 136, 0.2);
   background: #0A0A0B;
   height: 100%;
-  /* ⚡ Bolt: Optimize transition properties and add will-change for performance */
+  /* Optimized: Explicit properties to prevent layout thrashing */
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
   position: relative;
   overflow: hidden;
 }
@@ -120,7 +119,8 @@
   font-weight: 600;
   color: #00FF88;
   position: static;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -177,9 +177,8 @@
   border-radius: 12px;
   border: 1px solid rgba(0, 255, 136, 0.2);
   background: #111113;
-  /* ⚡ Bolt: Optimize transition properties and add will-change for performance */
+  /* Optimized: Explicit properties */
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  will-change: transform;
   position: relative;
 }
 
@@ -260,7 +259,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, background-color 0.2s ease;
   position: relative;
   z-index: 2;
 }
@@ -273,46 +273,6 @@
 .copyButton:focus-visible {
   outline: 2px solid #00FF88;
   outline-offset: 2px;
-}
-
-/* Tooltip styles */
-.copyButton::after {
-  content: attr(aria-label);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
-  background: #1A1A1D;
-  color: #E9EEF5;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  border: 1px solid rgba(0, 255, 136, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  z-index: 10;
-  margin-bottom: 8px;
-}
-
-.copyButton:hover::after,
-.copyButton:focus-visible::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-4px);
-}
-
-.copyButtonCopied {
-  color: #00FF88;
-  background: rgba(0, 255, 136, 0.1);
-}
-
-.copyButtonCopied::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-4px);
-  border-color: #00FF88;
-  color: #00FF88;
 }
 
 @media screen and (max-width: 768px) {
