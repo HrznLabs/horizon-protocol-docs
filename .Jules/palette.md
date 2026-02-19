@@ -9,3 +9,7 @@
 ## 2024-10-24 - Neon Focus States
 **Learning:** For dark/cyberpunk themes, standard browser focus outlines (often blue) clash visually and may have poor contrast. Using `:focus-visible` with a custom neon border/outline (`#00FF88`) maintains the aesthetic while significantly improving keyboard navigation visibility.
 **Action:** Apply `outline: 2px solid #00FF88` (or border/box-shadow) on `:focus-visible` for all interactive elements to ensure accessibility without compromising style.
+
+## 2024-10-25 - Tooltips Synced with ARIA Labels
+**Learning:** Using `content: attr(aria-label)` in CSS `::after` pseudo-elements ensures tooltips always match the screen reader text (e.g., "Copy address" -> "Copied!"). This prevents desynchronization bugs and reduces React state complexity for visual feedback.
+**Action:** Use this pattern for icon-only buttons where visual state changes (like success feedback) need to be communicated clearly to all users.
