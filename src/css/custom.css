@@ -116,7 +116,8 @@
 
 [data-theme='dark'] .navbar__link {
   color: #8B8D98;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 [data-theme='dark'] .navbar__link:hover {
@@ -161,7 +162,8 @@
    ============================================================================= */
 [data-theme='dark'] a {
   color: var(--horizon-green-bright);
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 [data-theme='dark'] a:hover {
@@ -245,7 +247,8 @@ table {
 .card {
   border: 1px solid rgba(0, 255, 136, 0.2);
   border-radius: 16px;
-  transition: all 0.3s ease;
+  /* Optimized: Explicit properties */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   overflow: hidden;
 }
 
@@ -289,7 +292,8 @@ table {
   color: #0A0A0B;
   font-weight: 600;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), 0 0 40px rgba(0, 255, 136, 0.2);
-  transition: all 0.3s ease;
+  /* Optimized: Explicit properties */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .button--primary:hover {
@@ -313,7 +317,8 @@ table {
   border: 2px solid rgba(0, 255, 136, 0.3);
   background: transparent;
   color: var(--horizon-green-bright);
-  transition: all 0.3s ease;
+  /* Optimized: Explicit properties */
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 [data-theme='dark'] .button--secondary {
@@ -334,7 +339,8 @@ table {
    ============================================================================= */
 [data-theme='dark'] .menu__link {
   color: #8B8D98;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 [data-theme='dark'] .menu__link:hover {
@@ -362,7 +368,8 @@ table {
    ============================================================================= */
 [data-theme='dark'] .table-of-contents__link {
   color: #5C5E69;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease;
 }
 
 [data-theme='dark'] .table-of-contents__link:hover {
@@ -393,7 +400,8 @@ table {
 
 [data-theme='dark'] .footer__link-item {
   color: #8B8D98;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 [data-theme='dark'] .footer__link-item:hover {
@@ -559,7 +567,8 @@ table {
 .DocSearch-Button {
   border-radius: 12px !important;
   border: 1px solid rgba(0, 255, 136, 0.2) !important;
-  transition: all 0.3s ease !important;
+  /* Optimized: Explicit properties */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 [data-theme='dark'] .DocSearch-Button {
@@ -587,7 +596,8 @@ table {
 
 [data-theme='dark'] .dropdown__link {
   color: #E9EEF5;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 [data-theme='dark'] .dropdown__link:hover {
@@ -602,7 +612,8 @@ table {
   border: 1px solid rgba(0, 255, 136, 0.2);
   background-color: #111113;
   border-radius: 12px;
-  transition: all 0.3s ease;
+  /* Optimized: Explicit properties */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 [data-theme='dark'] .pagination-nav__link:hover {
@@ -645,7 +656,8 @@ table {
 [data-theme='dark'] .tabs__item {
   color: #8B8D98;
   border-bottom-color: transparent;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
 
 [data-theme='dark'] .tabs__item:hover {
@@ -662,7 +674,8 @@ table {
    ============================================================================= */
 [data-theme='dark'] .breadcrumbs__link {
   color: #5C5E69;
-  transition: all 0.2s ease;
+  /* Optimized: Explicit properties */
+  transition: color 0.2s ease;
 }
 
 [data-theme='dark'] .breadcrumbs__link:hover {
