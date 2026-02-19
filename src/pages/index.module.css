@@ -275,6 +275,46 @@
   outline-offset: 2px;
 }
 
+/* Tooltip styles */
+.copyButton::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: #1A1A1D;
+  color: #E9EEF5;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  margin-bottom: 8px;
+}
+
+.copyButton:hover::after,
+.copyButton:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.copyButtonCopied {
+  color: #00FF88;
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.copyButtonCopied::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+  border-color: #00FF88;
+  color: #00FF88;
+}
+
 @media screen and (max-width: 768px) {
   .buttons {
     flex-direction: column;
