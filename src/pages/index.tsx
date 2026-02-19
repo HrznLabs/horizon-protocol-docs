@@ -93,7 +93,7 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
     <button
       type="button"
       onClick={handleCopy}
-      className={styles.copyButton}
+      className={clsx(styles.copyButton, copied && styles.copyButtonCopied)}
       aria-label={copied ? "Copied!" : "Copy address"}
       title={copied ? "Copied!" : "Copy address"}
     >
