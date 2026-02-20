@@ -277,6 +277,35 @@
   outline-offset: 2px;
 }
 
+/* Tooltip implementation */
+.copyButton::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, 4px);
+  background: #0A0A0B;
+  color: #E9EEF5;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  border: 1px solid #00FF88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+  z-index: 10;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.copyButton:hover::after,
+.copyButton:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, -6px);
+}
+
 @media screen and (max-width: 768px) {
   .buttons {
     flex-direction: column;
