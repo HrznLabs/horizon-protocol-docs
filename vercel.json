@@ -17,10 +17,6 @@
           "value": "nosniff"
         },
         {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
         },
@@ -30,7 +26,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(self), interest-cohort=()"
+          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(self), browsing-topics=(), attribution-reporting=(), run-ad-auction=(), join-ad-interest-group=(), local-fonts=(), screen-wake-lock=(), serial=(), hid=(), bluetooth=(), idle-detection=(), web-share=(), publickey-credentials-get=(), otp-credentials=(), storage-access=(), identity-credentials-get=()"
         },
         {
           "key": "X-Permitted-Cross-Domain-Policies",
