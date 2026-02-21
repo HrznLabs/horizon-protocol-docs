@@ -53,6 +53,16 @@ const config: Config = {
   ],
 
   headTags: [
+    // ⚡ Bolt: Preload critical logo asset for better LCP
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: '/img/logo.webp',
+        as: 'image',
+        type: 'image/webp',
+      },
+    },
     {
       tagName: 'link',
       attributes: {
