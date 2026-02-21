@@ -1,0 +1,3 @@
+Contact: mailto:security@horizonprotocol.xyz
+Preferred-Languages: en
+Policy: https://github.com/HrznLabs/horizon-docs/blob/main/SECURITY.md

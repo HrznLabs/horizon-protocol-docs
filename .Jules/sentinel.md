@@ -17,3 +17,8 @@
 **Vulnerability:** The `vercel.json` configuration contained the deprecated `X-XSS-Protection` header and the obsolete `interest-cohort` directive in `Permissions-Policy`, while missing restrictions for modern tracking APIs like `browsing-topics` and `attribution-reporting`.
 **Learning:** Security standards evolve rapidly. Headers like `X-XSS-Protection` can become counter-productive, and new browser features (like Privacy Sandbox APIs) often default to "allow" unless explicitly disabled.
 **Prevention:** Regularly audit security headers against current browser standards (e.g., MDN, OWASP) and use the Principle of Least Privilege to disable all unneeded browser features in `Permissions-Policy`.
+
+## 2024-05-25 - Missing Security Policy Discoverability
+**Vulnerability:** The repository lacked a standard `security.txt` file, making it difficult for security researchers to find the correct contact and policy information.
+**Learning:** While `SECURITY.md` exists, the `/.well-known/security.txt` standard (RFC 9116) provides a machine-readable and standardized location for security contacts that is often overlooked in documentation sites.
+**Prevention:** Always include a `security.txt` file in the public root (e.g., `static/.well-known/`) of documentation sites to ensure discoverability.
