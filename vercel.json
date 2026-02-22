@@ -26,7 +26,15 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(self), browsing-topics=(), attribution-reporting=(), run-ad-auction=(), join-ad-interest-group=(), local-fonts=(), screen-wake-lock=(), serial=(), hid=(), bluetooth=(), idle-detection=(), web-share=(), publickey-credentials-get=(), otp-credentials=(), storage-access=(), identity-credentials-get=()"
+          "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(self), browsing-topics=(), attribution-reporting=(), run-ad-auction=(), join-ad-interest-group=(), local-fonts=(), screen-wake-lock=(), serial=(), hid=(), bluetooth=(), idle-detection=(), web-share=(), publickey-credentials-get=(), otp-credentials=(), storage-access=(), identity-credentials-get=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), gamepad=(), picture-in-picture=(), window-management=()"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
         },
         {
           "key": "X-Permitted-Cross-Domain-Policies",
