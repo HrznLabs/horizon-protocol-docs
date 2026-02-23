@@ -1,4 +1,4 @@
-import {useState, memo, type ReactNode} from 'react';
+import {useState, useEffect, memo, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -7,6 +7,16 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
+
+// ⚡ Bolt: Memoized to prevent unnecessary re-renders
+const ArrowRightIcon = memo(function ArrowRightIcon({size = 16}: {size?: number}) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  );
+});
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
 const HomepageHeader = memo(function HomepageHeader() {
@@ -20,13 +30,12 @@ const HomepageHeader = memo(function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--primary button--lg"
+            className={clsx('button button--primary button--lg', styles.ctaButton)}
             to="/docs/">
-            Get Started →
+            Get Started <ArrowRightIcon size={20} />
           </Link>
           <Link
             className="button button--secondary button--lg"
-            style={{marginLeft: '1rem'}}
             to="/docs/guides/getting-started">
             Developer Guide
           </Link>
@@ -85,11 +94,17 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
 const CopyButton = memo(function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
 
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => setCopied(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied]);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -123,16 +138,6 @@ const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12}: {size?: num
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
       <polyline points="15 3 21 3 21 9"></polyline>
       <line x1="10" y1="14" x2="21" y2="3"></line>
-    </svg>
-  );
-});
-
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ArrowRightIcon = memo(function ArrowRightIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-      <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   );
 });

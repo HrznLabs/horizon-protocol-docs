@@ -316,3 +316,9 @@
     margin-left: 0 !important;
   }
 }
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
