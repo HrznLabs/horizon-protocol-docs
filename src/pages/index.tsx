@@ -1,4 +1,4 @@
-import {useState, memo, type ReactNode} from 'react';
+import {useState, useEffect, memo, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -85,11 +85,18 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
 const CopyButton = memo(function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
 
+  // 🛡️ Sentinel: Clean up timeout to prevent memory leaks on unmount
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => setCopied(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied]);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
