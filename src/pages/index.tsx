@@ -1,4 +1,4 @@
-import {useState, memo, type ReactNode} from 'react';
+import {useState, useEffect, memo, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -85,11 +85,17 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
 const CopyButton = memo(function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
 
+  useEffect(() => {
+    if (copied) {
+      const timeout = setTimeout(() => setCopied(false), 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [copied]);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -144,7 +150,10 @@ const contracts = [
   { name: 'GuildFactory', address: '0xfeae3538a4a1801e47b6d16104aa8586edb55f00' },
   { name: 'DisputeResolver', address: '0xb00ac4278129928aecc72541b0bcd69d94c1691e' },
   { name: 'HorizonAchievements', address: '0x568e0e3102bfa1f4045d3f62559c0f9823b469bc' },
-];
+].map(c => ({
+  ...c,
+  shortAddress: `${c.address.slice(0, 6)}...${c.address.slice(-4)}`
+}));
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
 const Deployments = memo(function Deployments(): ReactNode {
@@ -172,7 +181,7 @@ const Deployments = memo(function Deployments(): ReactNode {
               </a>
               <div className={styles.addressWrapper}>
                 <code className={styles.contractAddress}>
-                  {contract.address.slice(0, 6)}...{contract.address.slice(-4)}
+                  {contract.shortAddress}
                 </code>
                 <CopyButton text={contract.address} />
               </div>
