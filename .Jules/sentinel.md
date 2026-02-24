@@ -22,3 +22,8 @@
 **Vulnerability:** The repository lacked a standard `security.txt` file, making it difficult for security researchers to find the correct contact and policy information.
 **Learning:** While `SECURITY.md` exists, the `/.well-known/security.txt` standard (RFC 9116) provides a machine-readable and standardized location for security contacts that is often overlooked in documentation sites.
 **Prevention:** Always include a `security.txt` file in the public root (e.g., `static/.well-known/`) of documentation sites to ensure discoverability.
+
+## 2024-05-27 - Missing Cross-Origin Isolation Headers
+**Vulnerability:** The `vercel.json` configuration was missing `Cross-Origin-Opener-Policy` and `Cross-Origin-Resource-Policy` headers, despite external documentation or memory suggesting their presence.
+**Learning:** Configuration files (like `vercel.json`) are the source of truth for security headers, not documentation or memory. Automatic verification or linting of security headers is crucial to prevent regression.
+**Prevention:** Explicitly verify the presence of critical security headers in the configuration file during security audits, rather than relying on assumptions.
