@@ -67,6 +67,9 @@
   position: relative;
   overflow: hidden;
   will-change: transform;
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
 }
 
 .quickLinkCard::before {
@@ -82,6 +85,7 @@
   transform: translateY(-4px);
   border-color: #00FF88;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), 0 0 60px rgba(0, 255, 136, 0.1);
+  text-decoration: none;
 }
 
 .quickLinkCard:hover::before {
@@ -104,7 +108,6 @@
   font-size: 1.25rem;
   color: #ffffff;
   position: relative;
-  z-index: 2;
 }
 
 .quickLinkCard p {
@@ -113,13 +116,11 @@
   font-size: 0.95rem;
   line-height: 1.7;
   position: relative;
-  z-index: 2;
 }
 
-.quickLinkCard a {
+.cardCta {
   font-weight: 600;
   color: #00FF88;
-  position: static;
   /* Optimized: Explicit properties */
   transition: color 0.2s ease, text-shadow 0.2s ease;
   display: inline-flex;
@@ -127,14 +128,7 @@
   gap: 0.5rem;
 }
 
-.quickLinkCard a::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.quickLinkCard a:hover {
+.quickLinkCard:hover .cardCta {
   color: #4ADE80;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
