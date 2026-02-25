@@ -23,7 +23,7 @@
 **Learning:** While `SECURITY.md` exists, the `/.well-known/security.txt` standard (RFC 9116) provides a machine-readable and standardized location for security contacts that is often overlooked in documentation sites.
 **Prevention:** Always include a `security.txt` file in the public root (e.g., `static/.well-known/`) of documentation sites to ensure discoverability.
 
-## 2024-05-26 - Missing Isolation Headers and Robust Clipboard Handling
-**Vulnerability:** The application lacked `Cross-Origin-Opener-Policy` (COOP) and `Cross-Origin-Resource-Policy` (CORP) headers, leaving it potentially exposed to cross-origin attacks like Spectre. Additionally, the `CopyButton` component did not verify `navigator.clipboard` availability, risking runtime errors in non-secure contexts.
-**Learning:** Security headers like COOP and CORP are crucial for modern web security but are often omitted in favor of basic CSP. Frontend code interacting with powerful APIs like Clipboard must handle their absence gracefully.
-**Prevention:** Include strict `same-origin` values for COOP and CORP in deployment configurations unless specific cross-origin interaction is required. Always wrap `navigator.clipboard` calls in availability checks.
+## 2024-05-26 - Sensitive File Exposure Risk in Git
+**Vulnerability:** The `.gitignore` file was missing entries for common cryptographic and sensitive file types (e.g., `*.pem`, `*.key`, `*.p12`, `*.jks`), increasing the risk of accidental secrets exposure.
+**Learning:** Developers often forget to ignore certificate and key files until after an incident occurs. Preemptively ignoring these patterns is a low-cost, high-value security enhancement.
+**Prevention:** Add comprehensive ignore patterns for sensitive file extensions to `.gitignore` at the start of a project.

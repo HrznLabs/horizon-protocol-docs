@@ -29,3 +29,13 @@ yarn-error.log*
 
 .vercel
 
+# Security - Sensitive Files
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+id_rsa
+id_dsa
+id_ed25519
+known_hosts
