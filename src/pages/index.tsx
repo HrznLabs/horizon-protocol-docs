@@ -46,7 +46,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
             <div className={styles.quickLinkCard}>
               <h3>📜 Smart Contracts</h3>
               <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
-              <Link to="/docs/architecture/smart-contracts" className={styles.cardCta}>
+              <Link to="/docs/architecture/smart-contracts">
                 View Contracts <ArrowRightIcon />
               </Link>
             </div>
@@ -55,7 +55,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
             <div className={styles.quickLinkCard}>
               <h3>🔌 API Reference</h3>
               <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
-              <Link to="/docs/api/overview" className={styles.cardCta}>
+              <Link to="/docs/api/overview">
                 Browse API <ArrowRightIcon />
               </Link>
             </div>
@@ -66,7 +66,6 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
               <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
               <Link
                 to="https://github.com/HrznLabs/horizon-sdk"
-                className={styles.cardCta}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View SDK (opens in a new tab)"
