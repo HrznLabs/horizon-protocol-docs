@@ -306,6 +306,12 @@
   transform: translate(-50%, -6px);
 }
 
+.heroButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 @media screen and (max-width: 768px) {
   .buttons {
     flex-direction: column;

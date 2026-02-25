@@ -20,13 +20,12 @@ const HomepageHeader = memo(function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--primary button--lg"
+            className={clsx('button button--primary button--lg', styles.heroButton)}
             to="/docs/">
-            Get Started →
+            Get Started <ArrowRightIcon />
           </Link>
           <Link
             className="button button--secondary button--lg"
-            style={{marginLeft: '1rem'}}
             to="/docs/guides/getting-started">
             Developer Guide
           </Link>
@@ -128,9 +127,9 @@ const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12}: {size?: num
 });
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ArrowRightIcon = memo(function ArrowRightIcon() {
+const ArrowRightIcon = memo(function ArrowRightIcon({size = 16}: {size?: number}) {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <line x1="5" y1="12" x2="19" y2="12"></line>
       <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
