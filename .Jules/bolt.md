@@ -21,7 +21,3 @@
 ## 2025-02-15 - [CSS Transition Specificity]
 **Learning:** Using `transition: all` is convenient but causes the browser to check all properties for changes, leading to potential layout thrashing and painting overhead, especially on complex elements. Replacing it with specific properties (e.g., `transform`, `opacity`) significantly improves rendering performance without visual regression.
 **Action:** Audit CSS files for `transition: all` and replace with specific properties, prioritizing `transform` and `opacity` for animations.
-
-## 2025-02-15 - [Correctness as Performance]
-**Learning:** Memory leaks in React components (e.g., uncleaned `setTimeout`) are performance bugs. Using `useEffect` cleanup functions prevents these leaks and ensures the application remains performant over time.
-**Action:** Always clean up side effects (timers, subscriptions) in `useEffect` return functions.
