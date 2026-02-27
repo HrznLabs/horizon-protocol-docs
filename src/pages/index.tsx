@@ -1,7 +1,7 @@
 import {useState, useEffect, memo, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+// import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
@@ -10,14 +10,18 @@ import styles from './index.module.css';
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
 const HomepageHeader = memo(function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  // const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+          {/* {siteConfig.title} */}
+          Horizon Protocol
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+            {/* {siteConfig.tagline} */}
+            Decentralized, gamified coordination for real-world missions
+        </p>
         <div className={styles.buttons}>
           <Link
             className={clsx('button button--primary button--lg', styles.heroButton)}
@@ -192,7 +196,7 @@ const Deployments = memo(function Deployments(): ReactNode {
 });
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  // const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
       title="Documentation"
