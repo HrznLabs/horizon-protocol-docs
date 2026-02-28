@@ -22,3 +22,8 @@
 **Vulnerability:** The repository lacked a standard `security.txt` file, making it difficult for security researchers to find the correct contact and policy information.
 **Learning:** While `SECURITY.md` exists, the `/.well-known/security.txt` standard (RFC 9116) provides a machine-readable and standardized location for security contacts that is often overlooked in documentation sites.
 **Prevention:** Always include a `security.txt` file in the public root (e.g., `static/.well-known/`) of documentation sites to ensure discoverability.
+
+## 2025-05-27 - Missing Static Code Analysis (Linting)
+**Vulnerability:** The project lacked a configured linter (`eslint`), which is a fundamental security control for catching potential vulnerabilities (like unused variables, insecure practices, or React-specific issues) during development.
+**Learning:** Security is not just about headers and patches; it starts with code quality. Automated static analysis (linting) is a proactive defense layer that helps prevent vulnerabilities from being introduced in the first place.
+**Prevention:** Always include and enforce a strict `lint` script in `package.json` with security-focused rules (e.g., `@docusaurus/eslint-plugin`, `typescript-eslint`) as part of the standard development workflow.
