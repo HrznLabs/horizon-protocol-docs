@@ -13,3 +13,7 @@
 ## 2024-10-25 - Tooltips Synced with ARIA Labels
 **Learning:** Using `content: attr(aria-label)` in CSS `::after` pseudo-elements ensures tooltips always match the screen reader text (e.g., "Copy address" -> "Copied!"). This prevents desynchronization bugs and reduces React state complexity for visual feedback.
 **Action:** Use this pattern for icon-only buttons where visual state changes (like success feedback) need to be communicated clearly to all users.
+
+## 2024-10-25 - Semantic Headings for Visual Sections
+**Learning:** Visual-only sections (like card grids) often break heading hierarchy (e.g. jumping from H1 to H3). Adding visually hidden H2 headings (`<h2 className="sr-only">...\</h2>`) restores the document outline for screen reader users without affecting the visual design.
+**Action:** Always check the document outline of landing pages and insert hidden structural headings where visual sections are implied but not titled.
