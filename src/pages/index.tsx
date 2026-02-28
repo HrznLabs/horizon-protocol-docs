@@ -40,6 +40,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
   return (
     <section className={styles.quickLinks}>
       <div className="container">
+        <h2 className="sr-only">Quick Links</h2>
         <div className="row">
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
