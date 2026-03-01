@@ -92,8 +92,8 @@ function HomepageFeatures(): ReactNode {
       <div className="container">
         <h2 className="sr-only">Key Features</h2>
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
