@@ -71,7 +71,7 @@
   overflow: hidden;
   /* Optimized: Isolate layout and paint */
   contain: content;
-  will-change: transform;
+  /* ⚡ Bolt: Removed will-change: transform to prevent layer explosion */
 }
 
 .quickLinkCard::before {
@@ -191,7 +191,7 @@
   position: relative;
   /* Optimized: Isolate layout reflows */
   contain: layout;
-  will-change: transform;
+  /* ⚡ Bolt: Removed will-change: transform to prevent layer explosion */
 }
 
 .contractCard:hover {
