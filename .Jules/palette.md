@@ -17,3 +17,7 @@
 ## 2024-10-25 - Semantic Headings for Visual Sections
 **Learning:** Visual-only sections (like card grids) often break heading hierarchy (e.g. jumping from H1 to H3). Adding visually hidden H2 headings (`<h2 className="sr-only">...\</h2>`) restores the document outline for screen reader users without affecting the visual design.
 **Action:** Always check the document outline of landing pages and insert hidden structural headings where visual sections are implied but not titled.
+
+## 2025-01-20 - Decorative Emojis and Screen Readers
+**Learning:** Decorative emojis (like icons next to headings) are read aloud by screen readers, which can disrupt the flow and confuse users (e.g., reading "Scroll, Smart Contracts" instead of just "Smart Contracts").
+**Action:** Always wrap purely decorative emojis in an element like `<span aria-hidden="true">` to hide them from screen readers while keeping them visible.
