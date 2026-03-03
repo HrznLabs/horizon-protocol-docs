@@ -92,8 +92,10 @@ function HomepageFeatures(): ReactNode {
       <div className="container">
         <Heading as="h2" className="sr-only">Key Features</Heading>
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+          {FeatureList.map((props) => (
+            // ⚡ Bolt: Using a unique property (title) as key instead of array index.
+            // This ensures stable identity across re-renders, optimizing diffing and preventing potential bugs if the list changes.
+            <Feature key={props.title} {...props} />
           ))}
         </div>
       </div>
