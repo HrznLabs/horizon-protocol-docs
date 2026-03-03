@@ -294,8 +294,7 @@ table {
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), 0 0 40px rgba(0, 255, 136, 0.2);
   /* Optimized: Explicit properties */
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  /* ⚡ Bolt: Removed `will-change: transform` to prevent layer explosion and excessive memory consumption on this generic button class.
-     Impact: Reduces active memory footprint and compositor overhead, relying on standard browser optimizations for hover states. */
+  /* ⚡ Bolt: Removed will-change: transform to prevent layer explosion and memory bloat on this generic button class. */
 }
 
 .button--primary:hover {
