@@ -1,23 +1,7 @@
-## 2025-02-07 - [Branding vs Performance]
-**Learning:** The default `logo.svg` in Docusaurus repositories is the generic mascot, while custom branding is often uploaded as `logo.jpg` or similar. Blindly switching to SVG for performance can cause branding regressions if the SVG wasn't updated.
-**Action:** Always visually verify asset content (e.g. via screenshot) before swapping file formats, especially for branding assets.
+## 2024-10-24 - Global will-change Risk
+**Learning:** Applying `will-change: transform` to a generic class like `.card` can cause layer explosion if used extensively (e.g. in lists), leading to memory issues.
+**Action:** Only apply `will-change` to specific, limited-count elements or component-scoped classes.
 
-## 2025-02-07 - [React.memo in Docusaurus]
-**Learning:** Docusaurus pages often re-render due to context changes. Memoizing static sub-components (like `QuickLinks` or `Deployments` mapped from constants) effectively isolates them from these re-renders, even if the parent (`Home`) re-renders.
-**Action:** Apply `React.memo` to static page sections in Docusaurus to reduce hydration/update cost.
-
-## 2025-02-15 - [Configuration Validation]
-**Learning:** Docusaurus configuration files (`docusaurus.config.ts`) are TypeScript files and are type-checked. Duplicate keys in objects (like `headTags`) are valid JavaScript syntax (last one wins) but are flagged as errors by TypeScript, blocking builds/checks.
-**Action:** Ensure configuration files are valid TypeScript and contain no duplicate keys. Run `yarn typecheck` after modifying config files.
-
-## 2025-02-15 - [Image Format Optimization]
-**Learning:** High-resolution JPG logos (e.g., 1024x1024, 350KB) can be mistakenly used for small UI elements like navbars. Resizing to 256x256 and converting to WebP can yield massive savings (>98%) with no perceptible quality loss.
-**Action:** Audit asset sizes regularly and resize/convert images appropriate for their display size.
-
-## 2025-02-15 - [CSS Painting Performance]
-**Learning:** `filter: drop-shadow` is significantly more expensive to render than `text-shadow` or `box-shadow`, especially during animations/transitions. For text/emoji content, `text-shadow` provides a nearly identical visual result with much better performance.
-**Action:** Prefer `text-shadow` over `filter` for text elements, and use `will-change: transform` to hint the browser for smooth animations.
-
-## 2025-02-15 - [CSS Transition Specificity]
-**Learning:** Using `transition: all` is convenient but causes the browser to check all properties for changes, leading to potential layout thrashing and painting overhead, especially on complex elements. Replacing it with specific properties (e.g., `transform`, `opacity`) significantly improves rendering performance without visual regression.
-**Action:** Audit CSS files for `transition: all` and replace with specific properties, prioritizing `transform` and `opacity` for animations.
+## 2024-11-05 - Array Indices as React Keys
+**Learning:** Using array indices as `key` props in React lists (like `FeatureList.map`) can cause unnecessary re-renders or state bugs if the list ever changes order. Using unique properties (like `title`) stabilizes component identity.
+**Action:** Always prefer unique, stable properties over array indices for `key` props in React `.map()` iterations to optimize diffing.

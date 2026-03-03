@@ -90,7 +90,7 @@ function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <h2 className="sr-only">Key Features</h2>
+        <Heading as="h2" className="sr-only">Key Features</Heading>
         <div className="row">
           {FeatureList.map((props) => (
             // ⚡ Bolt: Using a unique property (title) as key instead of array index.
