@@ -44,11 +44,11 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
   return (
     <section className={styles.quickLinks}>
       <div className="container">
-        <h2 className="sr-only">Quick Links</h2>
+        <Heading as="h2" className="sr-only">Quick Links</Heading>
         <div className="row">
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
-              <h3><span aria-hidden="true">📜</span> Smart Contracts</h3>
+              <Heading as="h3"><span aria-hidden="true">📜</span> Smart Contracts</Heading>
               <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
               <Link to="/docs/architecture/smart-contracts">
                 View Contracts <ArrowRightIcon />
@@ -57,7 +57,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           </div>
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
-              <h3><span aria-hidden="true">🔌</span> API Reference</h3>
+              <Heading as="h3"><span aria-hidden="true">🔌</span> API Reference</Heading>
               <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
               <Link to="/docs/api/overview">
                 Browse API <ArrowRightIcon />
@@ -66,7 +66,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           </div>
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
-              <h3><span aria-hidden="true">🔧</span> TypeScript SDK</h3>
+              <Heading as="h3"><span aria-hidden="true">🔧</span> TypeScript SDK</Heading>
               <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
               <Link
                 to="https://github.com/HrznLabs/horizon-sdk"
@@ -112,11 +112,11 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
       aria-label={copied ? "Copied!" : "Copy address"}
     >
       {copied ? (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       ) : (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
         </svg>
@@ -172,7 +172,7 @@ const Deployments = memo(function Deployments(): ReactNode {
               key={contract.name}
               className={styles.contractCard}
             >
-              <a
+              <Link
                 href={`https://sepolia.basescan.org/address/${contract.address}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -181,7 +181,7 @@ const Deployments = memo(function Deployments(): ReactNode {
               >
                 {contract.name}
                 <ExternalLinkIcon />
-              </a>
+              </Link>
               <div className={styles.addressWrapper}>
                 <code className={styles.contractAddress}>
                   {contract.shortAddress}

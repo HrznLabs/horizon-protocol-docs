@@ -1,29 +1,4 @@
-## 2024-05-21 - Loose Content Security Policy Configuration
-**Vulnerability:** The `vercel.json` configuration included `script-src https:` and `style-src https:`, effectively bypassing CSP protections by allowing scripts and styles from any HTTPS domain.
-**Learning:** Default or copy-pasted CSP configurations often include broad wildcards like `https:` that undermine the policy's purpose. In Vercel deployments, this is defined in `vercel.json` headers.
-**Prevention:** Always start with a strict `default-src 'self'` policy and whitelist specific external domains only as needed. Avoid `https:` wildcards.
-
-## 2024-05-22 - Incomplete Permissions-Policy
-**Vulnerability:** The `Permissions-Policy` header was present but only disabled `geolocation`, `microphone`, and `camera`, leaving other sensitive features like `payment` and `usb` enabled by default.
-**Learning:** Partially configuring security headers can create a false sense of security. It's important to comprehensively list all features that should be disabled, not just the most common ones.
-**Prevention:** Regularly audit `Permissions-Policy` against the full list of available directives and disable everything not explicitly needed.
-
-## 2024-05-23 - Clipboard Access Controls Missing
-**Vulnerability:** The `Permissions-Policy` header did not restrict `clipboard-read` or `clipboard-write`, potentially allowing cross-origin iframes (if embedded) to hijack the user's clipboard.
-**Learning:** Modern `Permissions-Policy` directives like `clipboard-read` and `clipboard-write` offer granular control over hardware/privacy APIs and should be explicitly configured, especially for static sites where third-party content might be embedded.
-**Prevention:** Explicitly set `clipboard-read=()` (disable) and `clipboard-write=(self)` (same-origin only) in deployment headers to enforce least privilege.
-
-## 2024-05-24 - Outdated Permissions-Policy and Deprecated Headers
-**Vulnerability:** The `vercel.json` configuration contained the deprecated `X-XSS-Protection` header and the obsolete `interest-cohort` directive in `Permissions-Policy`, while missing restrictions for modern tracking APIs like `browsing-topics` and `attribution-reporting`.
-**Learning:** Security standards evolve rapidly. Headers like `X-XSS-Protection` can become counter-productive, and new browser features (like Privacy Sandbox APIs) often default to "allow" unless explicitly disabled.
-**Prevention:** Regularly audit security headers against current browser standards (e.g., MDN, OWASP) and use the Principle of Least Privilege to disable all unneeded browser features in `Permissions-Policy`.
-
-## 2024-05-25 - Missing Security Policy Discoverability
-**Vulnerability:** The repository lacked a standard `security.txt` file, making it difficult for security researchers to find the correct contact and policy information.
-**Learning:** While `SECURITY.md` exists, the `/.well-known/security.txt` standard (RFC 9116) provides a machine-readable and standardized location for security contacts that is often overlooked in documentation sites.
-**Prevention:** Always include a `security.txt` file in the public root (e.g., `static/.well-known/`) of documentation sites to ensure discoverability.
-
-## 2025-05-27 - Missing Static Code Analysis (Linting)
-**Vulnerability:** The project lacked a configured linter (`eslint`), which is a fundamental security control for catching potential vulnerabilities (like unused variables, insecure practices, or React-specific issues) during development.
-**Learning:** Security is not just about headers and patches; it starts with code quality. Automated static analysis (linting) is a proactive defense layer that helps prevent vulnerabilities from being introduced in the first place.
-**Prevention:** Always include and enforce a strict `lint` script in `package.json` with security-focused rules (e.g., `@docusaurus/eslint-plugin`, `typescript-eslint`) as part of the standard development workflow.
+## 2024-05-20 - RCE vulnerability in serialize-javascript
+**Vulnerability:** Found a High severity Remote Code Execution (RCE) vulnerability in `serialize-javascript` < 7.0.3 via `RegExp.flags` and `Date.prototype.toISOString()`. The vulnerable package was present in the dependency tree of `@docusaurus/preset-classic` (`webpack` -> `terser-webpack-plugin` -> `serialize-javascript`).
+**Learning:** The project relies heavily on a standard Docusaurus classic preset, which brought in an outdated transitive dependency. Docusaurus versions might pin specific versions of webpack tools which can carry vulnerabilities over time, requiring manual intervention in resolutions if the Docusaurus version itself is not updated.
+**Prevention:** Check `yarn audit` output carefully for vulnerabilities in deep dependencies (like `terser-webpack-plugin` in build tools) and force resolution of vulnerable transitive dependencies (using `resolutions` in `package.json`) if a direct dependency upgrade is not immediately feasible. Ensure `serialize-javascript` is kept above `7.0.3`.
