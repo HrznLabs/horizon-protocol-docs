@@ -63,34 +63,6 @@ const config: Config = {
         type: 'image/webp',
       },
     },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://github.com',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://sepolia.basescan.org',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'dns-prefetch',
-        href: 'https://github.com',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'dns-prefetch',
-        href: 'https://sepolia.basescan.org',
-      },
-    },
   ],
 
   themeConfig: {
