@@ -194,7 +194,8 @@
   /* ⚡ Bolt: Removed will-change: transform to prevent layer explosion */
 }
 
-.contractCard:hover {
+.contractCard:hover,
+.contractCard:focus-within {
   transform: translateY(-2px);
   border-color: #00FF88;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
@@ -285,6 +286,15 @@
 .copyButton:focus-visible {
   outline: 2px solid #00FF88;
   outline-offset: 2px;
+}
+
+.copyButton:active {
+  transform: scale(0.92);
+}
+
+.copyButtonCopied {
+  color: #00FF88;
+  background: rgba(0, 255, 136, 0.15);
 }
 
 /* Tooltip implementation */
