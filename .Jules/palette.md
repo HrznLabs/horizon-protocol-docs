@@ -21,3 +21,11 @@
 ## 2025-01-20 - Decorative Emojis and Screen Readers
 **Learning:** Decorative emojis (like icons next to headings) are read aloud by screen readers, which can disrupt the flow and confuse users (e.g., reading "Scroll, Smart Contracts" instead of just "Smart Contracts").
 **Action:** Always wrap purely decorative emojis in an element like `<span aria-hidden="true">` to hide them from screen readers while keeping them visible.
+
+## 2025-03-03 - Accessible Hover Feedback for Composite Cards
+**Learning:** Card components with nested links often only visually react to `:hover` on the card container. Keyboard users tabbing into a nested link within the card completely miss this visual elevation/glow feedback.
+**Action:** Always pair `:hover` with `:focus-within` on card containers so keyboard users experience the same visual hierarchy and feedback as mouse users when interacting with the card's contents.
+
+## 2025-03-03 - Tactile Click Feedback for Icon Buttons
+**Learning:** Icon buttons that change state visually (e.g., Copy button changing icon) feel unresponsive during the physical click interaction without a pressed state.
+**Action:** Add a slight `:active { transform: scale(0.92); }` effect to icon buttons to provide immediate tactile feedback confirming the click, before the async action or visual state update occurs.
