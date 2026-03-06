@@ -29,8 +29,7 @@
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
   /* Optimized: Move transition here to prevent snap-back */
   transition: transform 0.3s ease, text-shadow 0.3s ease;
-  /* Optimized: Hint browser for composition */
-  will-change: transform;
+  /* ⚡ Bolt: Removed will-change: transform to prevent memory issues and layer explosion in mapped lists */
 }
 
 /* Add spacing between feature rows */
