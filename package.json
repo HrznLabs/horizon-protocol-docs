@@ -16,10 +16,10 @@
     "lint": "eslint src"
   },
   "resolutions": {
-    "**/lodash": "^4.17.23",
-    "**/qs": "^6.14.3",
-    "**/serialize-javascript": "^7.0.3",
-    "**/serve-handler/minimatch": "^3.1.2"
+    "lodash": "^4.17.23",
+    "qs": "^6.14.3",
+    "serialize-javascript": "^7.0.3",
+    "**/serve-handler/minimatch": "^3.1.4"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
