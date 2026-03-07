@@ -322,6 +322,11 @@ table {
   color: #0A0A0B;
 }
 
+.button--primary:active,
+[data-theme='dark'] .button--primary:active {
+  transform: scale(0.98);
+}
+
 .button--secondary {
   border: 2px solid rgba(0, 255, 136, 0.3);
   background: transparent;
@@ -345,6 +350,11 @@ table {
   border-color: var(--horizon-green-bright);
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
   color: var(--horizon-green-bright);
+}
+
+.button--secondary:active,
+[data-theme='dark'] .button--secondary:active {
+  transform: scale(0.98);
 }
 
 /* =============================================================================
@@ -592,6 +602,11 @@ table {
 [data-theme='dark'] .DocSearch-Button:hover {
   border-color: var(--horizon-green-bright) !important;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.DocSearch-Button:active,
+[data-theme='dark'] .DocSearch-Button:active {
+  transform: scale(0.98);
 }
 
 /* =============================================================================

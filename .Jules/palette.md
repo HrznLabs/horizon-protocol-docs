@@ -30,6 +30,6 @@
 **Learning:** Icon buttons that change state visually (e.g., Copy button changing icon) feel unresponsive during the physical click interaction without a pressed state.
 **Action:** Add a slight `:active { transform: scale(0.92); }` effect to icon buttons to provide immediate tactile feedback confirming the click, before the async action or visual state update occurs.
 
-## 2025-03-04 - Tactile Click Feedback for Major Interactive Elements
-**Learning:** Visual hover states alone are insufficient for providing a satisfying feeling of responsiveness when an element is clicked. Major interactive elements (like primary/secondary buttons and navigation logos) require distinct `:active` states to give users physical tactile feedback.
-**Action:** Apply a scale transform on `:active` for major elements (e.g., `transform: scale(0.98)` for standard buttons, and `transform: scale(0.92)` for smaller elements like logos) to provide an immediate "pressed" sensation.
+## 2025-03-04 - Tactile Click Feedback for Main Buttons and Navbar Logo
+**Learning:** Main interactive elements like primary/secondary buttons and the navbar logo feel unresponsive during physical click interactions without a pressed state.
+**Action:** Always add a slight `:active { transform: scale(0.98); }` effect (or `0.92` for smaller elements like logos) to primary/secondary buttons and other major interactive elements to provide immediate tactile feedback confirming the click.
