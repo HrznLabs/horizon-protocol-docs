@@ -7,3 +7,8 @@
 **Vulnerability:** The project lacked a `.github/dependabot.yml` configuration, leaving the repository vulnerable to stale dependencies with known security vulnerabilities (such as the ReDoS vulnerability in `ajv` inside the `schema-utils` dependency path).
 **Learning:** Even static documentation sites (like Docusaurus) can be susceptible to security vulnerabilities within their dependency trees during build-time.
 **Prevention:** Always enable Dependabot or an equivalent automated dependency scanning tool in CI/CD pipelines to ensure timely identification and pull requests for patching critical and high-severity CVEs in upstream libraries.
+
+## 2024-10-27 - ReDoS vulnerability in minimatch via serve-handler
+**Vulnerability:** Found multiple High severity Regular Expression Denial of Service (ReDoS) vulnerabilities in `minimatch` <=3.1.3. This package was brought in as a transitive dependency of `@docusaurus/core` via `serve-handler`.
+**Learning:** Using a global wildcard resolution (like `"**/minimatch": "^3.1.4"`) is dangerous and can destructively downgrade newer, safe versions of the package (e.g., `minimatch@10`) used elsewhere in the dependency tree. This can cause build or runtime regressions by breaking APIs expected by those modern tools.
+**Prevention:** When applying `resolutions` to fix transitive dependency vulnerabilities, use targeted paths (e.g., `"**/serve-handler/minimatch": "^3.1.4"`) instead of global wildcards to safely upgrade only the vulnerable instances without affecting modern dependencies.
