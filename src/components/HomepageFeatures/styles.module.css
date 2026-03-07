@@ -9,6 +9,9 @@
   width: 100%;
   background: #0A0A0B;
   position: relative;
+  /* ⚡ Bolt: Skip rendering when off-screen */
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
 }
 
 .features::before {
@@ -41,6 +44,8 @@
 /* Feature card styling */
 .features .col {
   margin-bottom: 1rem;
+  /* ⚡ Bolt: Isolate layout and paint for self-contained cards */
+  contain: content;
 }
 
 .features h3 {
