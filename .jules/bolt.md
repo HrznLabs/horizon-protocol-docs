@@ -13,3 +13,7 @@
 ## 2024-12-14 - Isolated Layouts via CSS Containment
 **Learning:** Applying `contain: content` to self-contained UI components (like individual feature cards) and `content-visibility: auto` with `contain-intrinsic-size` to large sections (like `.features`) cleanly isolates layout and paint calculations, significantly improving rendering performance without JavaScript overhead.
 **Action:** Proactively apply CSS containment properties to repetitive grid/flex items and off-screen sections.
+
+## 2024-12-19 - Duplicate Intensive CSS Backgrounds
+**Learning:** Duplicating complex CSS properties (like multiple radial gradients and pseudo-element patterns) across both global (`.hero`) and module-scoped (`.heroBanner`) classes inflates the CSS bundle size and wastes browser styling computation, as both rules target the same element and override each other identically.
+**Action:** Extract shared, intensive background styles to global utility classes or base component styles, and keep module styles restricted to layout and spacing concerns (like padding and text-alignment).
