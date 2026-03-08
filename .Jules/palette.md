@@ -33,3 +33,7 @@
 ## 2025-03-04 - Tactile Click Feedback for Main Buttons and Navbar Logo
 **Learning:** Main interactive elements like primary/secondary buttons and the navbar logo feel unresponsive during physical click interactions without a pressed state.
 **Action:** Always add a slight `:active { transform: scale(0.98); }` effect (or `0.92` for smaller elements like logos) to primary/secondary buttons and other major interactive elements to provide immediate tactile feedback confirming the click.
+
+## 2024-05-18 - Directional Micro-Interactions for Link Affordance
+**Learning:** Animated icons inside links (e.g., arrows moving right for forward navigation, external icons moving top-right for new tabs) significantly improve interaction clarity. However, they are often implemented using only `:hover`, leaving keyboard users (navigating via `Tab`) without this valuable visual feedback when elements receive `:focus-visible`.
+**Action:** Always pair `:hover` with `:focus-visible` when animating directional icons inside links or buttons (e.g., `a:hover svg, a:focus-visible svg { transform: translateX(4px); }`). Ensure `className` props can be passed to reusable SVG components so they can be targeted effectively via CSS modules.

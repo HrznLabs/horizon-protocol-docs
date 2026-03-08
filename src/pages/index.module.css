@@ -139,9 +139,27 @@
   z-index: 1;
 }
 
-.quickLinkCard a:hover {
+.quickLinkCard a:hover,
+.quickLinkCard a:focus-visible {
   color: #4ADE80;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.arrowRightIcon,
+.externalLinkIcon {
+  transition: transform 0.2s ease;
+}
+
+.quickLinkCard a:hover .arrowRightIcon,
+.quickLinkCard a:focus-visible .arrowRightIcon,
+.heroButton:hover .arrowRightIcon,
+.heroButton:focus-visible .arrowRightIcon {
+  transform: translateX(4px);
+}
+
+.quickLinkCard a:hover .externalLinkIcon,
+.quickLinkCard a:focus-visible .externalLinkIcon {
+  transform: translate(2px, -2px);
 }
 
 /* Deployments Section */
@@ -220,9 +238,10 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.contractName:hover svg {
+.contractName:hover svg,
+.contractName:focus-visible svg {
   opacity: 1;
-  transform: translate(1px, -1px);
+  transform: translate(2px, -2px);
 }
 
 .contractName::before {
