@@ -26,7 +26,7 @@ const HomepageHeader = memo(function HomepageHeader() {
           <Link
             className={clsx('button button--primary button--lg', styles.heroButton)}
             to="/docs/">
-            Get Started <ArrowRightIcon />
+            Get Started <ArrowRightIcon className={styles.arrowRightIcon} />
           </Link>
           <Link
             className="button button--secondary button--lg"
@@ -51,7 +51,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
               <Heading as="h3"><span aria-hidden="true">📜</span> Smart Contracts</Heading>
               <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
               <Link to="/docs/architecture/smart-contracts">
-                View Contracts <ArrowRightIcon />
+                View Contracts <ArrowRightIcon className={styles.arrowRightIcon} />
               </Link>
             </div>
           </div>
@@ -60,7 +60,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
               <Heading as="h3"><span aria-hidden="true">🔌</span> API Reference</Heading>
               <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
               <Link to="/docs/api/overview">
-                Browse API <ArrowRightIcon />
+                Browse API <ArrowRightIcon className={styles.arrowRightIcon} />
               </Link>
             </div>
           </div>
@@ -74,7 +74,7 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
                 rel="noopener noreferrer"
                 aria-label="View SDK (opens in a new tab)"
               >
-                View SDK <ExternalLinkIcon size={16} />
+                View SDK <ExternalLinkIcon size={16} className={styles.externalLinkIcon} />
               </Link>
             </div>
           </div>
@@ -126,9 +126,9 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
 });
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12}: {size?: number}) {
+const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
       <polyline points="15 3 21 3 21 9"></polyline>
       <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -137,9 +137,9 @@ const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12}: {size?: num
 });
 
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ArrowRightIcon = memo(function ArrowRightIcon({size = 16}: {size?: number}) {
+const ArrowRightIcon = memo(function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <line x1="5" y1="12" x2="19" y2="12"></line>
       <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
