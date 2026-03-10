@@ -12,3 +12,8 @@
 **Vulnerability:** Found multiple High severity Regular Expression Denial of Service (ReDoS) vulnerabilities in `minimatch` <=3.1.3. This package was brought in as a transitive dependency of `@docusaurus/core` via `serve-handler`.
 **Learning:** Using a global wildcard resolution (like `"**/minimatch": "^3.1.4"`) is dangerous and can destructively downgrade newer, safe versions of the package (e.g., `minimatch@10`) used elsewhere in the dependency tree. This can cause build or runtime regressions by breaking APIs expected by those modern tools.
 **Prevention:** When applying `resolutions` to fix transitive dependency vulnerabilities, use targeted paths (e.g., `"**/serve-handler/minimatch": "^3.1.4"`) instead of global wildcards to safely upgrade only the vulnerable instances without affecting modern dependencies.
+
+## 2025-03-10 - Information leakage in clipboard copy
+**Vulnerability:** A `console.error` log within the `handleCopy` catch block (`src/pages/index.tsx`) previously output the raw `err` object to the browser console. This could potentially leak detailed stack traces or client-environment specifics when the clipboard API fails (e.g., due to permissions).
+**Learning:** Client-side error handling must also follow secure fail patterns. Even standard DOM exceptions can sometimes reveal unexpected implementation details when logged directly.
+**Prevention:** Always sanitize client-side error logging by outputting generic string messages instead of raw error objects. Use `// eslint-disable-next-line no-console` to explicitly allow and document intended, sanitized logging when strict `no-console` rules are in place.
