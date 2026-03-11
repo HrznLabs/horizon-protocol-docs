@@ -75,7 +75,7 @@ const config: Config = {
     announcementBar: {
       id: 'v2_1_launch',
       content:
-        '🚀 Horizon Protocol v2.1 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started">Get started →</a>',
+        '🚀 Horizon Protocol v2.1 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started" aria-label="Get started (opens in a new tab)">Get started →</a>',
       backgroundColor: '#00FF88',
       textColor: '#0A0A0B',
       isCloseable: true,
@@ -129,6 +129,7 @@ const config: Config = {
           href: 'https://github.com/HrznLabs',
           label: 'GitHub',
           position: 'right',
+          'aria-label': 'GitHub (opens in a new tab)',
         },
       ],
     },
@@ -162,14 +163,17 @@ const config: Config = {
             {
               label: 'GitHub',
               href: 'https://github.com/HrznLabs',
+              'aria-label': 'GitHub (opens in a new tab)',
             },
             {
               label: 'Smart Contracts',
               href: 'https://github.com/HrznLabs/horizon-contracts',
+              'aria-label': 'Smart Contracts (opens in a new tab)',
             },
             {
               label: 'TypeScript SDK',
               href: 'https://github.com/HrznLabs/horizon-sdk',
+              'aria-label': 'TypeScript SDK (opens in a new tab)',
             },
           ],
         },
