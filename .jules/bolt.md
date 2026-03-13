@@ -17,3 +17,7 @@
 ## 2024-12-19 - Duplicate Intensive CSS Backgrounds
 **Learning:** Duplicating complex CSS properties (like multiple radial gradients and pseudo-element patterns) across both global (`.hero`) and module-scoped (`.heroBanner`) classes inflates the CSS bundle size and wastes browser styling computation, as both rules target the same element and override each other identically.
 **Action:** Extract shared, intensive background styles to global utility classes or base component styles, and keep module styles restricted to layout and spacing concerns (like padding and text-alignment).
+
+## 2025-03-11 - Non-critical image preload anti-pattern
+**Learning:** Preloading non-critical, small images like a 32x32px navbar logo is a performance anti-pattern. It wastes high-priority network bandwidth during the initial load, delaying actual render-blocking resources (like critical CSS/JS) and negatively impacting First Contentful Paint (FCP) and Largest Contentful Paint (LCP).
+**Action:** Never use `<link rel="preload">` for small UI graphics or images outside the critical rendering path. Reserve preloads strictly for late-discovered, critical resources (like hero images or essential web fonts).
