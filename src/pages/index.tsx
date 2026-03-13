@@ -99,8 +99,10 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+    } catch {
+      // 🛡️ Sentinel: Fail securely by not exposing clipboard error details to the console
+      // eslint-disable-next-line no-console
+      console.error('Failed to copy address to clipboard');
     }
   };
 
