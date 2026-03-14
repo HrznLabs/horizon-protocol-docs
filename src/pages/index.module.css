@@ -302,6 +302,16 @@
   background: rgba(0, 255, 136, 0.15);
 }
 
+.copyButtonFailed {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.copyButtonFailed::after {
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2) !important;
+}
+
 /* Tooltip implementation */
 .copyButton::after {
   content: attr(aria-label);
