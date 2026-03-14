@@ -45,3 +45,7 @@
 ## 2025-03-06 - Accessible External Links in Docusaurus Config
 **Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
 **Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+
+## 2026-03-14 - Visual Feedback for Silent Failures (Clipboard)
+**Learning:** Providing success feedback (e.g., "Copied!") is standard, but failing silently when browser APIs (like clipboard) are denied leaves users thinking the button is completely broken.
+**Action:** Always implement a visual and screen-reader announced error state for UI interactions that rely on browser permissions or async APIs that can fail, even if the failure is caught securely.
