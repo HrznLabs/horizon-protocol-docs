@@ -17,3 +17,8 @@
 **Vulnerability:** A `console.error` log within the `handleCopy` catch block (`src/pages/index.tsx`) previously output the raw `err` object to the browser console. This could potentially leak detailed stack traces or client-environment specifics when the clipboard API fails (e.g., due to permissions).
 **Learning:** Client-side error handling must also follow secure fail patterns. Even standard DOM exceptions can sometimes reveal unexpected implementation details when logged directly.
 **Prevention:** Always sanitize client-side error logging by outputting generic string messages instead of raw error objects. Use `// eslint-disable-next-line no-console` to explicitly allow and document intended, sanitized logging when strict `no-console` rules are in place.
+
+## 2024-03-14 - Fix Unbounded Recursion DoS Vulnerability in `flatted`
+**Vulnerability:** The project had an unbounded recursion Denial of Service (DoS) vulnerability in the `parse()` function during the revive phase in the `flatted` dependency (versions < 3.4.0).
+**Learning:** The vulnerability existed because deeply nested transitive dependencies managed via npm/yarn do not automatically update through dependabot for minor/patch versions, specifically for dependencies of ESLint, causing outdated dependencies like `flatted` to remain vulnerable to recursion-based DoS.
+**Prevention:** Use targeted path resolutions in `package.json` to safely force upgrades of nested transitive dependencies (like `**/flatted`) without risking breaking changes across unrelated packages. Periodically manually run `yarn audit` to catch nested dependency vulnerabilities.
