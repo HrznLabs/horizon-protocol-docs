@@ -87,19 +87,26 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
 // ⚡ Bolt: Memoized to prevent unnecessary re-renders
 const CopyButton = memo(function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 2000);
+    if (copied || failed) {
+      const timeout = setTimeout(() => {
+        setCopied(false);
+        setFailed(false);
+      }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [copied]);
+  }, [copied, failed]);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      setFailed(false);
     } catch {
+      setFailed(true);
+      setCopied(false);
       // 🛡️ Sentinel: Fail securely by not exposing clipboard error details to the console
       // eslint-disable-next-line no-console
       console.error('Failed to copy address to clipboard');
@@ -110,15 +117,20 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
     <button
       type="button"
       onClick={handleCopy}
-      className={clsx(styles.copyButton, copied && styles.copyButtonCopied)}
-      aria-label={copied ? "Copied!" : "Copy address"}
+      className={clsx(styles.copyButton, copied && styles.copyButtonCopied, failed && styles.copyButtonFailed)}
+      aria-label={copied ? "Copied!" : failed ? "Copy failed" : "Copy address"}
     >
       <span aria-live="polite" className="sr-only">
-        {copied ? "Copied!" : ""}
+        {copied ? "Copied!" : failed ? "Copy failed" : ""}
       </span>
       {copied ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      ) : failed ? (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       ) : (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
