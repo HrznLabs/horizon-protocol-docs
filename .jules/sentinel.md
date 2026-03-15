@@ -17,3 +17,8 @@
 **Vulnerability:** A `console.error` log within the `handleCopy` catch block (`src/pages/index.tsx`) previously output the raw `err` object to the browser console. This could potentially leak detailed stack traces or client-environment specifics when the clipboard API fails (e.g., due to permissions).
 **Learning:** Client-side error handling must also follow secure fail patterns. Even standard DOM exceptions can sometimes reveal unexpected implementation details when logged directly.
 **Prevention:** Always sanitize client-side error logging by outputting generic string messages instead of raw error objects. Use `// eslint-disable-next-line no-console` to explicitly allow and document intended, sanitized logging when strict `no-console` rules are in place.
+
+## 2025-03-15 - Unbounded Recursion DoS in flatted via flat-cache
+**Vulnerability:** Found a High severity Denial of Service (DoS) vulnerability in `flatted` < 3.4.0 due to unbounded recursion in the `parse()` revive phase. The vulnerable package was present in the dependency tree of `eslint` (`eslint` -> `file-entry-cache` -> `flat-cache` -> `flatted`).
+**Learning:** Development dependencies like ESLint can introduce vulnerabilities into the toolchain, potentially affecting CI/CD pipelines or local development environments even if not deployed to production.
+**Prevention:** When resolving transitive dependencies using `resolutions` in `package.json`, use targeted paths (e.g., `"**/flat-cache/flatted": "^3.4.0"`) instead of global wildcards to safely upgrade vulnerable instances without risking the introduction of incompatible versions elsewhere. Regularly run dependency audits and ensure security tools are up to date.
