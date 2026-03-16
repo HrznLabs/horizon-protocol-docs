@@ -49,8 +49,8 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <Heading as="h3"><span aria-hidden="true">📜</span> Smart Contracts</Heading>
-              <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
-              <Link to="/docs/architecture/smart-contracts">
+              <p id="desc-smart-contracts">Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
+              <Link to="/docs/architecture/smart-contracts" aria-describedby="desc-smart-contracts">
                 View Contracts <ArrowRightIcon className={styles.arrowRightIcon} />
               </Link>
             </div>
@@ -58,8 +58,8 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <Heading as="h3"><span aria-hidden="true">🔌</span> API Reference</Heading>
-              <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
-              <Link to="/docs/api/overview">
+              <p id="desc-api-reference">REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
+              <Link to="/docs/api/overview" aria-describedby="desc-api-reference">
                 Browse API <ArrowRightIcon className={styles.arrowRightIcon} />
               </Link>
             </div>
@@ -67,12 +67,13 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <Heading as="h3"><span aria-hidden="true">🔧</span> TypeScript SDK</Heading>
-              <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
+              <p id="desc-ts-sdk">ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
               <Link
                 to="https://github.com/HrznLabs/horizon-sdk"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View SDK (opens in a new tab)"
+                aria-describedby="desc-ts-sdk"
               >
                 View SDK <ExternalLinkIcon size={16} className={styles.externalLinkIcon} />
               </Link>
