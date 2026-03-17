@@ -410,6 +410,9 @@ table {
 .footer {
   border-top: 1px solid rgba(0, 255, 136, 0.2);
   background: linear-gradient(180deg, #0A0A0B 0%, #050505 100%);
+  /* ⚡ Bolt: Skip rendering and layout of the footer when it's off-screen to improve page load and scrolling performance */
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
 }
 
 [data-theme='dark'] .footer {
