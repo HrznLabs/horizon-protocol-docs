@@ -45,3 +45,7 @@
 ## 2025-03-06 - Accessible External Links in Docusaurus Config
 **Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
 **Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+
+## 2025-03-07 - Tactile Click Feedback for Composite Clickable Cards
+**Learning:** Large composite clickable areas (like `.quickLinkCard` and `.contractCard`) can feel unresponsive or floaty during a physical click interaction without a clear pressed state, similar to buttons.
+**Action:** Always add a slight `:active { transform: scale(0.98); }` effect to large composite clickable cards to provide immediate tactile feedback confirming the click interaction.
