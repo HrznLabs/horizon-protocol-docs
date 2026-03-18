@@ -254,6 +254,8 @@ table {
   /* Optimized: Explicit properties */
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   overflow: hidden;
+  /* ⚡ Bolt: Isolate layout and paint for generic self-contained cards */
+  contain: content;
 }
 
 .card:hover {
@@ -410,6 +412,9 @@ table {
 .footer {
   border-top: 1px solid rgba(0, 255, 136, 0.2);
   background: linear-gradient(180deg, #0A0A0B 0%, #050505 100%);
+  /* ⚡ Bolt: Skip rendering large footer when off-screen */
+  content-visibility: auto;
+  contain-intrinsic-size: 400px;
 }
 
 [data-theme='dark'] .footer {
