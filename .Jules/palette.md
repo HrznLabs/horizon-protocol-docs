@@ -45,3 +45,7 @@
 ## 2025-03-06 - Accessible External Links in Docusaurus Config
 **Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
 **Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+
+## 2024-03-08 - Visual and Screen-Reader Error States
+**Learning:** UI interactions that rely on browser permissions or async APIs (like clipboard copy) must implement a visual and screen-reader announced error state, rather than failing silently, to prevent user confusion.
+**Action:** Always provide visual and screen-reader announced feedback when an interaction fails, instead of just logging to the console.
