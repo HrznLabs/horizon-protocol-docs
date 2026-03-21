@@ -17,3 +17,8 @@
 **Vulnerability:** A `console.error` log within the `handleCopy` catch block (`src/pages/index.tsx`) previously output the raw `err` object to the browser console. This could potentially leak detailed stack traces or client-environment specifics when the clipboard API fails (e.g., due to permissions).
 **Learning:** Client-side error handling must also follow secure fail patterns. Even standard DOM exceptions can sometimes reveal unexpected implementation details when logged directly.
 **Prevention:** Always sanitize client-side error logging by outputting generic string messages instead of raw error objects. Use `// eslint-disable-next-line no-console` to explicitly allow and document intended, sanitized logging when strict `no-console` rules are in place.
+
+## 2025-03-21 - Prototype Pollution and DoS vulnerabilities in flatted
+**Vulnerability:** Found High severity Prototype Pollution and unbounded recursion DoS vulnerabilities in `flatted` < 3.4.2. This package was brought in as a transitive dependency of `eslint` via `flat-cache`.
+**Learning:** Vulnerabilities in deep dev dependencies, such as `flatted` via `eslint`, can introduce security risks (like DoS and Prototype Pollution) to the development and build environments. Tools like Dependabot might not automatically update these transitive dependencies.
+**Prevention:** When resolving transitive vulnerabilities, use targeted resolutions (e.g., `"**/flat-cache/flatted": "^3.4.2"`) in `package.json` to fix the vulnerable path specifically, without affecting other parts of the dependency tree that might depend on different versions.
