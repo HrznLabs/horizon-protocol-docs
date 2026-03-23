@@ -1,4 +1,4 @@
-import {memo, type ReactNode} from 'react';
+import {type ReactNode} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -72,8 +72,8 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const Feature = memo(function Feature({title, emoji, description}: FeatureItem) {
+// ⚡ Bolt: Removed React.memo() since the parent component never re-renders, making memoization pure overhead.
+function Feature({title, emoji, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">
@@ -83,9 +83,9 @@ const Feature = memo(function Feature({title, emoji, description}: FeatureItem) 
       </div>
     </div>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders when parent (Home) updates
+// ⚡ Bolt: Removed default export memo() as this static section's parent (Home) has no state and never re-renders.
 function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
@@ -103,4 +103,4 @@ function HomepageFeatures(): ReactNode {
   );
 }
 
-export default memo(HomepageFeatures);
+export default HomepageFeatures;
