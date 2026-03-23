@@ -19,7 +19,8 @@
     "lodash": "^4.17.23",
     "qs": "^6.14.3",
     "serialize-javascript": "^7.0.3",
-    "**/serve-handler/minimatch": "^3.1.4"
+    "**/serve-handler/minimatch": "^3.1.4",
+    "**/flat-cache/flatted": "^3.4.2"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
