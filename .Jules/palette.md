@@ -45,3 +45,7 @@
 ## 2025-03-06 - Accessible External Links in Docusaurus Config
 **Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
 **Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+
+## 2025-03-07 - Accessible Error States for Async Browser APIs
+**Learning:** UI interactions that rely on browser permissions or async APIs (like `navigator.clipboard.writeText`) often fail silently if the permission is denied or the API is unavailable (e.g., in non-secure contexts). While Sentinel ensures these fail securely (by not leaking stack traces), UX requires that the user is actually informed of the failure.
+**Action:** Always implement a visual and screen-reader announced error state (e.g., changing the button icon and `aria-label` to "Failed to copy!") rather than just catching the error silently.
