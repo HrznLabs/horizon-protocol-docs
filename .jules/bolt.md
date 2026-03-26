@@ -21,3 +21,7 @@
 ## 2025-03-11 - Non-critical image preload anti-pattern
 **Learning:** Preloading non-critical, small images like a 32x32px navbar logo is a performance anti-pattern. It wastes high-priority network bandwidth during the initial load, delaying actual render-blocking resources (like critical CSS/JS) and negatively impacting First Contentful Paint (FCP) and Largest Contentful Paint (LCP).
 **Action:** Never use `<link rel="preload">` for small UI graphics or images outside the critical rendering path. Reserve preloads strictly for late-discovered, critical resources (like hero images or essential web fonts).
+
+## 2025-03-26 - React.memo() Anti-pattern on Static Components
+**Learning:** Applying `React.memo()` to static components whose parent components have no state and never re-render (such as homepage sections like `HomepageFeatures` or static icons like `ArrowRightIcon`) is a performance anti-pattern in this project. It adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+**Action:** Remove `memo` wrappers from static components in stateless hierarchies. Only use `React.memo()` when a component actually receives new props frequently while its specific dependencies remain unchanged.
