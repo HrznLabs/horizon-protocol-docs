@@ -86,6 +86,10 @@
   transform: translateY(-4px);
 }
 
+.quickLinkCard:active {
+  transform: scale(0.98);
+}
+
 .quickLinkCard:focus-within::before {
   opacity: 1;
 }
@@ -203,6 +207,10 @@
   transform: translateY(-2px);
   border-color: #00FF88;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.contractCard:active {
+  transform: scale(0.98);
 }
 
 .contractName {
