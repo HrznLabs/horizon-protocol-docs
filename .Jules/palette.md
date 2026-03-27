@@ -45,3 +45,6 @@
 ## 2025-03-06 - Accessible External Links in Docusaurus Config
 **Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
 **Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+## 2026-03-27 - Docusaurus Screen Reader Utility
+**Learning:** Docusaurus (via Infima) does NOT natively provide `.sr-only` or `.screen-reader-only` utility classes. Attempting to use them will result in the elements being rendered visibly, breaking the design.
+**Action:** The `.sr-only` class must be manually defined in `src/css/custom.css` to visually hide screen reader text.
