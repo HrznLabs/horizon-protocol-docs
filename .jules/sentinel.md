@@ -17,3 +17,8 @@
 **Vulnerability:** A `console.error` log within the `handleCopy` catch block (`src/pages/index.tsx`) previously output the raw `err` object to the browser console. This could potentially leak detailed stack traces or client-environment specifics when the clipboard API fails (e.g., due to permissions).
 **Learning:** Client-side error handling must also follow secure fail patterns. Even standard DOM exceptions can sometimes reveal unexpected implementation details when logged directly.
 **Prevention:** Always sanitize client-side error logging by outputting generic string messages instead of raw error objects. Use `// eslint-disable-next-line no-console` to explicitly allow and document intended, sanitized logging when strict `no-console` rules are in place.
+
+## 2025-11-06 - ReDoS vulnerability in picomatch via @docusaurus/core
+**Vulnerability:** Found multiple High severity Regular Expression Denial of Service (ReDoS) vulnerabilities in `picomatch` < 4.0.4. This package was brought in as a transitive dependency of `@docusaurus/core` and other packages via `fast-glob` and `micromatch`.
+**Learning:** Ensure that dependency management tools explicitly upgrade `picomatch` using `yarn` resolutions to resolve ReDoS issues present in deeply nested tree structures.
+**Prevention:** Add the `picomatch` override in the `"resolutions"` block in `package.json` to safely upgrade the vulnerable transitive dependency instances without directly modifying the dependent libraries.
