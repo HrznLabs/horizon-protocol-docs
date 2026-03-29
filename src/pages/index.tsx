@@ -1,4 +1,4 @@
-import {useState, useEffect, memo, type ReactNode} from 'react';
+import {useState, useEffect, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 // import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -8,8 +8,9 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const HomepageHeader = memo(function HomepageHeader() {
+// ⚡ Bolt: Removed React.memo() as parent Home component has no state and never re-renders.
+// Memoizing static components adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+function HomepageHeader() {
   // const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -37,10 +38,11 @@ const HomepageHeader = memo(function HomepageHeader() {
       </div>
     </header>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const QuickLinks = memo(function QuickLinks(): ReactNode {
+// ⚡ Bolt: Removed React.memo() as parent Home component has no state and never re-renders.
+// Memoizing static components adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+function QuickLinks(): ReactNode {
   return (
     <section className={styles.quickLinks}>
       <div className="container">
@@ -82,10 +84,11 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
       </div>
     </section>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const CopyButton = memo(function CopyButton({text}: {text: string}) {
+// ⚡ Bolt: Removed React.memo() as parent Home component has no state and never re-renders.
+// Memoizing static components adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -128,10 +131,11 @@ const CopyButton = memo(function CopyButton({text}: {text: string}) {
       )}
     </button>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
+// ⚡ Bolt: Removed React.memo() as parent Home component has no state and never re-renders.
+// Memoizing static components adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -139,17 +143,18 @@ const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: 
       <line x1="10" y1="14" x2="21" y2="3"></line>
     </svg>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ArrowRightIcon = memo(function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
+// ⚡ Bolt: Removed React.memo() as parent Home component has no state and never re-renders.
+// Memoizing static components adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <line x1="5" y1="12" x2="19" y2="12"></line>
       <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   );
-});
+}
 
 // Hoisted static data to prevent recreation on every render
 const contracts = [
@@ -163,8 +168,9 @@ const contracts = [
   shortAddress: `${c.address.slice(0, 6)}...${c.address.slice(-4)}`,
 }));
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const Deployments = memo(function Deployments(): ReactNode {
+// ⚡ Bolt: Removed React.memo() as parent Home component has no state and never re-renders.
+// Memoizing static components adds unnecessary initialization overhead and memory allocation without any render-saving benefits.
+function Deployments(): ReactNode {
   return (
     <section className={styles.deployments}>
       <div className="container">
@@ -199,7 +205,7 @@ const Deployments = memo(function Deployments(): ReactNode {
       </div>
     </section>
   );
-});
+}
 
 export default function Home(): ReactNode {
   // const {siteConfig} = useDocusaurusContext();
