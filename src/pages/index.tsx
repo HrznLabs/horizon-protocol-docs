@@ -188,6 +188,7 @@ const Deployments = memo(function Deployments(): ReactNode {
                 <ExternalLinkIcon />
               </Link>
               <div className={styles.addressWrapper}>
+                <span className="sr-only">Contract address:</span>
                 <code className={styles.contractAddress}>
                   {contract.shortAddress}
                 </code>
