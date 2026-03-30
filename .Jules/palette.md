@@ -45,3 +45,7 @@
 ## 2025-03-06 - Accessible External Links in Docusaurus Config
 **Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
 **Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+
+## 2025-03-08 - Context for Raw Data Strings
+**Learning:** Screen readers reading raw data strings like contract addresses lack context.
+**Action:** When displaying raw data strings like contract addresses, provide context to screen reader users by prepending a visually hidden `span` with `.sr-only` containing descriptive text (e.g., `<span className="sr-only">Contract address:</span>`).
