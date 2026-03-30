@@ -189,6 +189,7 @@ const Deployments = memo(function Deployments(): ReactNode {
               </Link>
               <div className={styles.addressWrapper}>
                 <code className={styles.contractAddress}>
+                  <span className="sr-only">Contract address: </span>
                   {contract.shortAddress}
                 </code>
                 <CopyButton text={contract.address} />
