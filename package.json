@@ -24,7 +24,8 @@
     "**/anymatch/picomatch": "^2.3.2",
     "**/readdirp/picomatch": "^2.3.2",
     "**/jest-util/picomatch": "^2.3.2",
-    "**/tinyglobby/picomatch": "^4.0.4"
+    "**/tinyglobby/picomatch": "^4.0.4",
+    "flatted": "^3.4.2"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
