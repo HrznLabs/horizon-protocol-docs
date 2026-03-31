@@ -17,3 +17,8 @@
 **Vulnerability:** A `console.error` log within the `handleCopy` catch block (`src/pages/index.tsx`) previously output the raw `err` object to the browser console. This could potentially leak detailed stack traces or client-environment specifics when the clipboard API fails (e.g., due to permissions).
 **Learning:** Client-side error handling must also follow secure fail patterns. Even standard DOM exceptions can sometimes reveal unexpected implementation details when logged directly.
 **Prevention:** Always sanitize client-side error logging by outputting generic string messages instead of raw error objects. Use `// eslint-disable-next-line no-console` to explicitly allow and document intended, sanitized logging when strict `no-console` rules are in place.
+
+## 2024-11-28 - ReDoS vulnerability in picomatch via extglob quantifiers
+**Vulnerability:** Found High severity ReDoS vulnerabilities in `picomatch` (<2.3.2 and >=4.0.0 <4.0.4) via extglob quantifiers. It was introduced transitively by `@docusaurus/core` (2.x) and `typescript-eslint` -> `tinyglobby` (4.x).
+**Learning:** When transitive dependencies exist in multiple incompatible major versions across the dependency tree (like `picomatch` 2.x and 4.x), using a single global resolution can destructively downgrade or upgrade packages, breaking tools that rely on the other major version.
+**Prevention:** Use targeted resolution paths in `package.json` (e.g., `"**/tinyglobby/picomatch": "^4.0.4"`) alongside resolutions for the older major version (e.g., `"**/micromatch/picomatch": "^2.3.2"`) to patch vulnerabilities in all instances without causing version conflicts or breaking modern dependencies.
