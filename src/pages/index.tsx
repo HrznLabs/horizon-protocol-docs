@@ -85,22 +85,29 @@ function QuickLinks(): ReactNode {
 
 function CopyButton({text}: {text: string}) {
   const [copied, setCopied] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 2000);
+    if (copied || hasError) {
+      const timeout = setTimeout(() => {
+        setCopied(false);
+        setHasError(false);
+      }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [copied]);
+  }, [copied, hasError]);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      setHasError(false);
     } catch {
       // 🛡️ Sentinel: Fail securely by not exposing clipboard error details to the console
       // eslint-disable-next-line no-console
       console.error('Failed to copy address to clipboard');
+      setHasError(true);
+      setCopied(false);
     }
   };
 
@@ -108,13 +115,19 @@ function CopyButton({text}: {text: string}) {
     <button
       type="button"
       onClick={handleCopy}
-      className={clsx(styles.copyButton, copied && styles.copyButtonCopied)}
-      aria-label={copied ? "Copied!" : "Copy address"}
+      className={clsx(styles.copyButton, copied && styles.copyButtonCopied, hasError && styles.copyButtonError)}
+      aria-label={hasError ? "Failed to copy" : copied ? "Copied!" : "Copy address"}
     >
       <span aria-live="polite" className="sr-only">
-        {copied ? "Copied!" : ""}
+        {hasError ? "Failed to copy" : copied ? "Copied!" : ""}
       </span>
-      {copied ? (
+      {hasError ? (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      ) : copied ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
