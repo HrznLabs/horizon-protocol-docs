@@ -302,6 +302,11 @@
   background: rgba(0, 255, 136, 0.15);
 }
 
+.copyButtonError {
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
 /* Tooltip implementation */
 .copyButton::after {
   content: attr(aria-label);
@@ -323,6 +328,11 @@
   z-index: 10;
   transition: opacity 0.2s ease, transform 0.2s ease;
   /* ⚡ Bolt: Removed will-change: transform, opacity to prevent layer explosion and memory bloat on this tooltip. */
+}
+
+.copyButtonError::after {
+  border-color: #EF4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
 }
 
 .copyButton:hover::after,
