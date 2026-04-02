@@ -49,3 +49,7 @@
 ## 2025-03-07 - Screen Reader Context for Generic Links
 **Learning:** Generic links inside cards (e.g., "View Contracts" or "Browse API") lack context for screen reader users when navigated out of context (e.g., via a list of links). Linking the surrounding descriptive text using `aria-describedby` provides immediate clarity.
 **Action:** Always link contextual paragraph descriptions to generic links within cards using `aria-describedby`.
+
+## 2026-04-02 - Respecting `prefers-reduced-motion`
+**Learning:** Users with vestibular disorders can experience nausea from UI animations. A global CSS reset using `@media (prefers-reduced-motion: reduce)` ensures animations and transitions are safely disabled when requested by the OS.
+**Action:** Always include a global `prefers-reduced-motion` media query that forces animation and transition durations to near-zero.
