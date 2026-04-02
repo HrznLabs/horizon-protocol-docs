@@ -49,10 +49,10 @@ Horizon Protocol enables:
         <h3>🚀 Getting Started</h3>
       </div>
       <div className="card__body">
-        <p>Set up your development environment and integrate with Horizon.</p>
+        <p id="desc-getting-started">Set up your development environment and integrate with Horizon.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--primary button--block" href="/docs/guides/getting-started">
+        <a className="button button--primary button--block" href="/docs/guides/getting-started" aria-describedby="desc-getting-started">
           Start Building
         </a>
       </div>
@@ -64,10 +64,10 @@ Horizon Protocol enables:
         <h3>📖 Protocol Overview</h3>
       </div>
       <div className="card__body">
-        <p>Understand how Horizon's mission engine, guilds, and economics work.</p>
+        <p id="desc-protocol-overview">Understand how Horizon's mission engine, guilds, and economics work.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/protocol/overview">
+        <a className="button button--secondary button--block" href="/docs/protocol/overview" aria-describedby="desc-protocol-overview">
           Learn More
         </a>
       </div>
@@ -82,10 +82,10 @@ Horizon Protocol enables:
         <h3>🔧 Smart Contracts</h3>
       </div>
       <div className="card__body">
-        <p>Explore the on-chain architecture: MissionEscrow, PaymentRouter, GuildDAO.</p>
+        <p id="desc-smart-contracts">Explore the on-chain architecture: MissionEscrow, PaymentRouter, GuildDAO.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/architecture/smart-contracts">
+        <a className="button button--secondary button--block" href="/docs/architecture/smart-contracts" aria-describedby="desc-smart-contracts">
           View Contracts
         </a>
       </div>
@@ -97,10 +97,10 @@ Horizon Protocol enables:
         <h3>🗺️ API Reference</h3>
       </div>
       <div className="card__body">
-        <p>Complete API documentation for missions, guilds, map, and WebSocket.</p>
+        <p id="desc-api-reference">Complete API documentation for missions, guilds, map, and WebSocket.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/api/overview">
+        <a className="button button--secondary button--block" href="/docs/api/overview" aria-describedby="desc-api-reference">
           Browse API
         </a>
       </div>
