@@ -49,3 +49,7 @@
 ## 2025-03-07 - Screen Reader Context for Generic Links
 **Learning:** Generic links inside cards (e.g., "View Contracts" or "Browse API") lack context for screen reader users when navigated out of context (e.g., via a list of links). Linking the surrounding descriptive text using `aria-describedby` provides immediate clarity.
 **Action:** Always link contextual paragraph descriptions to generic links within cards using `aria-describedby`.
+
+## 2026-04-02 - Accessible Error States for Async UI Actions
+**Learning:** UI interactions that rely on browser permissions or async APIs (like clipboard copy) can fail. Failing silently or only logging to the console creates a confusing UX, especially for screen reader users who expect feedback after triggering an action.
+**Action:** Always implement a visual and screen-reader announced error state (e.g., using an `aria-live` region and updating the `aria-label`) for interactive elements that can fail, rather than relying on silent catches.
