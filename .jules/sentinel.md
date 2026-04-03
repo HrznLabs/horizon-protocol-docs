@@ -1,4 +1,4 @@
-## 2024-04-02 - Transitive Dependency Vulnerability Resolutions
-**Vulnerability:** Deeply nested transitive dependencies (`node-forge` and `brace-expansion`) in Docusaurus plugins contained multiple HIGH vulnerabilities.
-**Learning:** Yarn resolutions provide a way to patch vulnerabilities in dependencies of dependencies. However, blindly overriding versions (e.g., forcing a 5.x resolution on a 1.x dependency tree) is highly risky and can cause subtle regressions or break builds.
-**Prevention:** Always use targeted resolution paths based on `yarn why` output (e.g., `"**/minimatch/brace-expansion": "^1.1.13"`) and ensure the patched version is strictly backward compatible within the required major version.
+## 2026-04-03 - [Targeted Dependency Overrides]
+**Vulnerability:** Blanket dependency overrides in `package.json` (e.g., `"**/path-to-regexp": "^0.1.13"`) can break semantic versioning by downgrading unrelated packages that depend on newer major versions (like `v1.x` or `v3.x`).
+**Learning:** `yarn audit` identifies vulnerable paths, and these paths must be specifically targeted in overrides to prevent breaking other dependencies.
+**Prevention:** Use targeted `resolutions` paths in `package.json` (e.g., `"**/express/path-to-regexp": "^0.1.13"`) based on `yarn audit` and `yarn why` findings to surgically patch vulnerabilities without forcing incompatible major version downgrades on other packages.
