@@ -53,3 +53,7 @@
 ## 2026-04-01 - Accessible Error States for Async Micro-Interactions
 **Learning:** UI interactions that rely on browser permissions or async APIs (like clipboard copy) can fail silently. This leaves users, especially those using screen readers, without feedback on why an action didn't complete.
 **Action:** Always implement a visual and screen-reader announced error state (using an aria-live region and distinct visual feedback like the standard error color #EF4444) for async micro-interactions that can fail.
+
+## 2025-03-08 - Reduced Motion Accessibility
+**Learning:** Users with vestibular disorders may experience discomfort from interface animations and transitions.
+**Action:** Always include a `@media (prefers-reduced-motion: reduce)` block in custom CSS that sets `animation-duration` and `transition-duration` to `0.01ms !important` globally.
