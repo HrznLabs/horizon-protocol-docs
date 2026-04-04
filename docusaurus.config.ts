@@ -62,7 +62,7 @@ const config: Config = {
     announcementBar: {
       id: 'v2_1_launch',
       content:
-        '🚀 Horizon Protocol v2.1 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started" aria-label="Get started (opens in a new tab)">Get started →</a>',
+        '<span aria-hidden="true">🚀</span> Horizon Protocol v2.1 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started" aria-label="Get started (opens in a new tab)">Get started →</a>',
       backgroundColor: '#00FF88',
       textColor: '#0A0A0B',
       isCloseable: true,
