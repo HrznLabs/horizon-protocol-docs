@@ -57,3 +57,7 @@
 ## 2025-03-08 - Reduced Motion Accessibility
 **Learning:** Users with vestibular disorders may experience discomfort from interface animations and transitions.
 **Action:** Always include a `@media (prefers-reduced-motion: reduce)` block in custom CSS that sets `animation-duration` and `transition-duration` to `0.01ms !important` globally.
+
+## 2026-04-04 - Tactile Click Feedback for Clickable Cards
+**Learning:** Large interactive elements like clickable cards (.quickLinkCard, .contractCard) can feel unresponsive during physical click interactions without a pressed state, leaving users unsure if their click registered immediately.
+**Action:** Always add a slight `:active { transform: scale(0.98); }` effect to clickable cards, paired with a faster transition speed (e.g., `transform 0.2s ease` instead of 0.3s) to provide immediate tactile feedback confirming the click.

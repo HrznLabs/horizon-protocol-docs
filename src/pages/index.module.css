@@ -52,7 +52,7 @@
   background: #0A0A0B;
   height: 100%;
   /* Optimized: Explicit properties to prevent layout thrashing */
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
   /* Optimized: Isolate layout and paint */
@@ -84,6 +84,10 @@
   border-color: #00FF88;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 255, 136, 0.2);
   transform: translateY(-4px);
+}
+
+.quickLinkCard:active {
+  transform: translateY(-4px) scale(0.98);
 }
 
 .quickLinkCard:focus-within::before {
@@ -191,7 +195,7 @@
   border: 1px solid rgba(0, 255, 136, 0.2);
   background: #111113;
   /* Optimized: Explicit properties */
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   /* Optimized: Isolate layout reflows */
   contain: layout;
@@ -203,6 +207,10 @@
   transform: translateY(-2px);
   border-color: #00FF88;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.contractCard:active {
+  transform: translateY(-2px) scale(0.98);
 }
 
 .contractName {
