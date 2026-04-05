@@ -61,3 +61,11 @@
 ## 2026-04-04 - Tactile Click Feedback for Clickable Cards
 **Learning:** Large interactive elements like clickable cards (.quickLinkCard, .contractCard) can feel unresponsive during physical click interactions without a pressed state, leaving users unsure if their click registered immediately.
 **Action:** Always add a slight `:active { transform: scale(0.98); }` effect to clickable cards, paired with a faster transition speed (e.g., `transform 0.2s ease` instead of 0.3s) to provide immediate tactile feedback confirming the click.
+
+## 2026-04-05 - Accessible Hover Feedback for Primary/Secondary Buttons
+**Learning:** Strong visual hover feedback (like background changes, shadow, and translateY) on `.button--primary` and `.button--secondary` classes are often missed by keyboard users if only `:hover` is targeted.
+**Action:** Always pair `:hover` with `:focus-visible` for all `.button--*` classes to ensure keyboard users receive the same visual elevation and interactions as mouse users.
+
+## 2026-04-05 - Accessible Active State on Elevated Buttons
+**Learning:** Combining a transform (like `translateY(-2px)`) on hover with another transform (`scale(0.98)`) on active can cause abrupt visual snapping.
+**Action:** Ensure `:active` states on elevated elements combine all required transforms (e.g., `transform: translateY(-2px) scale(0.98);`) to prevent jarring visual jumps.
