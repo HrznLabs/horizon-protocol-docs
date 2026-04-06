@@ -61,3 +61,7 @@
 ## 2026-04-04 - Tactile Click Feedback for Clickable Cards
 **Learning:** Large interactive elements like clickable cards (.quickLinkCard, .contractCard) can feel unresponsive during physical click interactions without a pressed state, leaving users unsure if their click registered immediately.
 **Action:** Always add a slight `:active { transform: scale(0.98); }` effect to clickable cards, paired with a faster transition speed (e.g., `transform 0.2s ease` instead of 0.3s) to provide immediate tactile feedback confirming the click.
+
+## 2024-04-10 - Screen Reader Context for Repeating Icon Buttons
+**Learning:** Repeating icon-only buttons in lists or grids (like "Copy address" buttons next to multiple contracts) lack context for screen reader users when navigated directly. Users hear "Copy address" multiple times without knowing *which* address.
+**Action:** Always provide descriptive, unique `aria-label`s for repeating icon buttons (e.g., "Copy MissionFactory address") to ensure they are understandable out of context.
