@@ -301,7 +301,8 @@ table {
   /* ⚡ Bolt: Removed will-change: transform to prevent layer explosion and memory bloat on this generic button class. */
 }
 
-.button--primary:hover {
+.button--primary:hover,
+.button--primary:focus-visible {
   background: linear-gradient(135deg, #4ADE80 0%, #22D3EE 100%);
   color: #0A0A0B;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.6), 0 0 60px rgba(0, 255, 136, 0.3);
@@ -309,7 +310,7 @@ table {
 }
 
 .button--primary:active {
-  transform: scale(0.98);
+  transform: translateY(-2px) scale(0.98);
 }
 
 [data-theme='dark'] .button--primary {
@@ -317,14 +318,15 @@ table {
   color: #0A0A0B;
 }
 
-[data-theme='dark'] .button--primary:hover {
+[data-theme='dark'] .button--primary:hover,
+[data-theme='dark'] .button--primary:focus-visible {
   background: linear-gradient(135deg, #4ADE80 0%, #22D3EE 100%);
   color: #0A0A0B;
 }
 
 .button--primary:active,
 [data-theme='dark'] .button--primary:active {
-  transform: scale(0.98);
+  transform: translateY(-2px) scale(0.98);
 }
 
 .button--secondary {
@@ -333,6 +335,14 @@ table {
   color: var(--horizon-green-bright);
   /* Optimized: Explicit properties */
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.button--secondary:hover,
+.button--secondary:focus-visible {
+  background-color: rgba(0, 255, 136, 0.1);
+  border-color: var(--horizon-green-bright);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  color: var(--horizon-green-bright);
 }
 
 .button--secondary:active {
@@ -345,7 +355,8 @@ table {
   background-color: transparent;
 }
 
-[data-theme='dark'] .button--secondary:hover {
+[data-theme='dark'] .button--secondary:hover,
+[data-theme='dark'] .button--secondary:focus-visible {
   background-color: rgba(0, 255, 136, 0.1);
   border-color: var(--horizon-green-bright);
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
