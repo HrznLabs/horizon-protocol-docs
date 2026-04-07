@@ -10,7 +10,15 @@
       "headers": [
         {
           "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "0"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "off"
         },
         {
           "key": "X-Content-Type-Options",
