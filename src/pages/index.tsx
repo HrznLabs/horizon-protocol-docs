@@ -83,7 +83,7 @@ function QuickLinks(): ReactNode {
   );
 }
 
-function CopyButton({text}: {text: string}) {
+function CopyButton({text, label}: {text: string, label?: string}) {
   const [copied, setCopied] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -120,7 +120,7 @@ function CopyButton({text}: {text: string}) {
         type="button"
         onClick={handleCopy}
         className={clsx(styles.copyButton, copied && styles.copyButtonCopied, hasError && styles.copyButtonError)}
-        aria-label={hasError ? "Failed to copy" : copied ? "Copied!" : "Copy address"}
+        aria-label={hasError ? "Failed to copy" : copied ? "Copied!" : label ? `Copy ${label} address` : "Copy address"}
       >
         {hasError ? (
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -202,7 +202,7 @@ function Deployments(): ReactNode {
                   <span className="sr-only">Contract address: </span>
                   {contract.shortAddress}
                 </code>
-                <CopyButton text={contract.address} />
+                <CopyButton text={contract.address} label={contract.name} />
               </div>
             </div>
           ))}
