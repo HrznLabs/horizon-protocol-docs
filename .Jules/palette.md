@@ -69,3 +69,7 @@
 ## 2026-04-05 - Accessible Active State on Elevated Buttons
 **Learning:** Combining a transform (like `translateY(-2px)`) on hover with another transform (`scale(0.98)`) on active can cause abrupt visual snapping.
 **Action:** Ensure `:active` states on elevated elements combine all required transforms (e.g., `transform: translateY(-2px) scale(0.98);`) to prevent jarring visual jumps.
+
+## 2026-04-06 - Contextual Labels for Repeating Icon Buttons
+**Learning:** When implementing repeating icon-only buttons in lists or grids (such as a "Copy" button for each item), always provide descriptive, unique `aria-label`s. Screen reader users navigating out-of-flow lose context if all buttons share the same generic label (e.g., "Copy address").
+**Action:** Use a dynamic `label` prop to construct a unique, context-aware `aria-label` (e.g., "Copy MissionFactory address").
