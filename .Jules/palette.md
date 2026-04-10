@@ -73,3 +73,6 @@
 ## 2026-04-06 - Contextual Labels for Repeating Icon Buttons
 **Learning:** When implementing repeating icon-only buttons in lists or grids (such as a "Copy" button for each item), always provide descriptive, unique `aria-label`s. Screen reader users navigating out-of-flow lose context if all buttons share the same generic label (e.g., "Copy address").
 **Action:** Use a dynamic `label` prop to construct a unique, context-aware `aria-label` (e.g., "Copy MissionFactory address").
+## 2026-04-10 - Focus Visible Enhancements for Keyboard Accessibility
+**Learning:** Interactive elements often map visual feedback exclusively to `:hover`, leaving keyboard users (navigating via Tab) without adequate visual context of their current position. Adding `:focus-visible` ensures an accessible equivalent experience without compromising mouse users.
+**Action:** Always ensure that any added `:hover` state on interactive components (buttons, links, navigation items) is accompanied by a corresponding `:focus-visible` rule to maintain equal accessibility.
