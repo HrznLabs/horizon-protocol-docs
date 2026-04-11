@@ -1,0 +1,3 @@
+## 2024-04-11 - Adding Focus-Visible States to Interactive Elements
+**Learning:** Found multiple interactive elements (`.navbar__link`, `a`, `.menu__link`, etc.) that possessed clear `:hover` states but lacked equivalent visual cues for keyboard navigation. Applying `:focus-visible` alongside `:hover` ensures seamless keyboard accessibility. Playwright verification required manually simulating `Tab` presses to assert focus state presence.
+**Action:** When auditing custom CSS rules involving `:hover`, explicitly check for and mirror those styles using `:focus-visible` where appropriate, avoiding applying generic focus rings everywhere if the hover state styling provides better context.
