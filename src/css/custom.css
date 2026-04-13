@@ -110,7 +110,8 @@
   height: 32px;
 }
 
-.navbar__logo:hover {
+.navbar__logo:hover,
+.navbar__brand:focus-visible .navbar__logo {
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
 }
 
@@ -625,7 +626,8 @@ table {
   color: #8B8D98;
 }
 
-[data-theme='dark'] .DocSearch-Button:hover {
+[data-theme='dark'] .DocSearch-Button:hover,
+[data-theme='dark'] .DocSearch-Button:focus-visible {
   border-color: var(--horizon-green-bright) !important;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
 }
