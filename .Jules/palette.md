@@ -76,3 +76,7 @@
 ## 2026-04-10 - Focus Visible Enhancements for Keyboard Accessibility
 **Learning:** Interactive elements often map visual feedback exclusively to `:hover`, leaving keyboard users (navigating via Tab) without adequate visual context of their current position. Adding `:focus-visible` ensures an accessible equivalent experience without compromising mouse users.
 **Action:** Always ensure that any added `:hover` state on interactive components (buttons, links, navigation items) is accompanied by a corresponding `:focus-visible` rule to maintain equal accessibility.
+
+## 2026-04-13 - Focus Visible Enhancements for Global Accessibility
+**Learning:** Interactive elements like the top navbar logo or the generic DocSearch search button map visual glow feedback exclusively to `:hover`, leaving keyboard users (navigating via Tab) without adequate visual context of their current position.
+**Action:** Always ensure that any added `:hover` state on interactive components (buttons, links, logos) is accompanied by a corresponding `:focus-visible` rule (e.g. `.navbar__brand:focus-visible .navbar__logo`) to maintain equal accessibility for all users.
