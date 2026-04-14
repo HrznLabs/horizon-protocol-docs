@@ -670,13 +670,17 @@ table {
   background-color: #111113;
   border-radius: 12px;
   /* Optimized: Explicit properties */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 [data-theme='dark'] .pagination-nav__link:hover,
 [data-theme='dark'] .pagination-nav__link:focus-visible {
   border-color: var(--horizon-green-bright);
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+[data-theme='dark'] .pagination-nav__link:active {
+  transform: scale(0.98);
 }
 
 [data-theme='dark'] .pagination-nav__sublabel {
