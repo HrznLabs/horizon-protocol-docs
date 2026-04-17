@@ -7,10 +7,6 @@ const config: Config = {
   tagline: 'Decentralized, gamified coordination for real-world missions',
   favicon: 'img/favicon.ico',
 
-  future: {
-    v4: true,
-  },
-
   // Production URL
   url: 'https://docs.horizonprotocol.xyz',
   baseUrl: '/',

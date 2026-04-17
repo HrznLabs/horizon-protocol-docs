@@ -28,7 +28,8 @@
     "**/jest-util/picomatch": "^2.3.2",
     "**/tinyglobby/picomatch": "^4.0.4",
     "**/selfsigned/node-forge": "^1.4.0",
-    "flatted": "^3.4.2"
+    "flatted": "^3.4.2",
+    "**/http-proxy/follow-redirects": "^1.16.0"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.0",
