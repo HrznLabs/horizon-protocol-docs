@@ -836,3 +836,12 @@ table {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =============================================================================
+   SMOOTH SCROLLING
+   ============================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

@@ -80,3 +80,7 @@
 ## 2026-04-13 - Focus Visible Enhancements for Global Accessibility
 **Learning:** Interactive elements like the top navbar logo or the generic DocSearch search button map visual glow feedback exclusively to `:hover`, leaving keyboard users (navigating via Tab) without adequate visual context of their current position.
 **Action:** Always ensure that any added `:hover` state on interactive components (buttons, links, logos) is accompanied by a corresponding `:focus-visible` rule (e.g. `.navbar__brand:focus-visible .navbar__logo`) to maintain equal accessibility for all users.
+
+## 2026-04-18 - Accessible Smooth Scrolling for Anchor Links
+**Learning:** Instant jumping to anchor links (like in a Table of Contents) can be disorienting, losing the user's context of where they are on the page. Adding `scroll-behavior: smooth` provides a better spatial understanding. However, smooth scrolling can trigger motion sickness in users with vestibular disorders.
+**Action:** Always wrap `scroll-behavior: smooth` inside a `@media (prefers-reduced-motion: no-preference)` query to provide the UX enhancement only to users who can safely experience it.
