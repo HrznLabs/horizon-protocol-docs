@@ -29,7 +29,11 @@
     "**/tinyglobby/picomatch": "^4.0.4",
     "**/selfsigned/node-forge": "^1.4.0",
     "flatted": "^3.4.2",
-    "**/http-proxy/follow-redirects": "^1.16.0"
+    "**/http-proxy/follow-redirects": "^1.16.0",
+    "**/@docusaurus/cssnano-preset/postcss": "^8.5.10",
+    "**/css-loader/postcss": "^8.5.10",
+    "**/css-minimizer-webpack-plugin/postcss": "^8.5.10",
+    "**/rtlcss/postcss": "^8.5.10"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.0",
