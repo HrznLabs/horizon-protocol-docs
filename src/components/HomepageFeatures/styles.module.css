@@ -61,7 +61,8 @@
 }
 
 /* Feature item hover effect */
-.features .col:hover .featureEmoji {
+.features .col:hover .featureEmoji,
+.features .col:focus-within .featureEmoji {
   text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
   transform: scale(1.1);
 }
