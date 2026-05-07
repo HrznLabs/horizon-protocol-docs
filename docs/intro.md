@@ -46,7 +46,7 @@ Horizon Protocol enables:
   <div className="col col--6">
     <div className="card margin-bottom--lg">
       <div className="card__header">
-        <h3>🚀 Getting Started</h3>
+        <h3><span aria-hidden="true">🚀</span> Getting Started</h3>
       </div>
       <div className="card__body">
         <p id="desc-getting-started">Set up your development environment and integrate with Horizon.</p>
@@ -61,7 +61,7 @@ Horizon Protocol enables:
   <div className="col col--6">
     <div className="card margin-bottom--lg">
       <div className="card__header">
-        <h3>📖 Protocol Overview</h3>
+        <h3><span aria-hidden="true">📖</span> Protocol Overview</h3>
       </div>
       <div className="card__body">
         <p id="desc-protocol-overview">Understand how Horizon's mission engine, guilds, and economics work.</p>
@@ -79,7 +79,7 @@ Horizon Protocol enables:
   <div className="col col--6">
     <div className="card margin-bottom--lg">
       <div className="card__header">
-        <h3>🔧 Smart Contracts</h3>
+        <h3><span aria-hidden="true">🔧</span> Smart Contracts</h3>
       </div>
       <div className="card__body">
         <p id="desc-smart-contracts">Explore the on-chain architecture: MissionEscrow, PaymentRouter, GuildDAO.</p>
@@ -94,7 +94,7 @@ Horizon Protocol enables:
   <div className="col col--6">
     <div className="card margin-bottom--lg">
       <div className="card__header">
-        <h3>🗺️ API Reference</h3>
+        <h3><span aria-hidden="true">🗺️</span> API Reference</h3>
       </div>
       <div className="card__body">
         <p id="desc-api-reference">Complete API documentation for missions, guilds, map, and WebSocket.</p>
