@@ -4,6 +4,10 @@ sidebar_position: 7
 
 # Token Economics
 
+:::warning HRZN Token — Testnet Only
+The HRZN token is currently deployed on **Base Sepolia testnet only**. Mainnet token launch is **deferred until after the protocol generates real fee revenue** on Base Mainnet (post-Phase 14). This is a "fees-first" strategy to minimize regulatory risk. Do not treat HRZN as a tradable asset — there is no public sale, no liquidity, and no exchange listing.
+:::
+
 The HRZN token is the governance and utility token of Horizon Protocol. It aligns long-term incentives across all protocol participants: performers, posters, guilds, resolvers, and stakers.
 
 ## HRZN Token
