@@ -4,6 +4,10 @@ sidebar_position: 7
 
 # Token Economics
 
+:::warning HRZN Token — Testnet Only
+The HRZN token is currently deployed on **Base Sepolia testnet only**. Mainnet token launch is **deferred until after the protocol generates real fee revenue** on Base Mainnet (post-Phase 14). This is a "fees-first" strategy to minimize regulatory risk. Do not treat HRZN as a tradable asset — there is no public sale, no liquidity, and no exchange listing.
+:::
+
 The HRZN token is the governance and utility token of Horizon Protocol. It aligns long-term incentives across all protocol participants: performers, posters, guilds, resolvers, and stakers.
 
 ## HRZN Token
@@ -145,16 +149,17 @@ On-chain governance is managed by the HorizonGovernor contract, an OpenZeppelin 
 
 ## Deployed Contracts (Base Sepolia)
 
+<!-- Last verified: 2026-05-10 against packages/shared/src/constants/index.ts -->
 | Contract | Address | Purpose |
 |----------|---------|---------|
-| **HorizonToken (HRZN)** | `0x7eF48a1E2c1253A81f98e4E2C560940eFD0d4eeB` | ERC-20 token |
-| **sHRZNVault** | `0x9b2D5b9E5c1f4e3d7A8B6C0D1E2F3A4B5C6D7E8F` | ERC-4626 staking vault |
-| **FeeDistributor** | `0xA1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0` | Revenue distribution |
-| **BuybackExecutor** | `0xB2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1` | Market buyback + burn |
-| **HorizonGovernor** | `0xC3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2` | Governance |
-| **GovernorTimelock** | `0xD4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3` | Execution delay |
-| **TeamVesting** | `0xE5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4` | 4-year team vesting |
-| **AdvisorVesting** | `0xF6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4A5` | 2-year advisor vesting |
+| **HorizonToken (HRZN)** | `0xe4f29a413c24B6020FE344C412D9f82Df15809aF` | ERC-20 token |
+| **sHRZNVault** | `0xf3D693616d6b185b36D4a2e36663E5932d351758` | ERC-4626 staking vault |
+| **FeeDistributor** | `0x75F875D3c1d01F9A31C7Bd85A5098bD9448b6440` | Revenue distribution |
+| **BuybackExecutor** | `0x57Bad3A5871BAEAB2e8aee1D5017Aa272f6564FA` | Market buyback + burn |
+| **HorizonGovernor** | `0xE52CCaa9980f0aD00F48BebCbB7294c3c5F644A7` | Governance |
+| **GovernorTimelock** | `0xD0112d484B3261b26D8721e074dC82866A85977C` | Execution delay |
+| **TeamVesting** | `0x7ce88218e511af2A676d5e9992D985BCa067F284` | 4-year team vesting |
+| **AdvisorVesting** | `0x2483829bd61Da59dF3eD728aE8Db778a7Af9eca7` | 2-year advisor vesting |
 
 > **Network**: Base Sepolia (Chain ID 84532). Mainnet deployment pending audit completion.
 
