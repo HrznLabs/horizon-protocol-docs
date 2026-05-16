@@ -6,6 +6,57 @@ const config: Config = {
   title: 'Horizon Protocol',
   tagline: 'Decentralized, gamified coordination for real-world missions',
   favicon: 'img/favicon.ico',
+  headTags: [
+    // ⚡ Bolt: Preconnect to Google Fonts to establish early connection
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    },
+    // ⚡ Bolt: Preload the Inter font CSS as a stylesheet to optimize the critical rendering path
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+        as: 'style',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+      },
+    },
+    // ⚡ Bolt: Preload JetBrains Mono for monospace fonts
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
+        as: 'style',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
+      },
+    },
+  ],
+
 
   // Production URL
   url: 'https://docs.horizonprotocol.xyz',
