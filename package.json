@@ -35,7 +35,10 @@
     "**/css-minimizer-webpack-plugin/postcss": "^8.5.10",
     "**/rtlcss/postcss": "^8.5.10",
     "**/@babel/preset-env/@babel/plugin-transform-modules-systemjs": "^7.29.4",
-    "**/ajv/fast-uri": "^3.1.2"
+    "**/ajv/fast-uri": "^3.1.2",
+    "**/webpack-dev-server/ws": "^8.20.1",
+    "**/minimatch/brace-expansion": "^5.0.6",
+    "**/@docusaurus/core/webpack-dev-server": "^5.2.4"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
