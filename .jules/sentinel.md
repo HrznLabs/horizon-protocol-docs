@@ -1,4 +1,4 @@
-## 2026-04-03 - [Targeted Dependency Overrides]
-**Vulnerability:** Blanket dependency overrides in `package.json` (e.g., `"**/path-to-regexp": "^0.1.13"`) can break semantic versioning by downgrading unrelated packages that depend on newer major versions (like `v1.x` or `v3.x`).
-**Learning:** `yarn audit` identifies vulnerable paths, and these paths must be specifically targeted in overrides to prevent breaking other dependencies.
-**Prevention:** Use targeted `resolutions` paths in `package.json` (e.g., `"**/express/path-to-regexp": "^0.1.13"`) based on `yarn audit` and `yarn why` findings to surgically patch vulnerabilities without forcing incompatible major version downgrades on other packages.
+## 2024-05-22 - Fix Transitive Dependency Vulnerabilities without Breaking Changes
+**Vulnerability:** Cross-origin source code exposure on non-HTTPS origins in `webpack-dev-server` and Large numeric range DoS in `brace-expansion`.
+**Learning:** Forcing major version dependency bumps using global `resolutions` (e.g. `uuid` from 8.x to 11.x) ignores semantic versioning and introduces massive regression risks by breaking upstream packages relying on legacy APIs. It constitutes "security theater" and violates the boundaries of safe patching.
+**Prevention:** Always check if the previously locked versions have actual vulnerabilities before blindly bumping them. When addressing transitive dependencies, only apply patch or minor version resolutions within the same major version line unless absolutely necessary, and verify that the target version actually exists.
