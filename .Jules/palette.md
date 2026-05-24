@@ -84,3 +84,7 @@
 ## 2026-04-18 - Accessible Smooth Scrolling for Anchor Links
 **Learning:** Instant jumping to anchor links (like in a Table of Contents) can be disorienting, losing the user's context of where they are on the page. Adding `scroll-behavior: smooth` provides a better spatial understanding. However, smooth scrolling can trigger motion sickness in users with vestibular disorders.
 **Action:** Always wrap `scroll-behavior: smooth` inside a `@media (prefers-reduced-motion: no-preference)` query to provide the UX enhancement only to users who can safely experience it.
+
+## 2026-04-19 - Accessible Hover Feedback for Table Rows
+**Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
+**Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.
