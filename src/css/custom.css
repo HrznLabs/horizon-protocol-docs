@@ -239,7 +239,8 @@ table {
   border-bottom: 1px solid rgba(0, 255, 136, 0.1);
 }
 
-[data-theme='dark'] tr:hover td {
+[data-theme='dark'] tr:hover td,
+[data-theme='dark'] tr:focus-within td {
   background-color: rgba(0, 255, 136, 0.05);
 }
 
