@@ -235,9 +235,9 @@ Dedicated users with governance power.
 |-------|-------|-------------|-------|
 | 16 | Captain | 13,575 | - |
 | 17 | Commander | 16,650 | - |
-| 18 | Elite | 20,325 | Governance voting |
-| 19 | Master | 24,725 | - |
-| 20 | Champion | 30,000 | Protocol proposals |
+| 18 | Elite | 19,500 | Governance voting |
+| 19 | Master | 22,500 | - |
+| 20 | Champion | 25,000 | Protocol proposals |
 
 ### Prestige (Levels 21-25)
 
@@ -245,11 +245,11 @@ Top-tier users with full access.
 
 | Level | Title | XP Required | Perks |
 |-------|-------|-------------|-------|
-| 21 | Hero | 36,300 | - |
-| 22 | Guardian | 43,850 | - |
-| 23 | Sentinel | 52,850 | - |
-| 24 | Titan | 63,525 | - |
-| 25 | Legend | 76,200 | All perks unlocked |
+| 21 | Hero | 31,000 | - |
+| 22 | Guardian | 38,000 | - |
+| 23 | Sentinel | 45,000 | - |
+| 24 | Titan | 52,000 | - |
+| 25 | Legend | 60,000 | All perks unlocked |
 
 ---
 
