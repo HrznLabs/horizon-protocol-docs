@@ -26,7 +26,7 @@ Horizon Protocol uses a multi-DAO governance structure.
 
 ## Protocol DAO
 
-The main governance body for core protocol decisions.
+The main governance body for core protocol decisions, powered by the deployed **HorizonGovernor** contract backed by **GovernorTimelock**.
 
 ### Responsibilities
 - Fee parameter changes
@@ -36,19 +36,28 @@ The main governance body for core protocol decisions.
 
 ### Voting Power
 
-Based on:
-- Protocol participation (mission activity, reputation)
-- Stake duration (future)
-- Community contribution
+Voting power is determined by **HRZN token holdings and sHRZN (staked HRZN) balances** at the proposal snapshot block. Staking HRZN into the sHRZNVault grants both yield and governance weight.
 
-### Proposal Types
+### On-Chain Parameters (HorizonGovernor — deployed Base Sepolia)
 
-| Type | Quorum | Voting Period | Timelock |
-|------|--------|---------------|----------|
-| Parameter Change | 10% | 7 days | 2 days |
-| Contract Upgrade | 20% | 14 days | 7 days |
-| Treasury (>$100k) | 30% | 14 days | 7 days |
-| Emergency | 51% | 24 hours | 0 |
+| Parameter | Value |
+|-----------|-------|
+| **Quorum** | 4% of total HRZN supply |
+| **Voting Period** | 5 days |
+| **Proposal Threshold** | Configurable via governance |
+| **Timelock Delay** | Configurable (GovernorTimelock) |
+| **Execution** | GovernorTimelock enforces delay before any action executes |
+
+All passed proposals are queued in the **GovernorTimelock** contract before execution, ensuring a safety window for the community to react.
+
+### Deployed Contracts
+
+| Contract | Address (Base Sepolia) |
+|----------|----------------------|
+| HorizonGovernor | `0xE52CCaa9980f0aD00F48BebCbB7294c3c5F644A7` |
+| GovernorTimelock | `0xD0112d484B3261b26D8721e074dC82866A85977C` |
+| HRZN Token | `0xe4f29a413c24B6020FE344C412D9f82Df15809aF` |
+| sHRZN Vault | `0xf3D693616d6b185b36D4a2e36663E5932d351758` |
 
 ## Resolvers DAO
 
@@ -122,9 +131,9 @@ Individual governance for each guild.
 
 ### 3. Formal Proposal
 
-- On-chain submission
-- Voting period begins
-- Participation-weighted votes
+- On-chain submission to HorizonGovernor
+- 5-day voting period begins
+- HRZN/sHRZN token-weighted votes (snapshot at proposal block)
 
 ### 4. Execution
 

@@ -1,4 +1,4 @@
-import {useState, useEffect, memo, type ReactNode} from 'react';
+import {useState, useEffect, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 // import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -8,8 +8,7 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const HomepageHeader = memo(function HomepageHeader() {
+function HomepageHeader() {
   // const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -37,10 +36,9 @@ const HomepageHeader = memo(function HomepageHeader() {
       </div>
     </header>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const QuickLinks = memo(function QuickLinks(): ReactNode {
+function QuickLinks(): ReactNode {
   return (
     <section className={styles.quickLinks}>
       <div className="container">
@@ -49,8 +47,8 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <Heading as="h3"><span aria-hidden="true">📜</span> Smart Contracts</Heading>
-              <p>Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
-              <Link to="/docs/architecture/smart-contracts">
+              <p id="desc-smart-contracts">Explore MissionEscrow, PaymentRouter, GuildDAO, and other on-chain components.</p>
+              <Link to="/docs/architecture/smart-contracts" aria-describedby="desc-smart-contracts">
                 View Contracts <ArrowRightIcon className={styles.arrowRightIcon} />
               </Link>
             </div>
@@ -58,8 +56,8 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <Heading as="h3"><span aria-hidden="true">🔌</span> API Reference</Heading>
-              <p>REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
-              <Link to="/docs/api/overview">
+              <p id="desc-api-reference">REST endpoints for missions, guilds, users, map, XP, and real-time WebSocket events.</p>
+              <Link to="/docs/api/overview" aria-describedby="desc-api-reference">
                 Browse API <ArrowRightIcon className={styles.arrowRightIcon} />
               </Link>
             </div>
@@ -67,12 +65,13 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
           <div className="col col--4">
             <div className={styles.quickLinkCard}>
               <Heading as="h3"><span aria-hidden="true">🔧</span> TypeScript SDK</Heading>
-              <p>ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
+              <p id="desc-ts-sdk">ABIs, utilities, and contract addresses for integrating with Horizon Protocol.</p>
               <Link
                 to="https://github.com/HrznLabs/horizon-sdk"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View SDK (opens in a new tab)"
+                aria-describedby="desc-ts-sdk"
               >
                 View SDK <ExternalLinkIcon size={16} className={styles.externalLinkIcon} />
               </Link>
@@ -82,51 +81,69 @@ const QuickLinks = memo(function QuickLinks(): ReactNode {
       </div>
     </section>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const CopyButton = memo(function CopyButton({text}: {text: string}) {
+function CopyButton({text, label}: {text: string, label?: string}) {
   const [copied, setCopied] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 2000);
+    if (copied || hasError) {
+      const timeout = setTimeout(() => {
+        setCopied(false);
+        setHasError(false);
+      }, 2000);
       return () => clearTimeout(timeout);
     }
-  }, [copied]);
+  }, [copied, hasError]);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+      setHasError(false);
+    } catch {
+      // 🛡️ Sentinel: Fail securely by not exposing clipboard error details to the console
+      // eslint-disable-next-line no-console
+      console.error('Failed to copy address to clipboard');
+      setHasError(true);
+      setCopied(false);
     }
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      className={clsx(styles.copyButton, copied && styles.copyButtonCopied)}
-      aria-label={copied ? "Copied!" : "Copy address"}
-    >
-      {copied ? (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      ) : (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-        </svg>
-      )}
-    </button>
+    <>
+      <span aria-live="polite" className="sr-only">
+        {hasError ? "Failed to copy" : copied ? "Copied!" : ""}
+      </span>
+      <button
+        type="button"
+        onClick={handleCopy}
+        className={clsx(styles.copyButton, copied && styles.copyButtonCopied, hasError && styles.copyButtonError)}
+        aria-label={hasError ? "Failed to copy" : copied ? "Copied!" : label ? `Copy ${label} address` : "Copy address"}
+      >
+        {hasError ? (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        ) : copied ? (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        ) : (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        )}
+      </button>
+    </>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
+function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -134,17 +151,16 @@ const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: 
       <line x1="10" y1="14" x2="21" y2="3"></line>
     </svg>
   );
-});
+}
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const ArrowRightIcon = memo(function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
+function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <line x1="5" y1="12" x2="19" y2="12"></line>
       <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   );
-});
+}
 
 // Hoisted static data to prevent recreation on every render
 const contracts = [
@@ -158,8 +174,7 @@ const contracts = [
   shortAddress: `${c.address.slice(0, 6)}...${c.address.slice(-4)}`,
 }));
 
-// ⚡ Bolt: Memoized to prevent unnecessary re-renders
-const Deployments = memo(function Deployments(): ReactNode {
+function Deployments(): ReactNode {
   return (
     <section className={styles.deployments}>
       <div className="container">
@@ -184,9 +199,10 @@ const Deployments = memo(function Deployments(): ReactNode {
               </Link>
               <div className={styles.addressWrapper}>
                 <code className={styles.contractAddress}>
+                  <span className="sr-only">Contract address: </span>
                   {contract.shortAddress}
                 </code>
-                <CopyButton text={contract.address} />
+                <CopyButton text={contract.address} label={contract.name} />
               </div>
             </div>
           ))}
@@ -194,7 +210,7 @@ const Deployments = memo(function Deployments(): ReactNode {
       </div>
     </section>
   );
-});
+}
 
 export default function Home(): ReactNode {
   // const {siteConfig} = useDocusaurusContext();
