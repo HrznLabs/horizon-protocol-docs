@@ -6,10 +6,57 @@ const config: Config = {
   title: 'Horizon Protocol',
   tagline: 'Decentralized, gamified coordination for real-world missions',
   favicon: 'img/favicon.ico',
+  headTags: [
+    // ⚡ Bolt: Preconnect to Google Fonts to establish early connection
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    },
+    // ⚡ Bolt: Preload the Inter font CSS as a stylesheet to optimize the critical rendering path
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+        as: 'style',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+      },
+    },
+    // ⚡ Bolt: Preload JetBrains Mono for monospace fonts
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
+        as: 'style',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
+      },
+    },
+  ],
 
-  future: {
-    v4: true,
-  },
 
   // Production URL
   url: 'https://docs.horizonprotocol.xyz',
@@ -52,19 +99,6 @@ const config: Config = {
     ],
   ],
 
-  headTags: [
-    // ⚡ Bolt: Preload critical logo asset for better LCP
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preload',
-        href: '/img/logo.webp',
-        as: 'image',
-        type: 'image/webp',
-      },
-    },
-  ],
-
   themeConfig: {
     image: 'img/horizon-social-card.png',
     colorMode: {
@@ -75,7 +109,7 @@ const config: Config = {
     announcementBar: {
       id: 'v2_1_launch',
       content:
-        '🚀 Horizon Protocol Core v2.2 + Token M5 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started">Get started →</a>',
+        '<span aria-hidden="true">🚀</span> Horizon Protocol Core v2.2 + Token M5 is now live on Base Sepolia! <a target="_blank" rel="noopener noreferrer" href="/docs/guides/getting-started" aria-label="Get started (opens in a new tab)">Get started →</a>',
       backgroundColor: '#00FF88',
       textColor: '#0A0A0B',
       isCloseable: true,
@@ -129,6 +163,7 @@ const config: Config = {
           href: 'https://github.com/HrznLabs',
           label: 'GitHub',
           position: 'right',
+          'aria-label': 'GitHub (opens in a new tab)',
         },
       ],
     },
@@ -162,14 +197,17 @@ const config: Config = {
             {
               label: 'GitHub',
               href: 'https://github.com/HrznLabs',
+              'aria-label': 'GitHub (opens in a new tab)',
             },
             {
               label: 'Smart Contracts',
               href: 'https://github.com/HrznLabs/horizon-contracts',
+              'aria-label': 'Smart Contracts (opens in a new tab)',
             },
             {
               label: 'TypeScript SDK',
               href: 'https://github.com/HrznLabs/horizon-sdk',
+              'aria-label': 'TypeScript SDK (opens in a new tab)',
             },
           ],
         },

@@ -37,3 +37,54 @@
 ## 2024-05-18 - Directional Micro-Interactions for Link Affordance
 **Learning:** Animated icons inside links (e.g., arrows moving right for forward navigation, external icons moving top-right for new tabs) significantly improve interaction clarity. However, they are often implemented using only `:hover`, leaving keyboard users (navigating via `Tab`) without this valuable visual feedback when elements receive `:focus-visible`.
 **Action:** Always pair `:hover` with `:focus-visible` when animating directional icons inside links or buttons (e.g., `a:hover svg, a:focus-visible svg { transform: translateX(4px); }`). Ensure `className` props can be passed to reusable SVG components so they can be targeted effectively via CSS modules.
+
+## 2025-03-05 - Announcing Dynamic Button States with ARIA Live
+**Learning:** Dynamically changing the `aria-label` attribute on a button (e.g., from "Copy address" to "Copied!") is not reliably announced by all screen readers because the focus remains on the button and the content hasn't triggered a new read event.
+**Action:** Always include a visually hidden `aria-live="polite"` region alongside or inside the button to explicitly communicate dynamic state changes to screen readers (e.g., `<span aria-live="polite" className="sr-only">{copied ? "Copied!" : ""}</span>`).
+
+## 2025-03-06 - Accessible External Links in Docusaurus Config
+**Learning:** External links defined in `docusaurus.config.ts` (such as those in the navbar, footer, or announcement bar) lack context for screen reader users that they open in a new tab, potentially causing confusion or disorientation.
+**Action:** Always include an `aria-label` attribute on external links in Docusaurus configurations specifying that the link opens in a new tab (e.g., `'aria-label': 'GitHub (opens in a new tab)'`).
+
+## 2025-03-07 - Screen Reader Context for Generic Links
+**Learning:** Generic links inside cards (e.g., "View Contracts" or "Browse API") lack context for screen reader users when navigated out of context (e.g., via a list of links). Linking the surrounding descriptive text using `aria-describedby` provides immediate clarity.
+**Action:** Always link contextual paragraph descriptions to generic links within cards using `aria-describedby`.
+
+## 2026-04-01 - Accessible Error States for Async Micro-Interactions
+**Learning:** UI interactions that rely on browser permissions or async APIs (like clipboard copy) can fail silently. This leaves users, especially those using screen readers, without feedback on why an action didn't complete.
+**Action:** Always implement a visual and screen-reader announced error state (using an aria-live region and distinct visual feedback like the standard error color #EF4444) for async micro-interactions that can fail.
+
+## 2025-03-08 - Reduced Motion Accessibility
+**Learning:** Users with vestibular disorders may experience discomfort from interface animations and transitions.
+**Action:** Always include a `@media (prefers-reduced-motion: reduce)` block in custom CSS that sets `animation-duration` and `transition-duration` to `0.01ms !important` globally.
+
+## 2026-04-04 - Tactile Click Feedback for Clickable Cards
+**Learning:** Large interactive elements like clickable cards (.quickLinkCard, .contractCard) can feel unresponsive during physical click interactions without a pressed state, leaving users unsure if their click registered immediately.
+**Action:** Always add a slight `:active { transform: scale(0.98); }` effect to clickable cards, paired with a faster transition speed (e.g., `transform 0.2s ease` instead of 0.3s) to provide immediate tactile feedback confirming the click.
+
+## 2026-04-05 - Accessible Hover Feedback for Primary/Secondary Buttons
+**Learning:** Strong visual hover feedback (like background changes, shadow, and translateY) on `.button--primary` and `.button--secondary` classes are often missed by keyboard users if only `:hover` is targeted.
+**Action:** Always pair `:hover` with `:focus-visible` for all `.button--*` classes to ensure keyboard users receive the same visual elevation and interactions as mouse users.
+
+## 2026-04-05 - Accessible Active State on Elevated Buttons
+**Learning:** Combining a transform (like `translateY(-2px)`) on hover with another transform (`scale(0.98)`) on active can cause abrupt visual snapping.
+**Action:** Ensure `:active` states on elevated elements combine all required transforms (e.g., `transform: translateY(-2px) scale(0.98);`) to prevent jarring visual jumps.
+
+## 2026-04-06 - Contextual Labels for Repeating Icon Buttons
+**Learning:** When implementing repeating icon-only buttons in lists or grids (such as a "Copy" button for each item), always provide descriptive, unique `aria-label`s. Screen reader users navigating out-of-flow lose context if all buttons share the same generic label (e.g., "Copy address").
+**Action:** Use a dynamic `label` prop to construct a unique, context-aware `aria-label` (e.g., "Copy MissionFactory address").
+## 2026-04-10 - Focus Visible Enhancements for Keyboard Accessibility
+**Learning:** Interactive elements often map visual feedback exclusively to `:hover`, leaving keyboard users (navigating via Tab) without adequate visual context of their current position. Adding `:focus-visible` ensures an accessible equivalent experience without compromising mouse users.
+**Action:** Always ensure that any added `:hover` state on interactive components (buttons, links, navigation items) is accompanied by a corresponding `:focus-visible` rule to maintain equal accessibility.
+
+## 2026-04-13 - Focus Visible Enhancements for Global Accessibility
+**Learning:** Interactive elements like the top navbar logo or the generic DocSearch search button map visual glow feedback exclusively to `:hover`, leaving keyboard users (navigating via Tab) without adequate visual context of their current position.
+**Action:** Always ensure that any added `:hover` state on interactive components (buttons, links, logos) is accompanied by a corresponding `:focus-visible` rule (e.g. `.navbar__brand:focus-visible .navbar__logo`) to maintain equal accessibility for all users.
+
+## 2026-04-18 - Accessible Smooth Scrolling for Anchor Links
+**Learning:** Instant jumping to anchor links (like in a Table of Contents) can be disorienting, losing the user's context of where they are on the page. Adding `scroll-behavior: smooth` provides a better spatial understanding. However, smooth scrolling can trigger motion sickness in users with vestibular disorders.
+**Action:** Always wrap `scroll-behavior: smooth` inside a `@media (prefers-reduced-motion: no-preference)` query to provide the UX enhancement only to users who can safely experience it.
+
+## 2026-04-19 - Accessible Hover Feedback for Table Rows
+**Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
+**Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.

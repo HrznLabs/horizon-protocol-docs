@@ -10,7 +10,15 @@
       "headers": [
         {
           "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "0"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "off"
         },
         {
           "key": "X-Content-Type-Options",
@@ -29,6 +37,10 @@
           "value": "geolocation=(), microphone=(), camera=(), payment=(), usb=(), fullscreen=(), display-capture=(), autoplay=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), sync-xhr=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(self), browsing-topics=(), attribution-reporting=(), run-ad-auction=(), join-ad-interest-group=(), local-fonts=(), screen-wake-lock=(), serial=(), hid=(), bluetooth=(), idle-detection=(), web-share=(), publickey-credentials-get=(), otp-credentials=(), storage-access=(), identity-credentials-get=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), gamepad=(), picture-in-picture=(), window-management=()"
         },
         {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "require-corp"
+        },
+        {
           "key": "Cross-Origin-Opener-Policy",
           "value": "same-origin"
         },
@@ -41,8 +53,12 @@
           "value": "none"
         },
         {
+          "key": "X-Download-Options",
+          "value": "noopen"
+        },
+        {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://github.com https://sepolia.basescan.org; font-src 'self' data: https://github.com https://sepolia.basescan.org; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://github.com https://sepolia.basescan.org; font-src 'self' data: https://github.com https://sepolia.basescan.org; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
         }
       ]
     }

@@ -110,7 +110,8 @@
   height: 32px;
 }
 
-.navbar__logo:hover {
+.navbar__logo:hover,
+.navbar__brand:focus-visible .navbar__logo {
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
 }
 
@@ -124,7 +125,8 @@
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-[data-theme='dark'] .navbar__link:hover {
+[data-theme='dark'] .navbar__link:hover,
+[data-theme='dark'] .navbar__link:focus-visible {
   color: var(--horizon-green-bright);
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
@@ -170,7 +172,8 @@
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-[data-theme='dark'] a:hover {
+[data-theme='dark'] a:hover,
+[data-theme='dark'] a:focus-visible {
   color: #4ADE80;
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
   text-decoration: none;
@@ -236,7 +239,8 @@ table {
   border-bottom: 1px solid rgba(0, 255, 136, 0.1);
 }
 
-[data-theme='dark'] tr:hover td {
+[data-theme='dark'] tr:hover td,
+[data-theme='dark'] tr:focus-within td {
   background-color: rgba(0, 255, 136, 0.05);
 }
 
@@ -252,14 +256,19 @@ table {
   border: 1px solid rgba(0, 255, 136, 0.2);
   border-radius: 16px;
   /* Optimized: Explicit properties */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   overflow: hidden;
 }
 
-.card:hover {
+.card:hover,
+.card:focus-within {
   transform: translateY(-4px);
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), 0 0 60px rgba(0, 255, 136, 0.1);
   border-color: var(--horizon-green-bright);
+}
+
+.card:active {
+  transform: translateY(-4px) scale(0.98);
 }
 
 [data-theme='dark'] .card {
@@ -267,7 +276,8 @@ table {
   border-color: rgba(0, 255, 136, 0.2);
 }
 
-[data-theme='dark'] .card:hover {
+[data-theme='dark'] .card:hover,
+[data-theme='dark'] .card:focus-within {
   border-color: var(--horizon-green-bright);
 }
 
@@ -301,7 +311,8 @@ table {
   /* ⚡ Bolt: Removed will-change: transform to prevent layer explosion and memory bloat on this generic button class. */
 }
 
-.button--primary:hover {
+.button--primary:hover,
+.button--primary:focus-visible {
   background: linear-gradient(135deg, #4ADE80 0%, #22D3EE 100%);
   color: #0A0A0B;
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.6), 0 0 60px rgba(0, 255, 136, 0.3);
@@ -309,7 +320,7 @@ table {
 }
 
 .button--primary:active {
-  transform: scale(0.98);
+  transform: translateY(-2px) scale(0.98);
 }
 
 [data-theme='dark'] .button--primary {
@@ -317,14 +328,15 @@ table {
   color: #0A0A0B;
 }
 
-[data-theme='dark'] .button--primary:hover {
+[data-theme='dark'] .button--primary:hover,
+[data-theme='dark'] .button--primary:focus-visible {
   background: linear-gradient(135deg, #4ADE80 0%, #22D3EE 100%);
   color: #0A0A0B;
 }
 
 .button--primary:active,
 [data-theme='dark'] .button--primary:active {
-  transform: scale(0.98);
+  transform: translateY(-2px) scale(0.98);
 }
 
 .button--secondary {
@@ -333,6 +345,14 @@ table {
   color: var(--horizon-green-bright);
   /* Optimized: Explicit properties */
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.button--secondary:hover,
+.button--secondary:focus-visible {
+  background-color: rgba(0, 255, 136, 0.1);
+  border-color: var(--horizon-green-bright);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  color: var(--horizon-green-bright);
 }
 
 .button--secondary:active {
@@ -345,7 +365,8 @@ table {
   background-color: transparent;
 }
 
-[data-theme='dark'] .button--secondary:hover {
+[data-theme='dark'] .button--secondary:hover,
+[data-theme='dark'] .button--secondary:focus-visible {
   background-color: rgba(0, 255, 136, 0.1);
   border-color: var(--horizon-green-bright);
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
@@ -366,7 +387,8 @@ table {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-[data-theme='dark'] .menu__link:hover {
+[data-theme='dark'] .menu__link:hover,
+[data-theme='dark'] .menu__link:focus-visible {
   color: var(--horizon-green-bright);
   background-color: rgba(0, 255, 136, 0.05);
 }
@@ -378,7 +400,8 @@ table {
   border-left: 3px solid var(--horizon-green-bright);
 }
 
-[data-theme='dark'] .menu__list-item-collapsible:hover {
+[data-theme='dark'] .menu__list-item-collapsible:hover,
+[data-theme='dark'] .menu__list-item-collapsible:focus-visible {
   background-color: rgba(0, 255, 136, 0.05);
 }
 
@@ -395,7 +418,8 @@ table {
   transition: color 0.2s ease;
 }
 
-[data-theme='dark'] .table-of-contents__link:hover {
+[data-theme='dark'] .table-of-contents__link:hover,
+[data-theme='dark'] .table-of-contents__link:focus-visible {
   color: var(--horizon-green-bright);
 }
 
@@ -410,6 +434,9 @@ table {
 .footer {
   border-top: 1px solid rgba(0, 255, 136, 0.2);
   background: linear-gradient(180deg, #0A0A0B 0%, #050505 100%);
+  /* ⚡ Bolt: Skip rendering when off-screen to improve page load performance */
+  content-visibility: auto;
+  contain-intrinsic-size: 400px;
 }
 
 [data-theme='dark'] .footer {
@@ -427,7 +454,8 @@ table {
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
-[data-theme='dark'] .footer__link-item:hover {
+[data-theme='dark'] .footer__link-item:hover,
+[data-theme='dark'] .footer__link-item:focus-visible {
   color: var(--horizon-green-bright);
   text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
 }
@@ -599,7 +627,8 @@ table {
   color: #8B8D98;
 }
 
-[data-theme='dark'] .DocSearch-Button:hover {
+[data-theme='dark'] .DocSearch-Button:hover,
+[data-theme='dark'] .DocSearch-Button:focus-visible {
   border-color: var(--horizon-green-bright) !important;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
 }
@@ -628,7 +657,8 @@ table {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-[data-theme='dark'] .dropdown__link:hover {
+[data-theme='dark'] .dropdown__link:hover,
+[data-theme='dark'] .dropdown__link:focus-visible {
   background-color: rgba(0, 255, 136, 0.1);
   color: var(--horizon-green-bright);
 }
@@ -641,12 +671,17 @@ table {
   background-color: #111113;
   border-radius: 12px;
   /* Optimized: Explicit properties */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-[data-theme='dark'] .pagination-nav__link:hover {
+[data-theme='dark'] .pagination-nav__link:hover,
+[data-theme='dark'] .pagination-nav__link:focus-visible {
   border-color: var(--horizon-green-bright);
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+[data-theme='dark'] .pagination-nav__link:active {
+  transform: scale(0.98);
 }
 
 [data-theme='dark'] .pagination-nav__sublabel {
@@ -688,7 +723,8 @@ table {
   transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
 
-[data-theme='dark'] .tabs__item:hover {
+[data-theme='dark'] .tabs__item:hover,
+[data-theme='dark'] .tabs__item:focus-visible {
   color: var(--horizon-green-bright);
 }
 
@@ -706,7 +742,8 @@ table {
   transition: color 0.2s ease;
 }
 
-[data-theme='dark'] .breadcrumbs__link:hover {
+[data-theme='dark'] .breadcrumbs__link:hover,
+[data-theme='dark'] .breadcrumbs__link:focus-visible {
   color: var(--horizon-green-bright);
 }
 
@@ -762,7 +799,8 @@ table {
   color: var(--horizon-green-bright);
 }
 
-[data-theme='dark'] .hash-link:hover {
+[data-theme='dark'] .hash-link:hover,
+[data-theme='dark'] .hash-link:focus-visible {
   color: #4ADE80;
 }
 
@@ -773,4 +811,38 @@ table {
   outline: 2px solid var(--horizon-green-bright);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* =============================================================================
+   ACCESSIBILITY UTILITIES
+   ============================================================================= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* =============================================================================
+   REDUCED MOTION
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =============================================================================
+   SMOOTH SCROLLING
+   ============================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
