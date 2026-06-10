@@ -21,6 +21,8 @@ const sidebars: SidebarsConfig = {
         'protocol/guilds',
         'protocol/economics',
         'protocol/governance',
+        'protocol/token-economics',
+        'protocol/itake-vertical',
         'protocol/geofencing',
       ],
     },

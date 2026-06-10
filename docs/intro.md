@@ -147,6 +147,7 @@ Horizon Protocol enables:
 | MissionFactory | `0x6d97964E9BE016A8AABA2f99F0bA419464Fb88D9` |
 | PaymentRouter | `0x3013db6C92EF956f86EBC0aDFECe70b80FA73600` |
 | GuildFactory | `0x7349Cd1A4f7C1a74Db730743d873de98A2f3a32F` |
+| ReputationAttestations | `0xedae9682a0fb6fb3c18d6865461f67db7d748002` |
 | DisputeResolver | `0xdE37Ff10A487c852941DC842987dd8d5d8b9E855` |
 | HorizonAchievements | `0xfCC5971C3704C7a1F1c9E4acFdC7eEd60D4e4949` |
 | USDC (testnet) | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
