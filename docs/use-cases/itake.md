@@ -26,7 +26,7 @@ iTake implements Horizon's hierarchical DAO model:
 │  │ • Cross-restaurant dispute resolution                         │  │
 │  │ • Driver pool coordination                                    │  │
 │  │ • Platform-wide promotions                                    │  │
-│  │ • Collects 1% MetaDAO fee                                    │  │
+│  │ • Collects 0.5% MetaDAO fee                                  │  │
 │  └───────────────────────────────────────────────────────────────┘  │
 ├─────────────────────────────────────────────────────────────────────┤
 │                    Restaurant SubDAOs                                │
@@ -238,20 +238,20 @@ When a delivery completes, the smart contract automatically distributes funds:
 | **Protocol** | 2.5% | Platform sustainability |
 | **Labs** | 2.5% | R&D and development |
 | **Resolver** | 2% | Dispute resolution pool |
-| **iTake (MetaDAO)** | 1% | Platform operations |
+| **iTake (MetaDAO)** | 0.5% | Platform operations |
 | **Restaurant (SubDAO)** | 2% | Restaurant's share |
 
 ### Example: €10 Delivery Fee
 
 ```
-Driver:       €9.00 (90%)
+Driver:       €9.05 (90.5%)
 Protocol:     €0.25 (2.5%)
 Labs:         €0.25 (2.5%)
 Resolver:     €0.20 (2%)
-iTake:        €0.10 (1%)
+iTake:        €0.05 (0.5%)
 Restaurant:   €0.20 (2%)
 ─────────────────────────
-Total Fees:   €1.00 (10%)
+Total Fees:   €0.95 (9.5%)
 ```
 
 > **Note**: Food revenue goes directly to the restaurant. The breakdown above applies only to delivery fees.
