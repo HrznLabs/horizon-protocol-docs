@@ -38,7 +38,8 @@
     "**/ajv/fast-uri": "^3.1.2",
     "**/webpack-dev-server": "^5.2.4",
     "**/webpack-dev-server/ws": "^8.20.1",
-    "**/minimatch@3/brace-expansion": "^1.1.13"
+    "**/minimatch@3/brace-expansion": "^1.1.13",
+    "**/launch-editor/shell-quote": "^1.8.4"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
