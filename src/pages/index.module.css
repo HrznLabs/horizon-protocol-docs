@@ -345,6 +345,10 @@
   transform: translate(-50%, -6px);
 }
 
+.heroButton:active {
+  transform: scale(0.98);
+}
+
 .heroButton {
   display: inline-flex;
   align-items: center;
