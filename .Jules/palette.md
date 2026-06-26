@@ -88,3 +88,6 @@
 ## 2026-04-19 - Accessible Hover Feedback for Table Rows
 **Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
 **Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.
+## 2024-06-13 - Sync Visual Effects for Keyboard Navigation
+**Learning:** In highly customized, interactive components like the `QuickLinkCard` or `ContractCard`, hover states on child elements (like link text color or icon translation) create a responsive feel for mouse users. However, if those styles are strictly bound to `:hover` and `:focus-visible` on the precise child link elements, keyboard users tabbing into the broader parent container miss out on the intended "activation" visual cue of the component.
+**Action:** Always link interactive component child visual state changes to the parent container's `:focus-within` state (e.g., `.card:focus-within .icon`) in tandem with its `:hover` state. This ensures keyboard users experience the exact same premium visual feedback immediately upon entering the component as mouse users do when hovering.
