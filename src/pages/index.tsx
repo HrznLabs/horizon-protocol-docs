@@ -1,4 +1,4 @@
-import {useState, useEffect, type ReactNode} from 'react';
+import {useState, useEffect, memo, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 // import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -83,7 +83,8 @@ function QuickLinks(): ReactNode {
   );
 }
 
-function CopyButton({text, label}: {text: string, label?: string}) {
+// ⚡ Bolt: Memoize leaf component to prevent re-renders when parent components update without prop changes
+const CopyButton = memo(function CopyButton({text, label}: {text: string, label?: string}) {
   const [copied, setCopied] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -141,9 +142,10 @@ function CopyButton({text, label}: {text: string, label?: string}) {
       </button>
     </>
   );
-}
+});
 
-function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
+// ⚡ Bolt: Memoize static presentation component
+const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -151,16 +153,17 @@ function ExternalLinkIcon({size = 12, className}: {size?: number, className?: st
       <line x1="10" y1="14" x2="21" y2="3"></line>
     </svg>
   );
-}
+});
 
-function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
+// ⚡ Bolt: Memoize static presentation component
+const ArrowRightIcon = memo(function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <line x1="5" y1="12" x2="19" y2="12"></line>
       <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   );
-}
+});
 
 // Hoisted static data to prevent recreation on every render
 const contracts = [
