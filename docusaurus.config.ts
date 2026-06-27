@@ -23,12 +23,13 @@ const config: Config = {
         crossorigin: 'anonymous',
       },
     },
-    // ⚡ Bolt: Preload the Inter font CSS as a stylesheet to optimize the critical rendering path
+    // ⚡ Bolt: Preload the Google Fonts CSS to optimize the critical rendering path.
+    // We batch requests (Inter and JetBrains Mono) into a single URL to reduce network roundtrips.
     {
       tagName: 'link',
       attributes: {
         rel: 'preload',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
         as: 'style',
       },
     },
@@ -36,27 +37,11 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
       },
     },
-    // ⚡ Bolt: Preload JetBrains Mono for monospace fonts
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preload',
-        href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
-        as: 'style',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
-      },
-    },
-  ],
 
+  ],
 
   // Production URL
   url: 'https://docs.horizonprotocol.xyz',
