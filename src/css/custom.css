@@ -413,7 +413,7 @@ table {
    TABLE OF CONTENTS
    ============================================================================= */
 [data-theme='dark'] .table-of-contents__link {
-  color: #5C5E69;
+  color: #8B8D98;
   /* Optimized: Explicit properties */
   transition: color 0.2s ease;
 }
@@ -461,7 +461,7 @@ table {
 }
 
 [data-theme='dark'] .footer__copyright {
-  color: #5C5E69;
+  color: #8B8D98;
 }
 
 /* =============================================================================
@@ -685,7 +685,7 @@ table {
 }
 
 [data-theme='dark'] .pagination-nav__sublabel {
-  color: #5C5E69;
+  color: #8B8D98;
 }
 
 [data-theme='dark'] .pagination-nav__label {
@@ -737,7 +737,7 @@ table {
    BREADCRUMBS
    ============================================================================= */
 [data-theme='dark'] .breadcrumbs__link {
-  color: #5C5E69;
+  color: #8B8D98;
   /* Optimized: Explicit properties */
   transition: color 0.2s ease;
 }
