@@ -1,4 +1,4 @@
-import {useState, useEffect, type ReactNode} from 'react';
+import {useState, useEffect, type ReactNode, memo} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 // import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -8,7 +8,8 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
-function HomepageHeader() {
+// ⚡ Bolt: Memoized static layout sections to prevent unnecessary re-renders
+const HomepageHeader = memo(function HomepageHeader() {
   // const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -36,9 +37,9 @@ function HomepageHeader() {
       </div>
     </header>
   );
-}
+});
 
-function QuickLinks(): ReactNode {
+const QuickLinks = memo(function QuickLinks(): ReactNode {
   return (
     <section className={styles.quickLinks}>
       <div className="container">
@@ -81,9 +82,10 @@ function QuickLinks(): ReactNode {
       </div>
     </section>
   );
-}
+});
 
-function CopyButton({text, label}: {text: string, label?: string}) {
+// ⚡ Bolt: Memoized interactive components
+const CopyButton = memo(function CopyButton({text, label}: {text: string, label?: string}) {
   const [copied, setCopied] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -141,9 +143,10 @@ function CopyButton({text, label}: {text: string, label?: string}) {
       </button>
     </>
   );
-}
+});
 
-function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
+// ⚡ Bolt: Memoized stateless SVG icons
+const ExternalLinkIcon = memo(function ExternalLinkIcon({size = 12, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -151,16 +154,16 @@ function ExternalLinkIcon({size = 12, className}: {size?: number, className?: st
       <line x1="10" y1="14" x2="21" y2="3"></line>
     </svg>
   );
-}
+});
 
-function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
+const ArrowRightIcon = memo(function ArrowRightIcon({size = 16, className}: {size?: number, className?: string}) {
   return (
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <line x1="5" y1="12" x2="19" y2="12"></line>
       <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   );
-}
+});
 
 // Hoisted static data to prevent recreation on every render
 const contracts = [
@@ -174,7 +177,7 @@ const contracts = [
   shortAddress: `${c.address.slice(0, 6)}...${c.address.slice(-4)}`,
 }));
 
-function Deployments(): ReactNode {
+const Deployments = memo(function Deployments(): ReactNode {
   return (
     <section className={styles.deployments}>
       <div className="container">
@@ -210,7 +213,7 @@ function Deployments(): ReactNode {
       </div>
     </section>
   );
-}
+});
 
 export default function Home(): ReactNode {
   // const {siteConfig} = useDocusaurusContext();

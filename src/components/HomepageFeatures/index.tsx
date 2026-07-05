@@ -1,4 +1,4 @@
-import {type ReactNode} from 'react';
+import {type ReactNode, memo} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -72,7 +72,8 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, emoji, description}: FeatureItem) {
+// ⚡ Bolt: Memoized individual features to prevent unnecessary re-renders
+const Feature = memo(function Feature({title, emoji, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">
@@ -82,7 +83,7 @@ function Feature({title, emoji, description}: FeatureItem) {
       </div>
     </div>
   );
-}
+});
 
 function HomepageFeatures(): ReactNode {
   return (
