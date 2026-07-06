@@ -198,7 +198,7 @@ function Deployments(): ReactNode {
                 <ExternalLinkIcon />
               </Link>
               <div className={styles.addressWrapper}>
-                <code className={styles.contractAddress}>
+                <code className={styles.contractAddress} title={contract.address}>
                   <span className="sr-only">Contract address: </span>
                   {contract.shortAddress}
                 </code>
