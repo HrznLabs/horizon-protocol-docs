@@ -202,7 +202,7 @@ function Deployments(): ReactNode {
                   <span className="sr-only">Contract address: </span>
                   {contract.shortAddress}
                 </code>
-                <CopyButton text={contract.address} label={contract.name} />
+                <CopyButton text={contract.address} label={contract.name + " address"} />
               </div>
             </div>
           ))}
