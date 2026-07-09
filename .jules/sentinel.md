@@ -7,3 +7,8 @@
 **Vulnerability:** Blanket dependency overrides in `package.json` (e.g., `"**/path-to-regexp": "^0.1.13"`) can break semantic versioning by downgrading unrelated packages that depend on newer major versions (like `v1.x` or `v3.x`).
 **Learning:** `yarn audit` identifies vulnerable paths, and these paths must be specifically targeted in overrides to prevent breaking other dependencies.
 **Prevention:** Use targeted `resolutions` paths in `package.json` (e.g., `"**/express/path-to-regexp": "^0.1.13"`) based on `yarn audit` and `yarn why` findings to surgically patch vulnerabilities without forcing incompatible major version downgrades on other packages.
+
+## 2026-06-25 - [Targeted Dependency Overrides for js-yaml]
+**Vulnerability:** Found multiple vulnerabilities in `js-yaml` involving DoS due to merge keys, impacting both the 3.x and 4.x major versions.
+**Learning:** Forcing a major version upgrade of a package like `js-yaml` (from 3.x to 4.x) using `resolutions` to fix vulnerabilities can cause unavoidable build failures if the dependent module (like `gray-matter`) relies on removed functions (e.g., `yaml.safeLoad`).
+**Prevention:** Always verify if a dependency patch crosses a major SemVer boundary. If it does, determine which package paths use which major version and use highly targeted `resolutions` to patch each path with its respective secure major version (e.g., patching `gray-matter/js-yaml` to `^3.15.0` while patching other instances to `^4.2.0`).
