@@ -88,3 +88,7 @@
 ## 2026-04-19 - Accessible Hover Feedback for Table Rows
 **Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
 **Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.
+
+## 2026-04-25 - Tactile Click Feedback Physics
+**Learning:** Applying an upward translation (e.g., `translateY(-2px)`) to an `:active` state (often accidentally inherited or combined from a hover state) creates a jarring, counter-intuitive interaction. Elements should physically sink into the page when pressed.
+**Action:** Always ensure that `:active` states for interactive elements (like buttons and cards) either scale down or translate downwards (e.g., `translateY(1px)`), never upwards.
