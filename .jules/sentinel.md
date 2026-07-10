@@ -7,3 +7,8 @@
 **Vulnerability:** Blanket dependency overrides in `package.json` (e.g., `"**/path-to-regexp": "^0.1.13"`) can break semantic versioning by downgrading unrelated packages that depend on newer major versions (like `v1.x` or `v3.x`).
 **Learning:** `yarn audit` identifies vulnerable paths, and these paths must be specifically targeted in overrides to prevent breaking other dependencies.
 **Prevention:** Use targeted `resolutions` paths in `package.json` (e.g., `"**/express/path-to-regexp": "^0.1.13"`) based on `yarn audit` and `yarn why` findings to surgically patch vulnerabilities without forcing incompatible major version downgrades on other packages.
+
+## 2024-05-20 - Dependency vulnerabilities in Docusaurus tooling
+**Vulnerability:** Found multiple vulnerabilities in dependencies: `http-proxy-middleware` (host+path substring matching bypass, moderate), `js-yaml` (quadratic-complexity DoS, moderate), `uuid` (missing buffer bounds check, moderate), and `joi` (uncaught RangeError).
+**Learning:** These vulnerabilities are brought in by `@docusaurus/core` and `@docusaurus/preset-classic`. Docusaurus versions might pin specific versions of these tools which can carry vulnerabilities over time.
+**Prevention:** Check `yarn audit` output carefully for vulnerabilities in deep dependencies. Use targeted `resolutions` in `package.json` to force resolution of vulnerable transitive dependencies to patched versions (e.g., `**/http-proxy-middleware`, `**/gray-matter/js-yaml`, `**/js-yaml`, `**/webpack-dev-server/sockjs/uuid`, `**/joi`).
