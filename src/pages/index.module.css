@@ -86,9 +86,7 @@
   transform: translateY(-4px);
 }
 
-.quickLinkCard:active {
-  transform: translateY(-4px) scale(0.98);
-}
+.quickLinkCard:active { transform: translateY(1px) scale(0.98); }
 
 .quickLinkCard:focus-within::before {
   opacity: 1;
@@ -209,9 +207,7 @@
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
 }
 
-.contractCard:active {
-  transform: translateY(-2px) scale(0.98);
-}
+.contractCard:active { transform: translateY(1px) scale(0.98); }
 
 .contractName {
   font-weight: 600;
