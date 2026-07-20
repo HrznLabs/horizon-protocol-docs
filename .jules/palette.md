@@ -1,3 +1,7 @@
 ## 2024-04-11 - Adding Focus-Visible States to Interactive Elements
 **Learning:** Found multiple interactive elements (`.navbar__link`, `a`, `.menu__link`, etc.) that possessed clear `:hover` states but lacked equivalent visual cues for keyboard navigation. Applying `:focus-visible` alongside `:hover` ensures seamless keyboard accessibility. Playwright verification required manually simulating `Tab` presses to assert focus state presence.
 **Action:** When auditing custom CSS rules involving `:hover`, explicitly check for and mirror those styles using `:focus-visible` where appropriate, avoiding applying generic focus rings everywhere if the hover state styling provides better context.
+
+## 2024-04-12 - Adjusting Active State Translations for Physicality
+**Learning:** Found multiple interactive elements (`.card`, `.quickLinkCard`, `.button--primary`) where the `:active` state applied an upward translation (e.g., `translateY(-4px) scale(0.98)` or `translateY(-2px) scale(0.98)`). In UI design, an active/pressed state should mimic a physical button press by moving *down* to simulate being depressed. Applying an upward translation during an active state creates a jarring and counter-intuitive interaction. Translating downwards while scaling accurately mimics a physical button press.
+**Action:** When auditing or adding `:active` states for interactive elements, explicitly ensure that any Y-axis translation applied mimics a physical press by moving downwards (e.g., `translateY(1px)`), and never upwards.
