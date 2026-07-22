@@ -88,3 +88,6 @@
 ## 2026-04-19 - Accessible Hover Feedback for Table Rows
 **Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
 **Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.
+## 2026-04-20 - Physical Press Simulation on Elevated Elements
+**Learning:** Applying an upward translation to an :active state creates a counter-intuitive interaction that contradicts physical expectations of a press.
+**Action:** Always ensure that :active states simulate physical depth by translating downwards (e.g., translateY(1px) scale(0.98)), even if the element is elevated on hover.
