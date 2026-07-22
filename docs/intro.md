@@ -3,6 +3,8 @@ sidebar_position: 1
 slug: /
 ---
 
+import Link from '@docusaurus/Link';
+
 # Welcome to Horizon Protocol
 
 Horizon is a **decentralized, gamified coordination platform** for real-world missions built natively on **Base L2**. It bridges digital incentives with physical-world tasks through blockchain-backed escrow, location verification, and guild-based coordination.
@@ -52,9 +54,10 @@ Horizon Protocol enables:
         <p id="desc-getting-started">Set up your development environment and integrate with Horizon.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--primary button--block" href="/docs/guides/getting-started" aria-describedby="desc-getting-started">
+        <!-- ⚡ Bolt: Use Docusaurus Link to prevent full page reloads -->
+        <Link className="button button--primary button--block" to="/docs/guides/getting-started" aria-describedby="desc-getting-started">
           Start Building
-        </a>
+        </Link>
       </div>
     </div>
   </div>
@@ -67,9 +70,10 @@ Horizon Protocol enables:
         <p id="desc-protocol-overview">Understand how Horizon's mission engine, guilds, and economics work.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/protocol/overview" aria-describedby="desc-protocol-overview">
+        <!-- ⚡ Bolt: Use Docusaurus Link to prevent full page reloads -->
+        <Link className="button button--secondary button--block" to="/docs/protocol/overview" aria-describedby="desc-protocol-overview">
           Learn More
-        </a>
+        </Link>
       </div>
     </div>
   </div>
@@ -85,9 +89,10 @@ Horizon Protocol enables:
         <p id="desc-smart-contracts">Explore the on-chain architecture: MissionEscrow, PaymentRouter, GuildDAO.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/architecture/smart-contracts" aria-describedby="desc-smart-contracts">
+        <!-- ⚡ Bolt: Use Docusaurus Link to prevent full page reloads -->
+        <Link className="button button--secondary button--block" to="/docs/architecture/smart-contracts" aria-describedby="desc-smart-contracts">
           View Contracts
-        </a>
+        </Link>
       </div>
     </div>
   </div>
@@ -100,9 +105,10 @@ Horizon Protocol enables:
         <p id="desc-api-reference">Complete API documentation for missions, guilds, map, and WebSocket.</p>
       </div>
       <div className="card__footer">
-        <a className="button button--secondary button--block" href="/docs/api/overview" aria-describedby="desc-api-reference">
+        <!-- ⚡ Bolt: Use Docusaurus Link to prevent full page reloads -->
+        <Link className="button button--secondary button--block" to="/docs/api/overview" aria-describedby="desc-api-reference">
           Browse API
-        </a>
+        </Link>
       </div>
     </div>
   </div>
