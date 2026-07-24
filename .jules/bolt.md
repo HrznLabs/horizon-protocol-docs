@@ -9,3 +9,6 @@
 ## 2025-02-23 - Avoid Render-Blocking Font Loading
 **Learning:** In Docusaurus, loading fonts directly via CSS `@import` or synchronously within the application can block the critical rendering path.
 **Action:** Always inject font loading through `headTags` in `docusaurus.config.ts`, utilizing `<link rel="preconnect">` for the font domains and `<link rel="preload" as="style">` for the font CSS to ensure early connection establishment and optimized rendering.
+## 2025-02-23 - Use JSX Comments in MDX
+**Learning:** When adding inline comments to Docusaurus Markdown (`.md` or `.mdx`) files, standard HTML comments may render incorrectly or cause parsing issues because Docusaurus uses MDX.
+**Action:** Always use JSX comment syntax (e.g., `{/* ⚡ Bolt: ... */}`) when adding inline explanations to Markdown/MDX files in Docusaurus projects.
