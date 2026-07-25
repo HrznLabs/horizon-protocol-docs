@@ -88,3 +88,6 @@
 ## 2026-04-19 - Accessible Hover Feedback for Table Rows
 **Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
 **Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.
+## 2024-07-25 - Physical Press Micro-interaction
+**Learning:** Applying an upward translation on an :active state for cards that translate up on hover creates a jarring, floating effect that defies physics.
+**Action:** Always ensure :active states on interactive cards mimic physical reality by translating downwards (e.g., translateY(1px) scale(0.98)), providing satisfying tactile feedback.
