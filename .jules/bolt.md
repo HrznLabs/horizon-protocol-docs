@@ -9,3 +9,4 @@
 ## 2025-02-23 - Avoid Render-Blocking Font Loading
 **Learning:** In Docusaurus, loading fonts directly via CSS `@import` or synchronously within the application can block the critical rendering path.
 **Action:** Always inject font loading through `headTags` in `docusaurus.config.ts`, utilizing `<link rel="preconnect">` for the font domains and `<link rel="preload" as="style">` for the font CSS to ensure early connection establishment and optimized rendering.
+## 2025-02-23 - SPA Link Navigation Optimization\n**Learning:** Using standard HTML `<a>` tags for internal links in Docusaurus (and other React-based SPAs) triggers a full browser page reload, bypassing the optimized client-side routing. This breaks the SPA experience, increasing latency and network requests.\n**Action:** Always prefer the built-in routing components like `<Link>` from `@docusaurus/Link` for internal navigation within an SPA to ensure instant page transitions.
