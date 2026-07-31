@@ -88,3 +88,7 @@
 ## 2026-04-19 - Accessible Hover Feedback for Table Rows
 **Learning:** Table rows often only visually react to `:hover` with a background color change. Keyboard users tabbing into a nested link within the row completely miss this visual row highlighting.
 **Action:** Always pair `tr:hover td` with `tr:focus-within td` so keyboard users experience the same visual context as mouse users when interacting with the table's contents.
+
+## 2024-07-31 - Fix unnatural active state translation on interactive cards
+**Learning:** In CSS, applying an upward translation (e.g., `translateY(-4px)`) to an `:active` pseudo-class creates a physically counter-intuitive user interaction, as it implies the element is moving towards the user when pressed.
+**Action:** When implementing or modifying `:active` states for interactive elements like cards or buttons, ensure they mimic a physical press by scaling down or translating downwards (e.g., `translateY(1px)`).
