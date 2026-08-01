@@ -23,7 +23,7 @@ const config: Config = {
         crossorigin: 'anonymous',
       },
     },
-    // ⚡ Bolt: Preload fonts as a single batched request to optimize the critical rendering path
+    // ⚡ Bolt: Preload combined Google Fonts (Inter + JetBrains Mono) to reduce network roundtrips
     {
       tagName: 'link',
       attributes: {

@@ -40,7 +40,6 @@
     "**/webpack-dev-server/ws": "^8.21.0",
     "**/minimatch@3/brace-expansion": "^1.1.13",
     "**/launch-editor/shell-quote": "^1.8.4",
-    "**/webpack-dev-server/sockjs/uuid": "^11.1.1",
     "**/webpack-bundle-analyzer/ws": "^7.5.11"
   },
   "dependencies": {
@@ -49,8 +48,8 @@
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.10.1",
@@ -58,9 +57,9 @@
     "@docusaurus/tsconfig": "3.10.1",
     "@docusaurus/types": "3.10.1",
     "@eslint/js": "^10.0.1",
-    "eslint": "^10.4.0",
+    "eslint": "^10.5.0",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.60.0"
+    "typescript-eslint": "^8.61.1"
   },
   "browserslist": {
     "production": [
