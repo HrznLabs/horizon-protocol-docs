@@ -9,3 +9,7 @@
 ## 2025-02-23 - Avoid Render-Blocking Font Loading
 **Learning:** In Docusaurus, loading fonts directly via CSS `@import` or synchronously within the application can block the critical rendering path.
 **Action:** Always inject font loading through `headTags` in `docusaurus.config.ts`, utilizing `<link rel="preconnect">` for the font domains and `<link rel="preload" as="style">` for the font CSS to ensure early connection establishment and optimized rendering.
+
+## 2024-06-24 - Batch Google Fonts Requests
+**Learning:** Making separate CSS requests for different Google Fonts families (e.g., Inter and JetBrains Mono) adds unnecessary network roundtrips to the critical rendering path. Google Fonts API supports batching multiple families into a single request URL using the `&family=` parameter.
+**Action:** Always combine multiple Google Fonts families into a single `<link>` request URL rather than using separate tags to optimize font loading performance.
