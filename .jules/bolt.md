@@ -13,3 +13,11 @@
 ## 2024-06-24 - Batch Google Fonts Requests
 **Learning:** Making separate CSS requests for different Google Fonts families (e.g., Inter and JetBrains Mono) adds unnecessary network roundtrips to the critical rendering path. Google Fonts API supports batching multiple families into a single request URL using the `&family=` parameter.
 **Action:** Always combine multiple Google Fonts families into a single `<link>` request URL rather than using separate tags to optimize font loading performance.
+
+## 2024-05-18 - Docusaurus SPA Routing with Link Component
+**Learning:** Using standard HTML `<a>` tags for internal navigation in Docusaurus (and similar React SPA frameworks) bypasses the client-side router, triggering full page reloads and re-downloading of assets.
+**Action:** Always use the `@docusaurus/Link` component (`<Link to="...">`) or standard Markdown links `[text](url)` for internal navigation to preserve the SPA experience, enable near-instant page transitions, and optimize perceived performance.
+
+## 2024-05-18 - MDX Frontmatter Import Placement
+**Learning:** When injecting React component imports (like `@docusaurus/Link`) into Docusaurus Markdown (`.md` or `.mdx`) files, placing the import *before* or *inside* the YAML frontmatter block breaks metadata parsing and causes routing errors.
+**Action:** Always ensure component import statements are placed strictly *after* the closing `---` of the YAML frontmatter block.
