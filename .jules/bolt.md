@@ -13,3 +13,6 @@
 ## 2024-06-24 - Batch Google Fonts Requests
 **Learning:** Making separate CSS requests for different Google Fonts families (e.g., Inter and JetBrains Mono) adds unnecessary network roundtrips to the critical rendering path. Google Fonts API supports batching multiple families into a single request URL using the `&family=` parameter.
 **Action:** Always combine multiple Google Fonts families into a single `<link>` request URL rather than using separate tags to optimize font loading performance.
+## 2024-05-18 - Replacing Markdown <a> with Docusaurus <Link>
+**Learning:** When adding React component imports (e.g., `import Link from '@docusaurus/Link';`) to Docusaurus Markdown (`.md` or `.mdx`) files, the import statement must be placed strictly *after* the YAML frontmatter block, and it is better to leave a blank line before inserting JSX comments to prevent breaking metadata parsing or causing routing errors during the build.
+**Action:** Use specific regular expressions when injecting imports to ensure they fall after the entire `--- ... ---` block and respect spacing.
