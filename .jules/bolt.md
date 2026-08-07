@@ -13,3 +13,7 @@
 ## 2024-06-24 - Batch Google Fonts Requests
 **Learning:** Making separate CSS requests for different Google Fonts families (e.g., Inter and JetBrains Mono) adds unnecessary network roundtrips to the critical rendering path. Google Fonts API supports batching multiple families into a single request URL using the `&family=` parameter.
 **Action:** Always combine multiple Google Fonts families into a single `<link>` request URL rather than using separate tags to optimize font loading performance.
+
+## 2026-08-07 - Internal Routing Optimization in MDX
+**Learning:** In Docusaurus (and similar React SPA static site generators), using raw HTML `<a>` tags for internal links in Markdown/MDX files breaks client-side routing, causing full page reloads and significant performance degradation.
+**Action:** Always replace native `<a>` tags targeting internal routes with Docusaurus `@docusaurus/Link` component (`<Link to="...">`) or use standard Markdown link syntax (`[text](url)`) to preserve SPA navigation and optimize performance.
