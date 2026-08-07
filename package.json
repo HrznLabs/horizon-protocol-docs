@@ -36,12 +36,16 @@
     "**/rtlcss/postcss": "^8.5.10",
     "**/@babel/preset-env/@babel/plugin-transform-modules-systemjs": "^7.29.4",
     "**/ajv/fast-uri": "^3.1.2",
-    "**/webpack-dev-server": "^5.2.4",
+    "**/webpack-dev-server": "^5.2.6",
     "**/webpack-dev-server/ws": "^8.21.0",
     "**/minimatch@3/brace-expansion": "^1.1.13",
     "**/launch-editor/shell-quote": "^1.8.4",
     "**/webpack-bundle-analyzer/ws": "^7.5.11",
-    "websocket-driver": "^0.7.5"
+    "websocket-driver": "^0.7.5",
+    "**/svgo": "^3.3.4",
+    "**/launch-editor": "^2.14.1",
+    "**/gray-matter/js-yaml": "^3.15.0",
+    "js-yaml": "^4.3.0"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
