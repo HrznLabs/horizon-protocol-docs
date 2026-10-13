@@ -1,0 +1,26 @@
+#!/bin/sh
+# LIGHT checks only (heavy checks live in .husky/pre-push).
+start=$(date +%s)
+echo "[pre-commit] secretlint on staged files..."
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR)
+if [ -z "$STAGED" ]; then
+  echo "[pre-commit] OK: no staged files (0s)"
+  exit 0
+fi
+
+# shellcheck disable=SC2086
+echo "$STAGED" | tr '\n' '\0' | xargs -0 yarn --silent secretlint --secretlintignore .secretlintignore --format stylish
+code=$?
+elapsed=$(( $(date +%s) - start ))
+
+# secretlint exit codes: 0 clean, 1 secrets found, 2 internal/no-input error
+if [ "$code" -eq 1 ]; then
+  echo "[pre-commit] FAIL: secretlint found potential secrets (${elapsed}s). Remove them before committing."
+  exit 1
+fi
+if [ "$code" -ne 0 ]; then
+  echo "[pre-commit] FAIL: secretlint errored with exit code $code (${elapsed}s)"
+  exit "$code"
+fi
+echo "[pre-commit] OK: no secrets in $(echo "$STAGED" | wc -l | tr -d ' ') staged file(s) (${elapsed}s)"

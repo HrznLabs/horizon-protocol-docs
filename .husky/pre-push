@@ -1,0 +1,40 @@
+#!/bin/sh
+# HEAVY checks, run locally so CI can stay light: typecheck + production build.
+# Scoped: skipped when nothing site-affecting changed vs origin/staging.
+# Cached: skipped when this exact tree already passed (stored in .git/).
+start=$(date +%s)
+echo "[pre-push] checking what changed vs origin/staging..."
+
+BASE=$(git merge-base HEAD origin/staging 2>/dev/null)
+if [ -n "$BASE" ]; then
+  # Files that cannot affect typecheck or the Docusaurus build.
+  RELEVANT=$(git diff --name-only "$BASE" HEAD | grep -v -E '^(\.jules/|\.github/|AGENTS\.md$|CLAUDE\.md$|README\.md$|SECURITY\.md$|LICENSE$|funding\.json$)|\.(png|py)$')
+  if [ -z "$RELEVANT" ]; then
+    echo "[pre-push] OK: no site-affecting changes vs origin/staging, typecheck + build skipped (0s)"
+    exit 0
+  fi
+else
+  echo "[pre-push] no merge-base with origin/staging, running full checks"
+fi
+
+TREE=$(git rev-parse 'HEAD^{tree}')
+CACHE="$(git rev-parse --git-dir)/pre-push-passed"
+if [ -f "$CACHE" ] && grep -qx "$TREE" "$CACHE"; then
+  echo "[pre-push] OK: tree $TREE already passed typecheck + build, skipped (cached)"
+  exit 0
+fi
+
+echo "[pre-push] running: yarn typecheck"
+if ! yarn --silent typecheck; then
+  echo "[pre-push] FAIL: typecheck failed ($(( $(date +%s) - start ))s)"
+  exit 1
+fi
+
+echo "[pre-push] running: yarn build (Docusaurus production build)"
+if ! yarn --silent build; then
+  echo "[pre-push] FAIL: build failed ($(( $(date +%s) - start ))s)"
+  exit 1
+fi
+
+echo "$TREE" > "$CACHE"
+echo "[pre-push] OK: typecheck + build passed ($(( $(date +%s) - start ))s)"
