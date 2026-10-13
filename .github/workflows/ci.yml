@@ -1,12 +1,29 @@
 name: CI
 
+# Static checks (typecheck, lint, secretlint) run locally in git hooks.
+# CI keeps only the cheap Docusaurus build, which catches broken links/MDX
+# that nothing else does. Skipped for changes that cannot affect the site.
 on:
   pull_request:
+    paths-ignore:
+      - '.jules/**'
+      - '*.png'
+      - '*.py'
+      - 'AGENTS.md'
+      - 'CLAUDE.md'
+      - 'SECURITY.md'
+      - 'LICENSE'
+      - 'funding.json'
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     name: Install & Build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -18,8 +35,19 @@ jobs:
           node-version: '20'
           cache: 'yarn'
 
+      - name: Cache Docusaurus
+        uses: actions/cache@v4
+        with:
+          path: |
+            .docusaurus
+            node_modules/.cache
+          key: docusaurus-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          restore-keys: |
+            docusaurus-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-
+            docusaurus-${{ runner.os }}-
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Build Docusaurus
         run: yarn build
