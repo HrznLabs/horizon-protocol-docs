@@ -177,13 +177,13 @@ For most applications, you'll also want to use the Horizon REST API:
 
 | Environment | URL |
 |-------------|-----|
-| **Testnet** | `https://api.horizon.dev` |
+| **Testnet** | `https://horizon-api-production.up.railway.app/api/v1` |
 | **Mainnet** | Coming soon |
 
 ### Fetch Missions
 
 ```typescript
-const response = await fetch('https://api.horizon.dev/missions?state=Open');
+const response = await fetch('https://horizon-api-production.up.railway.app/api/v1/missions?state=Open');
 const missions = await response.json();
 
 console.log('Available missions:', missions);
@@ -194,7 +194,7 @@ console.log('Available missions:', missions);
 Most API endpoints require authentication:
 
 ```typescript
-const response = await fetch('https://api.horizon.dev/missions', {
+const response = await fetch('https://horizon-api-production.up.railway.app/api/v1/missions', {
   headers: {
     'Authorization': `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
