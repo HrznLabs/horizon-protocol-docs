@@ -11,7 +11,7 @@ Real-time events for mission updates and location tracking.
 ```javascript
 import { io } from 'socket.io-client';
 
-const socket = io('wss://api.horizon.xyz', {
+const socket = io('wss://horizon-api-production.up.railway.app', {
   transports: ['websocket'],
   auth: {
     token: 'Bearer <jwt>'
@@ -179,7 +179,7 @@ socket.on('connect_error', (error) => {
 ## Reconnection
 
 ```javascript
-const socket = io('wss://api.horizon.xyz', {
+const socket = io('wss://horizon-api-production.up.railway.app', {
   reconnection: true,
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,

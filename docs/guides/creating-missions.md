@@ -55,7 +55,7 @@ await publicClient.waitForTransactionReceipt({ hash });
 ### Using the API
 
 ```typescript
-const mission = await fetch('https://api.horizon.dev/missions', {
+const mission = await fetch('https://horizon-api-production.up.railway.app/api/v1/missions', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${token}`,
@@ -135,7 +135,7 @@ Add eligibility requirements:
 
 ```typescript
 // Via API - missions can have requirements
-const mission = await fetch('https://api.horizon.dev/missions', {
+const mission = await fetch('https://horizon-api-production.up.railway.app/api/v1/missions', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${token}`,
