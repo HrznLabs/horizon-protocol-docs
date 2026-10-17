@@ -43,7 +43,7 @@ const config: Config = {
 
 
   // Production URL
-  url: 'https://docs.horizonprotocol.xyz',
+  url: 'https://horizon-docs-public.vercel.app',
   baseUrl: '/',
 
   // GitHub org/repo for deployment
