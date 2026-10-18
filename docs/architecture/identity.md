@@ -56,12 +56,12 @@ Horizon uses **Sign-In With Ethereum (EIP-4361)** for authentication:
 ```typescript
 // SIWE message format
 const message = `
-horizon.app wants you to sign in with your Ethereum account:
+horizon-miniapp.vercel.app wants you to sign in with your Ethereum account:
 ${address}
 
 Sign in to Horizon
 
-URI: https://horizon.app
+URI: https://horizon-miniapp.vercel.app
 Version: 1
 Chain ID: ${chainId}
 Nonce: ${nonce}

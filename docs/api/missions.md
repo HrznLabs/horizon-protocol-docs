@@ -346,7 +346,7 @@ Subscribe to mission events:
 import { parseUSDC } from '@horizon-protocol/sdk';
 
 // Create mission via API
-const response = await fetch('https://api.horizon.dev/missions', {
+const response = await fetch('https://horizon-api-production.up.railway.app/api/v1/missions', {
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${token}`,

@@ -10,7 +10,7 @@ The Horizon REST API provides programmatic access to all protocol features. This
 
 | Environment | Base URL |
 |-------------|----------|
-| **Testnet** | `https://api.horizon.dev` |
+| **Testnet** | `https://horizon-api-production.up.railway.app/api/v1` |
 | **Mainnet** | Coming soon |
 
 ## Authentication
@@ -25,7 +25,7 @@ Authorization: Bearer <your-jwt-token>
 
 ```typescript
 // 1. Get message to sign
-const messageRes = await fetch('https://api.horizon.dev/auth/message', {
+const messageRes = await fetch('https://horizon-api-production.up.railway.app/api/v1/auth/message', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ address: walletAddress }),
@@ -36,7 +36,7 @@ const { message } = await messageRes.json();
 const signature = await wallet.signMessage(message);
 
 // 3. Get JWT
-const authRes = await fetch('https://api.horizon.dev/auth/verify', {
+const authRes = await fetch('https://horizon-api-production.up.railway.app/api/v1/auth/verify', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ address: walletAddress, signature }),
@@ -129,14 +129,14 @@ X-RateLimit-Reset: 1640000000
 ### List Open Missions
 
 ```bash
-curl -X GET "https://api.horizon.dev/missions?state=Open&take=10" \
+curl -X GET "https://horizon-api-production.up.railway.app/api/v1/missions?state=Open&take=10" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 ### Create Mission
 
 ```bash
-curl -X POST "https://api.horizon.dev/missions" \
+curl -X POST "https://horizon-api-production.up.railway.app/api/v1/missions" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -151,7 +151,7 @@ curl -X POST "https://api.horizon.dev/missions" \
 ### Get User Profile
 
 ```bash
-curl -X GET "https://api.horizon.dev/users/me" \
+curl -X GET "https://horizon-api-production.up.railway.app/api/v1/users/me" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -163,7 +163,7 @@ For TypeScript projects, use the SDK with API endpoints:
 import { BASE_SEPOLIA } from '@horizon-protocol/sdk';
 
 const apiClient = {
-  baseUrl: 'https://api.horizon.dev',
+  baseUrl: 'https://horizon-api-production.up.railway.app/api/v1',
   token: null,
 
   async fetch(path: string, options: RequestInit = {}) {
