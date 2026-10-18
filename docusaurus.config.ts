@@ -43,12 +43,12 @@ const config: Config = {
 
 
   // Production URL
-  url: 'https://docs.horizonprotocol.xyz',
+  url: 'https://horizon-docs-public.vercel.app',
   baseUrl: '/',
 
   // GitHub org/repo for deployment
   organizationName: 'HrznLabs',
-  projectName: 'horizon-docs',
+  projectName: 'horizon-protocol-docs',
 
   onBrokenLinks: 'throw',
 
@@ -70,7 +70,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/HrznLabs/horizon-docs/tree/main/',
+          editUrl: 'https://github.com/HrznLabs/horizon-protocol-docs/tree/main/',
           // Disabled for Vercel deployment (no git history available)
           showLastUpdateTime: false,
           showLastUpdateAuthor: false,

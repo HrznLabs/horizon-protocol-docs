@@ -12,9 +12,9 @@ The following versions of the Horizon Protocol documentation are currently suppo
 
 We take the security of our systems seriously. If you have discovered a security vulnerability, we appreciate your help in disclosing it to us in a responsible manner.
 
-Please report vulnerabilities by emailing **security@horizonprotocol.xyz**.
+Please report vulnerabilities privately through GitHub: [open a private security advisory](https://github.com/HrznLabs/horizon-contracts/security/advisories/new) on `HrznLabs/horizon-contracts`. Do not open a public issue.
 
-We will acknowledge your email within 48 hours. We ask that you:
+We will acknowledge your report within 48 hours. We ask that you:
 
 1. Do not disclose the vulnerability to the public until we have had reasonable time to correct it.
 2. Provide us with a reasonable amount of time to fix the issue before publishing it.

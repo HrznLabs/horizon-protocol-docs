@@ -119,7 +119,7 @@ sidebars.ts                     # Navigation structure
 ## Configuration
 
 Site configuration in `docusaurus.config.ts`:
-- Domain: `docs.horizonprotocol.xyz`
+- Domain: `horizon-docs-public.vercel.app`
 - Blog: Disabled
 - Search: Algolia (configured)
 - Analytics: Enabled
