@@ -4,7 +4,10 @@ name: CI
 # CI keeps only the cheap Docusaurus build, which catches broken links/MDX
 # that nothing else does. Skipped for changes that cannot affect the site.
 on:
+  # Not on PRs into main: the automated staging-to-main promotion PR is opened by the bot and merged at once,
+  # so its run would only wait for approval and expire. The promotion workflow has its own build gate.
   pull_request:
+    branches-ignore: [main]
     paths-ignore:
       - '.jules/**'
       - '*.png'
