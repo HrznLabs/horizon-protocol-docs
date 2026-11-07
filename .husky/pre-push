@@ -7,8 +7,9 @@ echo "[pre-push] checking what changed vs origin/staging..."
 
 BASE=$(git merge-base HEAD origin/staging 2>/dev/null)
 if [ -n "$BASE" ]; then
-  # Files that cannot affect typecheck or the Docusaurus build.
-  RELEVANT=$(git diff --name-only "$BASE" HEAD | grep -v -E '^(\.jules/|\.github/|AGENTS\.md$|CLAUDE\.md$|README\.md$|SECURITY\.md$|LICENSE$|funding\.json$)|\.(png|py)$')
+  # Files that cannot affect typecheck or the Docusaurus build. `|| true`: grep exits 1 on an empty diff,
+  # which ends the hook under `sh -e` before it can skip.
+  RELEVANT=$(git diff --name-only "$BASE" HEAD | grep -v -E '^(\.jules/|\.github/|AGENTS\.md$|CLAUDE\.md$|README\.md$|SECURITY\.md$|LICENSE$|funding\.json$)|\.(png|py)$' || true)
   if [ -z "$RELEVANT" ]; then
     echo "[pre-push] OK: no site-affecting changes vs origin/staging, typecheck + build skipped (0s)"
     exit 0
