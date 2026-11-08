@@ -21,13 +21,16 @@ BASE_SEPOLIA = {
   rpcUrl: 'https://sepolia.base.org',
   blockExplorer: 'https://sepolia.basescan.org',
   contracts: {
-    missionFactory: '0xee9234954b134c39c17a75482da78e46b16f466c',
-    paymentRouter: '0x94fb7908257ec36f701d2605b51eefed4326ddf5',
-    guildFactory: '0xfeae3538a4a1801e47b6d16104aa8586edb55f00',
-    reputationAttestations: '0xedae9682a0fb6fb3c18d6865461f67db7d748002',
-    disputeResolver: '0xb00ac4278129928aecc72541b0bcd69d94c1691e',
-    horizonAchievements: '0x568e0e3102bfa1f4045d3f62559c0f9823b469bc',
+    missionFactory: '0x8D780F03206E6433c2e5F7E0aB40244Ee051a271',
+    paymentRouter: '0x3a84718A90E03621526748A1721f10D32BEaf903',
+    missionEscrowImpl: '0x9aBe058635D961191571140948774cD829847406',
+    guildFactory: '0x7349Cd1A4f7C1a74Db730743d873de98A2f3a32F',
+    disputeResolver: '0x073A3674FB09177fcD6615bD920Ca1Fc52Fbd156',
+    pauseRegistry: '0x05Ec569d16Ac6b7B5dEB8B815976512CED645A87',
+    achievements: '0xfCC5971C3704C7a1F1c9E4acFdC7eEd60D4e4949',
     usdc: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
+    eurc: '0x808456652fdb597867f38412077A9182bf77359F',
+    // ...plus the HRZN token stack and iTake vertical contracts
   },
 };
 ```
@@ -266,10 +269,9 @@ import {
 
 | Contract | Address |
 |----------|---------|
-| PaymentRouter | `0x94fb7908257ec36f701d2605b51eefed4326ddf5` |
-| MissionFactory | `0xee9234954b134c39c17a75482da78e46b16f466c` |
-| GuildFactory | `0xfeae3538a4a1801e47b6d16104aa8586edb55f00` |
-| ReputationAttestations | `0xedae9682a0fb6fb3c18d6865461f67db7d748002` |
-| DisputeResolver | `0xb00ac4278129928aecc72541b0bcd69d94c1691e` |
-| HorizonAchievements | `0x568e0e3102bfa1f4045d3f62559c0f9823b469bc` |
+| PaymentRouter | `0x3a84718A90E03621526748A1721f10D32BEaf903` |
+| MissionFactory | `0x8D780F03206E6433c2e5F7E0aB40244Ee051a271` |
+| GuildFactory | `0x7349Cd1A4f7C1a74Db730743d873de98A2f3a32F` |
+| DisputeResolver | `0x073A3674FB09177fcD6615bD920Ca1Fc52Fbd156` |
+| HorizonAchievements | `0xfCC5971C3704C7a1F1c9E4acFdC7eEd60D4e4949` |
 | USDC | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
