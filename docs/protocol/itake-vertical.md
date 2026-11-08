@@ -152,9 +152,9 @@ All verticals share Horizon's core infrastructure:
 
 | Contract | Address | Purpose |
 |----------|---------|---------|
-| **iTakeMetaDAO** | `0x1234567890abcdef1234567890abcdef12345678` | Platform governance |
-| **SubDAO (Lisbon Demo)** | `0xabcdef1234567890abcdef1234567890abcdef12` | Demo restaurant A |
-| **SubDAO (Porto Demo)** | `0x567890abcdef1234567890abcdef123456789012` | Demo restaurant B |
+| **iTakeMetaDAO** | `0x883B7D8CA234912B82AC9718664c2dF224c98a67` | Platform governance |
+| **LisboaCafe SubDAO** | `0xAA0096E1038449220dB872c19BDF9CD6d619b7BA` | Demo restaurant (Lisbon) |
+| **AtobaDAO SubDAO** | `0x85fB5f85FeC3c18a47e21f22AB69A9bBB09d913f` | Demo restaurant |
 
 > **Network**: Base Sepolia (Chain ID 84532). These are testnet deployments for validation.
 
