@@ -81,7 +81,7 @@ import { BASE_SEPOLIA, BASE_MAINNET, getContracts } from '@horizon-protocol/sdk'
 
 // Pre-configured addresses
 console.log(BASE_SEPOLIA.contracts.missionFactory);
-// => '0xee9234954b134c39c17a75482da78e46b16f466c'
+// => '0x8D780F03206E6433c2e5F7E0aB40244Ee051a271'
 
 // Get contracts by chain ID
 const contracts = getContracts(84532); // Base Sepolia
