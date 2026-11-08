@@ -196,7 +196,7 @@ Posters can require minimum Builder Score:
 |----------|---------|
 | MissionFactory | `0x8D780F03206E6433c2e5F7E0aB40244Ee051a271` |
 | PaymentRouter | `0x3a84718A90E03621526748A1721f10D32BEaf903` |
-| GuildFactory | `0x7349Cd1A4f7C1a74Db730743d873de98A2f3a32F` |
+| GuildFactory | `0xB3720D5f3Ff1A6385aC0C1f54f88536F68a967F3` |
 | DisputeResolver | `0x073A3674FB09177fcD6615bD920Ca1Fc52Fbd156` |
 | HorizonAchievements | `0xfCC5971C3704C7a1F1c9E4acFdC7eEd60D4e4949` |
 
